@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.dustin.knapp.project.macrosuggestion">
+
+  <uses-permission android:name="android.permission.INTERNET" />
+
+  <uses-permission android:name="android.permission.CAMERA" />
+
+
+  <application
+      android:allowBackup="true"
+      android:icon="@mipmap/ic_launcher"
+      android:label="@string/app_name"
+      android:name=".MacroSuggestionApplication"
+      android:supportsRtl="true"
+      android:theme="@style/AppTheme">
+    <activity android:name=".activities.LoginActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+
+
+    <activity android:name=".activities.LandingPageActivity" />
+    <activity android:name=".activities.MacroSuggestionResults" />
+    <activity android:name=".activities.OnBoardingActivityStep1" />
+    <activity android:name=".activities.OnBoardingActivityStep2" />
+    <activity android:name=".activities.OnBoardingActivityStep3" />
+    <activity android:name=".activities.BarcodeScanner" />
+    <activity android:name=".activities.SignoutActivity" />
+    <activity android:name=".activities.DailyLogActivity" />
+  </application>
+
+</manifest>

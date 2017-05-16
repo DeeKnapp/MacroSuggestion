@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+  <RelativeLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      >
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/chart1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+  </RelativeLayout>
+
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="10dp"
+      android:layout_marginTop="10dp"
+      android:gravity="center_vertical|center_horizontal"
+      android:text="Excess Macros"
+      android:textSize="25sp"
+      android:textStyle="bold"
+      />
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="1px"
+      android:background="@color/mediumGrey"
+      />
+
+
+  <android.support.design.widget.TextInputLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="16dp"
+      android:layout_marginRight="16dp"
+      android:layout_marginTop="10dp"
+      >
+
+    <EditText
+        android:id="@+id/etCalories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Calories"
+        android:textColorHint="@color/mediumGrey"
+        android:windowSoftInputMode="stateHidden"
+        />
+
+  </android.support.design.widget.TextInputLayout>
+
+  <android.support.design.widget.TextInputLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="16dp"
+      android:layout_marginRight="16dp"
+      android:layout_marginTop="10dp"
+      >
+
+    <EditText
+        android:id="@+id/etFat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Fat"
+        android:textColorHint="@color/mediumGrey"
+        android:windowSoftInputMode="stateHidden"
+        />
+
+  </android.support.design.widget.TextInputLayout>
+
+  <android.support.design.widget.TextInputLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="16dp"
+      android:layout_marginRight="16dp"
+      android:layout_marginTop="10dp"
+      >
+
+    <EditText
+        android:id="@+id/etCarbs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Carbohydrates"
+        android:textColorHint="@color/mediumGrey"
+        android:windowSoftInputMode="stateHidden"
+        />
+
+  </android.support.design.widget.TextInputLayout>
+
+  <android.support.design.widget.TextInputLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="16dp"
+      android:layout_marginRight="16dp"
+      android:layout_marginTop="10dp"
+      >
+
+    <EditText
+        android:id="@+id/etProtein"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Protein"
+        android:textColorHint="@color/mediumGrey"
+        android:windowSoftInputMode="stateHidden"
+        />
+
+  </android.support.design.widget.TextInputLayout>
+
+  <Button
+      android:id="@+id/btnSubmit"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="10dp"
+      android:text="Submit"
+      />
+
+
+</LinearLayout>

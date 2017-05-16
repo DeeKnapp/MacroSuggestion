@@ -1,0 +1,29 @@
+<resources>
+  <!-- Default screen margins, per the Android Design guidelines. -->
+  <dimen name="activity_horizontal_margin">16dp</dimen>
+  <dimen name="activity_vertical_margin">16dp</dimen>
+
+  <dimen name="nav_drawer_width">240dp</dimen>
+
+  <!-- Global -->
+  <dimen name="default_layout_padding">16dp</dimen>
+  <dimen name="margin_above_large_heading">24dp</dimen>
+  <dimen name="margin_above_top_large_heading">21dp</dimen>
+  <dimen name="margin_above_heading_3">10dp</dimen>
+  <dimen name="margin_above_button">24dp</dimen>
+  <dimen name="margin_below_button">14dp</dimen>
+  <dimen name="button_corner_radius">5dp</dimen>
+  <dimen name="fragment_message_padding">16dp</dimen>
+  <dimen name="default_button_radius">5dp</dimen>
+  <dimen name="default_button_height">52dp</dimen>
+
+  <!-- Message Dialog -->
+  <dimen name="message_dialog_button_width">90dp</dimen>
+  <dimen name="message_dialog_button_height">40dp</dimen>
+
+  <!-- Default text sizes -->
+  <dimen name="text_size_small">14sp</dimen>
+  <dimen name="text_size_medium">18sp</dimen>
+  <dimen name="text_size_large">22sp</dimen>
+  <dimen name="empty_field_error_padding">3dp</dimen>
+</resources>

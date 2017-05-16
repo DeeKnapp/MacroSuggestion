@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    >
+
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+      <com.github.mikephil.charting.charts.PieChart
+          android:id="@+id/proteinChart"
+          android:layout_width="match_parent"
+          android:layout_height="225dp"
+          android:layout_marginBottom="10dp"
+          />
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="2px"
+          android:background="@color/mediumGrey"
+          />
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="5dp"
+          android:layout_marginLeft="10dp"
+          android:layout_marginRight="10dp"
+          android:layout_marginTop="5dp"
+          android:orientation="horizontal"
+          android:weightSum="3"
+          >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+          <TextView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="Goal"
+              android:textColor="#000000"
+              android:textSize="15sp"
+              />
+
+          <TextView
+              android:id="@+id/proteinGoal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="Goal: "
+              android:textColor="#000000"
+              android:textSize="12sp"
+              />
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/mediumGrey"
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+          <TextView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="Current"
+              android:textColor="#000000"
+              android:textSize="15sp"
+              />
+
+          <TextView
+              android:id="@+id/proteinCurrent"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="Current: "
+              android:textColor="#000000"
+              android:textSize="12sp"
+              />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/mediumGrey"
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+          <TextView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="Remaining"
+              android:textColor="#000000"
+              android:textSize="15sp"
+              />
+
+          <TextView
+              android:id="@+id/proteinRemaining"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="Remaining: "
+              android:textColor="#000000"
+              android:textSize="12sp"
+              />
+
+        </LinearLayout>
+
+
+      </LinearLayout>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="2px"
+          android:background="@color/mediumGrey"
+          />
+
+      <com.github.mikephil.charting.charts.PieChart
+          android:id="@+id/carbChart"
+          android:layout_width="match_parent"
+          android:layout_height="225dp"
+          android:layout_marginBottom="10dp"
+          />
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="2px"
+          android:background="@color/mediumGrey"
+          />
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="5dp"
+          android:layout_marginLeft="10dp"
+          android:layout_marginRight="10dp"
+          android:layout_marginTop="5dp"
+          android:orientation="horizontal"
+          android:weightSum="3"
+          >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+          <TextView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="Goal"
+              android:textColor="#000000"
+              android:textSize="15sp"
+              />
+
+          <TextView
+              android:id="@+id/carbGoal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="Goal: "
+              android:textColor="#000000"
+              android:textSize="12sp"
+              />
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/mediumGrey"
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+          <TextView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="Current"
+              android:textColor="#000000"
+              android:textSize="15sp"
+              />
+
+          <TextView
+              android:id="@+id/carbCurrent"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="Current: "
+              android:textColor="#000000"
+              android:textSize="12sp"
+              />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/mediumGrey"
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+          <TextView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="Remaining"
+              android:textColor="#000000"
+              android:textSize="15sp"
+              />
+
+          <TextView
+              android:id="@+id/carbRemaining"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="Remaining: "
+              android:textColor="#000000"
+              android:textSize="12sp"
+              />
+
+        </LinearLayout>
+
+
+      </LinearLayout>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="2px"
+          android:background="@color/mediumGrey"
+          />
+
+      <com.github.mikephil.charting.charts.PieChart
+          android:id="@+id/fatChart"
+          android:layout_width="match_parent"
+          android:layout_height="225dp"
+          android:layout_marginBottom="10dp"
+          />
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="2px"
+          android:background="@color/mediumGrey"
+          />
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="5dp"
+          android:layout_marginLeft="10dp"
+          android:layout_marginRight="10dp"
+          android:layout_marginTop="5dp"
+          android:orientation="horizontal"
+          android:weightSum="3"
+          >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+          <TextView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="Goal"
+              android:textColor="#000000"
+              android:textSize="15sp"
+              />
+
+          <TextView
+              android:id="@+id/fatGoal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="Goal: "
+              android:textColor="#000000"
+              android:textSize="12sp"
+              />
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/mediumGrey"
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+          <TextView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="Current"
+              android:textColor="#000000"
+              android:textSize="15sp"
+              />
+
+          <TextView
+              android:id="@+id/fatCurrent"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="Current: "
+              android:textColor="#000000"
+              android:textSize="12sp"
+              />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/mediumGrey"
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+          <TextView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="Remaining"
+              android:textColor="#000000"
+              android:textSize="15sp"
+              />
+
+          <TextView
+              android:id="@+id/fatRemaining"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="Remaining: "
+              android:textColor="#000000"
+              android:textSize="12sp"
+              />
+
+        </LinearLayout>
+
+
+      </LinearLayout>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="2px"
+          android:background="@color/mediumGrey"
+          />
+
+      <Button
+          android:id="@+id/suggestionButton"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Suggest Food"
+          />
+
+    </LinearLayout>
+
+  </ScrollView>
+
+
+</LinearLayout>

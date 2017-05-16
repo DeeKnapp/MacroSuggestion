@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    >
+
+  <TextView
+      android:id="@+id/code_info"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentTop="true"
+      android:layout_marginLeft="16dp"
+      android:text="UPC number: N/a"
+      android:textSize="20sp"
+      />
+
+  <TextView
+      android:id="@+id/foodNameLabel"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/code_info"
+      android:layout_marginStart="16dp"
+      android:text="Food Name:"
+      android:textSize="20sp"
+      />
+
+  <TextView
+      android:id="@+id/etFoodName"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/code_info"
+      android:layout_marginStart="5dp"
+      android:layout_toEndOf="@id/foodNameLabel"
+      android:gravity="center"
+      android:textSize="20sp"
+      />
+
+  <TextView
+      android:id="@+id/totalCaloriesLabel"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/etFoodName"
+      android:layout_marginStart="16dp"
+      android:text="Total Calories:"
+      android:textSize="20sp"
+      />
+
+  <TextView
+      android:id="@+id/etCalories"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/etFoodName"
+      android:layout_marginStart="5dp"
+      android:layout_toEndOf="@id/totalCaloriesLabel"
+      android:gravity="center"
+      android:textSize="20sp"
+      />
+
+  <TextView
+      android:id="@+id/totalFatsLabel"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/totalCaloriesLabel"
+      android:layout_marginStart="16dp"
+      android:text="Total Fats:"
+      android:textSize="20sp"
+      />
+
+  <TextView
+      android:id="@+id/etFats"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/totalCaloriesLabel"
+      android:layout_marginStart="5dp"
+      android:layout_toEndOf="@id/totalFatsLabel"
+      android:gravity="center"
+      android:textSize="20sp"
+      />
+
+  <TextView
+      android:id="@+id/totalCarbsLabel"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/totalFatsLabel"
+      android:layout_marginStart="16dp"
+      android:text="Total Carbs:"
+      android:textSize="20sp"
+      />
+
+  <TextView
+      android:id="@+id/etCarbs"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/totalFatsLabel"
+      android:layout_marginStart="5dp"
+      android:layout_toEndOf="@id/totalCarbsLabel"
+      android:gravity="center"
+      android:textSize="20sp"
+      />
+
+  <TextView
+      android:id="@+id/totalProteinLabel"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/totalCarbsLabel"
+      android:layout_marginLeft="16dp"
+      android:text="Total Protein:"
+      android:textSize="20sp"
+      />
+
+  <TextView
+      android:id="@+id/etProtein"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/totalCarbsLabel"
+      android:layout_marginStart="5dp"
+      android:layout_toEndOf="@id/totalProteinLabel"
+      android:gravity="center"
+      android:textSize="20sp"
+      />
+
+  <TextView
+      android:id="@+id/spinnerTextHeader"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/totalProteinLabel"
+      android:layout_marginLeft="16dp"
+      android:text="Serving Size"
+      android:textSize="20sp"
+      />
+
+
+  <Spinner
+      android:id="@+id/servingSizeSpinner"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/totalProteinLabel"
+      android:layout_marginLeft="10dp"
+      android:layout_toRightOf="@id/spinnerTextHeader"
+      >
+
+
+  </Spinner>
+
+  <Button
+      android:id="@+id/dataIsCorrectButton"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:text="Nutrition Info Is Correct"
+      android:textSize="15sp"
+      />
+
+</RelativeLayout>
