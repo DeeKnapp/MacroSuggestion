@@ -8,7 +8,6 @@ import android.text.style.RelativeSizeSpan;
 import android.view.Gravity;
 import android.widget.Toast;
 import com.dustin.knapp.project.macrosuggestion.R;
-import com.dustin.knapp.project.macrosuggestion.activities.fragments.CaloriesFragment;
 import com.dustin.knapp.project.macrosuggestion.activities.fragments.WaterFragment;
 import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.PieData;
