@@ -10,7 +10,14 @@
       android:id="@+id/createAccountButton"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Create Account"
+      android:text="Create Account Process 1"
+      />
+
+  <Button
+      android:id="@+id/createAccountButton2"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Create Account Process 2"
       />
 
   <Button

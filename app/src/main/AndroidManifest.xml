@@ -28,6 +28,9 @@
     <activity android:name=".activities.OnBoardingActivityStep1" />
     <activity android:name=".activities.OnBoardingActivityStep2" />
     <activity android:name=".activities.OnBoardingActivityStep3" />
+    <activity android:name=".activities.OnBoardingProcess2Step1" />
+    <activity android:name=".activities.OnBoardingProcess2Step2" />
+    <activity android:name=".activities.OnBoardingProcess2Step3" />
     <activity android:name=".activities.BarcodeScanner" />
     <activity android:name=".activities.SignoutActivity" />
     <activity android:name=".activities.DailyLogActivity" />

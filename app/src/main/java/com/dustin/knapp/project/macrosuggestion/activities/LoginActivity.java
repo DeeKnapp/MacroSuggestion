@@ -21,6 +21,7 @@ import rx.Observer;
 public class LoginActivity extends BaseActivity {
 
   @BindView(R.id.createAccountButton) Button createAccountButton;
+  @BindView(R.id.createAccountButton2) Button createAccountButton2;
   @BindView(R.id.loginButton) Button loginButton;
 
   @Inject public Observer<PendingNutritionData> pendingNutritionalObserver;
@@ -41,6 +42,11 @@ public class LoginActivity extends BaseActivity {
 
   @OnClick(R.id.createAccountButton) void createAccountClicked(View v) {
     Intent createAccountIntent = new Intent(this, OnBoardingActivityStep1.class);
+    startActivity(createAccountIntent);
+  }
+
+  @OnClick(R.id.createAccountButton2) void createAccount2Clicked(View v) {
+    Intent createAccountIntent = new Intent(this, OnBoardingProcess2Step1.class);
     startActivity(createAccountIntent);
   }
 

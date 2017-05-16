@@ -2,7 +2,6 @@ package com.dustin.knapp.project.macrosuggestion.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,12 +14,7 @@ import com.dustin.knapp.project.macrosuggestion.Constants;
 import com.dustin.knapp.project.macrosuggestion.MacroSuggestionApplication;
 import com.dustin.knapp.project.macrosuggestion.R;
 import android.content.Intent;
-import com.dustin.knapp.project.macrosuggestion.models.PendingNutritionData;
 import com.dustin.knapp.project.macrosuggestion.models.UserObject;
-import com.dustin.knapp.project.macrosuggestion.models.barcode_objects.Base;
-import com.dustin.knapp.project.macrosuggestion.utils.DateUtils;
-import com.dustin.knapp.project.macrosuggestion.utils.RealmUtils;
-import com.dustin.knapp.project.macrosuggestion.utils.SharedPreferencesUtil;
 import javax.inject.Inject;
 import rx.Observer;
 

@@ -7,6 +7,9 @@ import com.dustin.knapp.project.macrosuggestion.activities.LoginActivity;
 import com.dustin.knapp.project.macrosuggestion.activities.OnBoardingActivityStep2;
 import com.dustin.knapp.project.macrosuggestion.activities.OnBoardingActivityStep1;
 import com.dustin.knapp.project.macrosuggestion.activities.OnBoardingActivityStep3;
+import com.dustin.knapp.project.macrosuggestion.activities.OnBoardingProcess2Step1;
+import com.dustin.knapp.project.macrosuggestion.activities.OnBoardingProcess2Step2;
+import com.dustin.knapp.project.macrosuggestion.activities.OnBoardingProcess2Step3;
 import com.dustin.knapp.project.macrosuggestion.activities.SignoutActivity;
 import com.dustin.knapp.project.macrosuggestion.activities.fragments.CaloriesFragment;
 import com.dustin.knapp.project.macrosuggestion.activities.fragments.FoodFragment;
@@ -19,6 +22,12 @@ import javax.inject.Singleton;
   void inject(LoginActivity activity);
 
   void inject(SignoutActivity activity);
+
+  void inject(OnBoardingProcess2Step1 activity);
+
+  void inject(OnBoardingProcess2Step2 activity);
+
+  void inject(OnBoardingProcess2Step3 activity);
 
   void inject(OnBoardingActivityStep1 activity);
 
