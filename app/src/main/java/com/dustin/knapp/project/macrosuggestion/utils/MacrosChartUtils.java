@@ -33,6 +33,7 @@ public class MacrosChartUtils {
     holder.chart.setCenterTextSize(9f);
     holder.chart.setUsePercentValues(false);
     holder.chart.setExtraOffsets(5, 10, 5, 10);
+    holder.chart.setTouchEnabled(false);
 
     float currentPercent = (current / goal) * 100;
 

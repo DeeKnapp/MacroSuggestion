@@ -7,6 +7,8 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.widget.Toast;
 import com.dustin.knapp.project.macrosuggestion.R;
+import com.dustin.knapp.project.macrosuggestion.activities.DailyLogActivity;
+import com.dustin.knapp.project.macrosuggestion.activities.LandingPageActivity;
 import com.dustin.knapp.project.macrosuggestion.activities.fragments.CaloriesFragment;
 import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.PieData;
@@ -21,8 +23,8 @@ import java.util.ArrayList;
  */
 public class CaloriesChartUtils {
 
-  public static void updateChartViews(CaloriesFragment.ViewHolder holder,
-      float current, float goal, Activity activity) {
+  public static void updateChartViews(CaloriesFragment.ViewHolder holder, float current, float goal,
+      Activity activity) {
 
     int goalTextLength = String.valueOf(goal).length();
 
@@ -34,6 +36,7 @@ public class CaloriesChartUtils {
     holder.chart.setCenterTextSize(9f);
     holder.chart.setUsePercentValues(false);
     holder.chart.setExtraOffsets(5, 10, 5, 10);
+    holder.chart.setTouchEnabled(false);
 
     float caloriePercent = (current / goal) * 100;
 
@@ -54,11 +57,25 @@ public class CaloriesChartUtils {
     // holder.chart.invalidate();
     holder.chart.animateY(400);
 
-    //todo only display once goal is complete, not every additional add
-    if (current >= goal) {
-      new ParticleSystem(activity, 1000, R.drawable.confeti2, (long) 1500,
-          R.id.calorie_fragment_wrapper).setSpeedRange(0.1f, 0.5f).oneShot(holder.chart, 500);
-      Toast.makeText(activity, "Goal Complete!", Toast.LENGTH_SHORT).show();
+    if (activity instanceof LandingPageActivity) {
+      if (((LandingPageActivity) activity).sharedPreferencesUtil.shouldShouldCalorieAnimation()) {
+        if (current >= goal) {
+          new ParticleSystem(activity, 1000, R.drawable.extra_small_confetti, 1500,
+              R.id.calorie_fragment_wrapper).setSpeedRange(0.1f, 0.5f).oneShot(holder.chart, 1000);
+
+          new ParticleSystem(activity, 1000, R.drawable.small_confetti, 1500,
+              R.id.calorie_fragment_wrapper).setSpeedRange(0.1f, 0.5f)
+              .oneShot(holder.remaining, 1000);
+
+          new ParticleSystem(activity, 1000, R.drawable.medium_confetti, 1500,
+              R.id.calorie_fragment_wrapper).setSpeedRange(0.1f, 0.5f)
+              .oneShot(holder.current, 1000);
+
+          Toast.makeText(activity, "Goal Complete!", Toast.LENGTH_SHORT).show();
+          ((LandingPageActivity) activity).sharedPreferencesUtil.storeShouldShowCalorieAnimation(
+              false);
+        }
+      }
     }
   }
 
@@ -90,5 +107,4 @@ public class CaloriesChartUtils {
     s.setSpan(new ForegroundColorSpan(Color.rgb(0, 0, 0)), 0, 1, 0);
     return s;
   }
-
 }

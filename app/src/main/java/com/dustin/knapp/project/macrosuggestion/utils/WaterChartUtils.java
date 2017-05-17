@@ -8,6 +8,7 @@ import android.text.style.RelativeSizeSpan;
 import android.view.Gravity;
 import android.widget.Toast;
 import com.dustin.knapp.project.macrosuggestion.R;
+import com.dustin.knapp.project.macrosuggestion.activities.DailyLogActivity;
 import com.dustin.knapp.project.macrosuggestion.activities.fragments.WaterFragment;
 import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.PieData;
@@ -35,6 +36,7 @@ public class WaterChartUtils {
     holder.chart.setCenterTextSize(9f);
     holder.chart.setUsePercentValues(false);
     holder.chart.setExtraOffsets(5, 10, 5, 10);
+    holder.chart.setTouchEnabled(false);
 
     float caloriePercent = (current / goal) * 100;
 
@@ -55,15 +57,30 @@ public class WaterChartUtils {
     // holder.chart.invalidate();
     holder.chart.animateY(400);
 
-    //todo only display once goal is complete, not every additional add
-    if (current >= goal) {
+    if (activity instanceof DailyLogActivity) {
+      if (((DailyLogActivity) activity).sharedPreferencesUtil.shouldShowWaterAnimation()) {
+        if (current >= goal) {
 
-      new ParticleSystem(activity, 800, R.mipmap.rain_drop, 10000).setSpeedByComponentsRange(0f, 0f,
-          0.05f, 0.1f)
-          .setAcceleration(0.00005f, 90)
-          .emitWithGravity(activity.findViewById(R.id.emiter), Gravity.BOTTOM, 8);
+          new ParticleSystem(activity, 800, R.drawable.large_rain_drop,
+              10000).setSpeedByComponentsRange(0f, 0f, 0.05f, 0.1f)
+              .setAcceleration(0.00015f, 90)
+              .emitWithGravity(activity.findViewById(R.id.emiter), Gravity.BOTTOM, 25, 4000);
 
-      Toast.makeText(activity, "Goal Complete!", Toast.LENGTH_SHORT).show();
+          new ParticleSystem(activity, 800, R.drawable.medium_rain_drop,
+              10000).setSpeedByComponentsRange(0f, 0f, 0.05f, 0.1f)
+              .setAcceleration(0.00005f, 90)
+              .emitWithGravity(activity.findViewById(R.id.emiter), Gravity.BOTTOM, 25, 4000);
+
+          new ParticleSystem(activity, 800, R.drawable.small_rain_drop,
+              10000).setSpeedByComponentsRange(0f, 0f, 0.05f, 0.1f)
+              .setAcceleration(0.00035f, 90)
+              .emitWithGravity(activity.findViewById(R.id.emiter), Gravity.BOTTOM, 25, 4000);
+
+          Toast.makeText(activity, "Goal Complete!", Toast.LENGTH_SHORT).show();
+
+          ((DailyLogActivity) activity).sharedPreferencesUtil.storeShouldShowWaterAnimation(false);
+        }
+      }
     }
   }
 

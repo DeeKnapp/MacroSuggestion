@@ -15,11 +15,9 @@ import com.dustin.knapp.project.macrosuggestion.navigation_drawer.DrawerMenuHelp
 import com.dustin.knapp.project.macrosuggestion.navigation_drawer.DrawerMenuItem;
 import com.dustin.knapp.project.macrosuggestion.utils.DateUtils;
 import com.dustin.knapp.project.macrosuggestion.utils.RealmUtils;
-import com.dustin.knapp.project.macrosuggestion.utils.SharedPreferencesUtil;
 import javax.inject.Inject;
 import rx.Observable;
 import rx.Observer;
-import rx.functions.Action1;
 
 public class LandingPageActivity extends BaseNavDrawerActivity {
 
@@ -66,6 +64,9 @@ public class LandingPageActivity extends BaseNavDrawerActivity {
       pendingNutritionData.setCurrentFat(0);
       pendingNutritionData.setCurrentCarb(0);
       pendingNutritionData.setCurrentDate(DateUtils.getCurrentDate());
+
+      sharedPreferencesUtil.storeShouldShowCalorieAnimation(true);
+      sharedPreferencesUtil.storeShouldShowWaterAnimation(true);
     } else {
       pendingNutritionData.setCurrentDate(DateUtils.getCurrentDate());
       pendingNutritionData.setGoalCalorie(realmPendingData.getGoalCalorie());

@@ -77,6 +77,8 @@ public class CaloriesFragment extends Fragment
 
     caloriesViewHolder = new CaloriesFragment.ViewHolder();
     caloriesViewHolder.chart = (PieChart) view.findViewById(R.id.calorie_chart);
+    caloriesViewHolder.current = currentCalorieText;
+    caloriesViewHolder.remaining = remainingCalorieText;
 
     fab = (FloatingActionButton) view.findViewById(R.id.fab);
 
@@ -178,5 +180,6 @@ public class CaloriesFragment extends Fragment
 
   public class ViewHolder {
     public PieChart chart;
+    public TextView current, remaining;
   }
 }
