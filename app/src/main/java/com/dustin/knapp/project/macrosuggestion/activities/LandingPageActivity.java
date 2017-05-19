@@ -46,7 +46,7 @@ public class LandingPageActivity extends BaseNavDrawerActivity {
 
     toolbarTitle.setText(DrawerMenuItem.getTitle(LandingPageActivity.class));
     toolbar.setBackgroundColor(
-        ResourcesCompat.getColor(getResources(), R.color.dgm_dark_green, null));
+        ResourcesCompat.getColor(getResources(), R.color.dgm_green, null));
 
     PendingNutritionData pendingNutritionData = new PendingNutritionData();
     PendingNutritionData realmPendingData = RealmUtils.getCurrentDayNutritionObject();

@@ -65,11 +65,11 @@ public class DrawerMenuItemAdapter extends BaseAdapter {
 
     if (position == selectedPosition) {
       convertView.setBackgroundColor(
-          ResourcesCompat.getColor(context.getResources(), R.color.dgm_medium_green, null));
+          ResourcesCompat.getColor(context.getResources(), R.color.dgm_green, null));
       textView.setTextColor(ResourcesCompat.getColor(context.getResources(), R.color.white, null));
     } else {
       convertView.setBackground(ResourcesCompat.getDrawable(context.getResources(),
-          R.drawable.background_states_nav_others, null));
+          R.drawable.background_states_nav_other, null));
       textView.setTextColor(getColorStateList());
     }
 

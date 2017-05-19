@@ -67,7 +67,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="10dp"
-      android:background="@color/dgm_medium_green"
+      android:background="@color/dgm_green"
       android:text="Calculate Diet Plan"
       android:textColor="@color/white"
       />

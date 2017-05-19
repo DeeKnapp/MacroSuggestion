@@ -72,7 +72,7 @@ public class BarcodeScanner extends BaseNavDrawerActivity
 
     toolbarTitle.setText(DrawerMenuItem.getTitle(BarcodeScanner.class));
     toolbar.setBackgroundColor(
-        ResourcesCompat.getColor(getResources(), R.color.dgm_dark_green, null));
+        ResourcesCompat.getColor(getResources(), R.color.dgm_green, null));
 
     barcodeInfo = (TextView) findViewById(R.id.code_info);
     etFoodName = (TextView) findViewById(R.id.etFoodName);

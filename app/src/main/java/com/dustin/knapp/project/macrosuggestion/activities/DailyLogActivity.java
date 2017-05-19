@@ -51,7 +51,7 @@ public class DailyLogActivity extends BaseNavDrawerActivity {
 
     toolbarTitle.setText(DrawerMenuItem.getTitle(DailyLogActivity.class));
     toolbar.setBackgroundColor(
-        ResourcesCompat.getColor(getResources(), R.color.dgm_dark_green, null));
+        ResourcesCompat.getColor(getResources(), R.color.dgm_green, null));
   }
 
   private void setupViewPager() {
