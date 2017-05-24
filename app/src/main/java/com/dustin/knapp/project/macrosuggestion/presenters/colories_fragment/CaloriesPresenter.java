@@ -48,7 +48,12 @@ public class CaloriesPresenter extends Presenter<CaloriesReactiveView> {
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new Action1<InspirationalCall.Quote>() {
           @Override public void call(InspirationalCall.Quote quote) {
-            String quoteText = "\"" + quote.getQuoteText()+ "\" - " +  quote.getQuoteAuthor();
+            String quoteText;
+            if (quote.getQuoteAuthor().equals("")) {
+              quoteText = "\"" + quote.getQuoteText() + "\" - Unknown";
+            } else {
+              quoteText = "\"" + quote.getQuoteText() + "\" - " + quote.getQuoteAuthor();
+            }
             Log.d("QuoteText: ", quoteText);
             if (!quoteText.equals("")) {
               caloriesReactiveView.onServerSuccess(quoteText);

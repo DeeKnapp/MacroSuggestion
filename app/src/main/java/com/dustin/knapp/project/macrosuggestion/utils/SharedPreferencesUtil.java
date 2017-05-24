@@ -48,6 +48,7 @@ public class SharedPreferencesUtil {
     editor.apply();
   }
 
+  //todo this will need to change for the flow of the application....
   public boolean getUserIsEnrolled() {
     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     return sharedPreferences.getBoolean(USER_IS_ENROLLED, false);

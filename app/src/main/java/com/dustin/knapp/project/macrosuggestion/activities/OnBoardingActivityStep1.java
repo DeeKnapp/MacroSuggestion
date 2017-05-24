@@ -16,7 +16,9 @@ import com.dustin.knapp.project.macrosuggestion.R;
 import android.content.Intent;
 import com.dustin.knapp.project.macrosuggestion.models.UserObject;
 import javax.inject.Inject;
+import rx.Observable;
 import rx.Observer;
+import rx.functions.Action1;
 
 /**
  * Created by dknapp on 5/8/17
@@ -25,6 +27,7 @@ public class OnBoardingActivityStep1 extends BaseActivity {
 
   @BindView(R.id.etEnterName) EditText etName;
   @BindView(R.id.etEnterEmail) EditText etEmail;
+  @BindView(R.id.etEnterPassword) EditText etPassword;
   @BindView(R.id.etCurrentWeight) EditText etCurrentWeight;
   @BindView(R.id.etTargetWeight) EditText etTargetWeight;
   @BindView(R.id.etEnterHeightFeet) EditText etHeightFt;
@@ -34,6 +37,9 @@ public class OnBoardingActivityStep1 extends BaseActivity {
   @BindView(R.id.nextButton) Button nextButton;
 
   @Inject public Observer<UserObject> pendingUserObjectObserver;
+  @Inject public Observable<UserObject> pendingUserObjectObservable;
+
+  private UserObject newUser;
 
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -42,6 +48,19 @@ public class OnBoardingActivityStep1 extends BaseActivity {
     ((MacroSuggestionApplication) getApplication()).getAppComponent().inject(this);
 
     unbinder = ButterKnife.bind(this);
+
+    pendingUserObjectObservable.subscribe(new Action1<UserObject>() {
+      @Override public void call(UserObject userObject) {
+        if (userObject.getEmail() != null && userObject.getName() != null) {
+          newUser = new UserObject();
+          newUser.setName(userObject.getName());
+          newUser.setEmail(userObject.getEmail());
+
+          etName.setText(userObject.getName());
+          etEmail.setText(userObject.getEmail());
+        }
+      }
+    });
   }
 
   @OnClick(R.id.nextButton) void nextButtonClicked(View v) {
@@ -51,6 +70,9 @@ public class OnBoardingActivityStep1 extends BaseActivity {
     } else if (etEmail.getText().toString().equals("")) {
       etEmail.requestFocus();
       showKeyboard(etEmail);
+    } else if (etPassword.getText().toString().equals("")) {
+      etPassword.requestFocus();
+      showKeyboard(etPassword);
     } else if (etHeightFt.getText().toString().equals("")) {
       etHeightFt.requestFocus();
       showKeyboard(etHeightFt);
@@ -70,6 +92,7 @@ public class OnBoardingActivityStep1 extends BaseActivity {
       UserObject newUser = new UserObject();
       newUser.setName(etName.getText().toString());
       newUser.setEmail(etEmail.getText().toString());
+      newUser.setPendingPassword(etPassword.getText().toString());
       newUser.setHeightInFeet(Integer.valueOf(etHeightFt.getText().toString()));
       newUser.setHeightInInches(Integer.valueOf(etHeightInches.getText().toString()));
       newUser.setCurrentWeight(Float.valueOf(etCurrentWeight.getText().toString()));

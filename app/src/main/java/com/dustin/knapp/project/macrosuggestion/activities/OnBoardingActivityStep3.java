@@ -16,9 +16,11 @@ import com.dustin.knapp.project.macrosuggestion.MacroSuggestionApplication;
 import com.dustin.knapp.project.macrosuggestion.R;
 import com.dustin.knapp.project.macrosuggestion.models.NutritionDataGoal;
 import com.dustin.knapp.project.macrosuggestion.models.PendingNutritionData;
+import com.dustin.knapp.project.macrosuggestion.models.PendingWaterData;
 import com.dustin.knapp.project.macrosuggestion.models.UserObject;
 import com.dustin.knapp.project.macrosuggestion.utils.DateUtils;
 import com.dustin.knapp.project.macrosuggestion.utils.RealmUtils;
+import com.google.firebase.auth.FirebaseAuth;
 import javax.inject.Inject;
 import rx.Observable;
 import rx.Observer;
@@ -35,6 +37,9 @@ public class OnBoardingActivityStep3 extends BaseActivity {
 
   @Inject public Observable<UserObject> pendingUserObjectObservable;
   @Inject public Observer<PendingNutritionData> pendingNutritionalObserver;
+  @Inject public Observer<PendingWaterData> pendingWaterObserver;
+
+  FirebaseAuth firebaseAuth;
 
   private UserObject currentUserObject;
 
@@ -54,6 +59,11 @@ public class OnBoardingActivityStep3 extends BaseActivity {
   }
 
   @OnClick(R.id.submitButton) void submitButtonClicked(View v) {
+
+    firebaseAuth = FirebaseAuth.getInstance();
+    firebaseAuth.createUserWithEmailAndPassword(currentUserObject.getEmail(),
+        currentUserObject.getPendingPassword());
+
     NutritionDataGoal nutritionDataGoal = new NutritionDataGoal();
 
     nutritionDataGoal.setGoalCalorie(2000);
@@ -66,6 +76,15 @@ public class OnBoardingActivityStep3 extends BaseActivity {
     RealmUtils.saveNutritionDataGoal(nutritionDataGoal);
 
     RealmUtils.saveUserObject(currentUserObject);
+
+    PendingWaterData pendingWaterData = new PendingWaterData();
+    pendingWaterData.setCurrentDate(DateUtils.getCurrentDate());
+    pendingWaterData.setGoalWater(64);
+    pendingWaterData.setCurrentWater(0);
+
+    pendingWaterObserver.onNext(pendingWaterData);
+
+    RealmUtils.updateCurrentDayPendingWaterData(pendingWaterData);
 
     sharedPreferencesUtil.storeUserIsEnrolled(true);
     sharedPreferencesUtil.storeEnrolledEmail(currentUserObject.getEmail());

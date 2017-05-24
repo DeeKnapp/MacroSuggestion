@@ -92,7 +92,7 @@ public class CaloriesChartUtils {
 
     d.setSliceSpace(1f);
     int[] color_Scheme = {
-        Color.rgb(56, 142, 60), Color.rgb(211, 47, 47)
+        Color.rgb(56, 142, 60), Color.rgb(224, 224, 224)
     };
 
     d.setColors(color_Scheme);

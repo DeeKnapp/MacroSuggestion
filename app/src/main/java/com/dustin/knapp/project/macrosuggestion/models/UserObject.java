@@ -15,6 +15,17 @@ public class UserObject extends RealmObject {
   private float targetWeight;
   private int heightInFeet;
   private int heightInInches;
+  //this will not be saved in realm or used after account creation
+
+  public String getPendingPassword() {
+    return pendingPassword;
+  }
+
+  public void setPendingPassword(String pendingPassword) {
+    this.pendingPassword = pendingPassword;
+  }
+
+  private String pendingPassword;
 
   //0 - Lose Weight / 1 - Gain Weight
   private int goalType;

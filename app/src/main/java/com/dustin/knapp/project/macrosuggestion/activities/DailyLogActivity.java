@@ -23,9 +23,8 @@ public class DailyLogActivity extends BaseNavDrawerActivity {
   ViewPager mViewPager;
 
   private View view;
-  @Inject public Observable<PendingWaterData> pendingWaterObservable;
-  @Inject public Observer<PendingWaterData> pendingWaterObserver;
 
+  //todo bring this into fragment
   @Inject public CaloriesPresenter caloriesPresenter;
 
   DailyLogFragmentPagerAdapter dailyLogFragmentPagerAdapter;
@@ -36,12 +35,6 @@ public class DailyLogActivity extends BaseNavDrawerActivity {
 
     ((MacroSuggestionApplication) getApplication()).getAppComponent().inject(this);
 
-    PendingWaterData pendingWaterData = new PendingWaterData();
-    pendingWaterData.currentWater = 16;
-    pendingWaterData.goalWater = 64;
-
-    pendingWaterObserver.onNext(pendingWaterData);
-
     toolbarTitle.setText(DrawerMenuItem.getTitle(DailyLogActivity.class));
     toolbar.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.white, null));
 
@@ -50,8 +43,7 @@ public class DailyLogActivity extends BaseNavDrawerActivity {
     this.content.addView(view);
 
     toolbarTitle.setText(DrawerMenuItem.getTitle(DailyLogActivity.class));
-    toolbar.setBackgroundColor(
-        ResourcesCompat.getColor(getResources(), R.color.dgm_green, null));
+    toolbar.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.dgm_green, null));
   }
 
   private void setupViewPager() {
@@ -68,7 +60,6 @@ public class DailyLogActivity extends BaseNavDrawerActivity {
     drawerMenuAdaper.updateWithSelectedPosition(position);
     drawerMenuList.smoothScrollToPosition(position);
   }
-
 
   @Override public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
       @NonNull int[] grantResults) {

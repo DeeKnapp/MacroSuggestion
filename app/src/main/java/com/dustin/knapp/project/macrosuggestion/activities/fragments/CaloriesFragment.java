@@ -120,8 +120,8 @@ public class CaloriesFragment extends Fragment
 
   private void updateChartView(CaloriesFragment.ViewHolder holder, float current, float goal,
       Activity activity) {
-    currentCalorieText.setText(current + "");
-    remainingCalorieText.setText((goal - current) + "");
+    currentCalorieText.setText(String.valueOf(current));
+    remainingCalorieText.setText(String.valueOf(goal - current));
     CaloriesChartUtils.updateChartViews(holder, current, goal, activity);
   }
 

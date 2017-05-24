@@ -7,253 +7,280 @@
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="vertical"
       android:layout_margin="10dp"
+      android:orientation="vertical"
       >
 
 
-  <TextView
-      android:id="@+id/tvEnterNameTitle"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="Hi, my name is"
-      android:textColor="@color/dgm_black"
-      android:textSize="22sp"
-      />
-
-  <android.support.design.widget.TextInputLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      >
-
-    <android.support.design.widget.TextInputEditText
-        android:id="@+id/etEnterName"
+    <TextView
+        android:id="@+id/tvEnterNameTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Name"
-        android:imeOptions="actionNext"
-        android:inputType="textPersonName"
-        android:textSize="18sp"
+        android:text="Hi, my name is"
+        android:textColor="@color/dgm_black"
+        android:textSize="22sp"
         />
 
-  </android.support.design.widget.TextInputLayout>
-
-  <TextView
-      android:id="@+id/tvEnterEmailTitle"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="My email address is"
-      android:textColor="@color/dgm_black"
-      android:textSize="22sp"
-      />
-
-  <android.support.design.widget.TextInputLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      >
-
-    <android.support.design.widget.TextInputEditText
-        android:id="@+id/etEnterEmail"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:hint="Enter email"
-        android:imeOptions="actionNext"
-        android:inputType="textEmailAddress"
-        android:textSize="18sp"
+        android:layout_height="wrap_content"
+        >
+
+      <android.support.design.widget.TextInputEditText
+          android:id="@+id/etEnterName"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="Enter Name"
+          android:imeOptions="actionNext"
+          android:inputType="textPersonName"
+          android:textSize="18sp"
+          />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tvEnterEmailTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My email address is"
+        android:textColor="@color/dgm_black"
+        android:textSize="22sp"
         />
 
-  </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
 
-  <TextView
-      android:id="@+id/tvSelectPurproseTitle"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="and I want to"
-      android:textColor="@color/dgm_black"
-      android:textSize="22sp"
-      />
+      <android.support.design.widget.TextInputEditText
+          android:id="@+id/etEnterEmail"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:hint="Enter email"
+          android:imeOptions="actionNext"
+          android:inputType="textEmailAddress"
+          android:textSize="18sp"
+          />
 
-  <RadioGroup
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      android:weightSum="2.1"
-      >
+    </android.support.design.widget.TextInputLayout>
 
-    <RadioButton
-        android:id="@+id/loseWeightButton"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@drawable/green_rounded_rect_selector"
-        android:button="@null"
-        android:gravity="center_horizontal|center_vertical"
-        android:text="Lose Weight"
+    <TextView
+        android:id="@+id/tvEnterPasswordTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="I want my password to be"
+        android:textColor="@color/dgm_black"
+        android:textSize="22sp"
         />
 
-    <!--use this button to set the layout_height automatically-->
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+      <android.support.design.widget.TextInputEditText
+          android:id="@+id/etEnterPassword"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:hint="Enter password"
+          android:imeOptions="actionNext"
+          android:inputType="textPassword"
+          android:textSize="18sp"
+          />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tvSelectPurproseTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="and I want to"
+        android:textColor="@color/dgm_black"
+        android:textSize="22sp"
+        />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2.1"
+        >
+
+      <RadioButton
+          android:id="@+id/loseWeightButton"
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:background="@drawable/green_rounded_rect_selector"
+          android:button="@null"
+          android:gravity="center_horizontal|center_vertical"
+          android:text="Lose Weight"
+          />
+
+      <!--use this button to set the layout_height automatically-->
+      <Button
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="0.1"
+          android:visibility="invisible"
+          />
+
+      <RadioButton
+          android:id="@+id/gainWeightButton"
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:background="@drawable/green_rounded_rect_selector"
+          android:button="@null"
+          android:gravity="center_horizontal|center_vertical"
+          android:text="Gain Weight"
+          />
+
+
+    </RadioGroup>
+
+
+    <TextView
+        android:id="@+id/tvHeightTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Current Height is"
+        android:textColor="@color/dgm_black"
+        android:textSize="22sp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="6"
+        >
+
+      <EditText
+          android:id="@+id/etEnterHeightFeet"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="2"
+          android:hint="Enter Feet"
+          android:imeOptions="actionNext"
+          android:inputType="number"
+          android:textSize="18sp"
+          />
+
+
+      <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_vertical"
+          android:layout_weight="1"
+          android:text="ft."
+          />
+
+      <EditText
+          android:id="@+id/etEnterHeightInches"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_gravity="bottom"
+          android:layout_weight="2"
+          android:hint="Enter Inches"
+          android:imeOptions="actionNext"
+          android:inputType="number"
+          android:textSize="18sp"
+
+          />
+
+      <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_vertical"
+          android:layout_weight="1"
+          android:text="in."
+          />
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tvEnterCurrentWeightTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="and I currently weigh"
+        android:textColor="@color/dgm_black"
+        android:textSize="22sp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        >
+
+      <EditText
+          android:id="@+id/etCurrentWeight"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="3"
+          android:hint="Current Weight"
+          android:imeOptions="actionNext"
+          android:inputType="numberDecimal"
+          android:textSize="18sp"
+          />
+
+      <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="lbs"
+          />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tvEnterTargetWeightTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="but, I want to weigh"
+        android:textColor="@color/dgm_black"
+        android:textSize="22sp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        >
+
+      <EditText
+          android:id="@+id/etTargetWeight"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="3"
+          android:hint="Target Weight"
+          android:imeOptions="actionDone"
+          android:inputType="numberDecimal"
+          android:textSize="18sp"
+          />
+
+      <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="lbs"
+          />
+
+    </LinearLayout>
+
     <Button
-        android:layout_width="0dp"
+        android:id="@+id/nextButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.1"
-        android:visibility="invisible"
+        android:layout_marginBottom="15dp"
+        android:text="Next"
         />
-
-    <RadioButton
-        android:id="@+id/gainWeightButton"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@drawable/green_rounded_rect_selector"
-        android:button="@null"
-        android:gravity="center_horizontal|center_vertical"
-        android:text="Gain Weight"
-        />
-
-
-  </RadioGroup>
-
-
-  <TextView
-      android:id="@+id/tvHeightTitle"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="My Current Height is"
-      android:textColor="@color/dgm_black"
-      android:textSize="22sp"
-      />
-
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      android:weightSum="6"
-      >
-
-    <EditText
-        android:id="@+id/etEnterHeightFeet"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:hint="Enter Feet"
-        android:imeOptions="actionNext"
-        android:inputType="number"
-        android:textSize="18sp"
-        />
-
-
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_weight="1"
-        android:text="ft."
-        />
-
-    <EditText
-        android:id="@+id/etEnterHeightInches"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_weight="2"
-        android:hint="Enter Inches"
-        android:imeOptions="actionNext"
-        android:inputType="number"
-        android:textSize="18sp"
-
-        />
-
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_weight="1"
-        android:text="in."
-        />
-
-
-  </LinearLayout>
-
-
-  <TextView
-      android:id="@+id/tvEnterCurrentWeightTitle"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="and I currently weigh"
-      android:textColor="@color/dgm_black"
-      android:textSize="22sp"
-      />
-
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      android:weightSum="4"
-      >
-
-    <EditText
-        android:id="@+id/etCurrentWeight"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:hint="Current Weight"
-        android:imeOptions="actionNext"
-        android:inputType="numberDecimal"
-        android:textSize="18sp"
-        />
-
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="lbs"
-        />
-
-  </LinearLayout>
-
-
-  <TextView
-      android:id="@+id/tvEnterTargetWeightTitle"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="but, I want to weigh"
-      android:textColor="@color/dgm_black"
-      android:textSize="22sp"
-      />
-
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      android:weightSum="4"
-      >
-
-    <EditText
-        android:id="@+id/etTargetWeight"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:hint="Target Weight"
-        android:imeOptions="actionDone"
-        android:inputType="numberDecimal"
-        android:textSize="18sp"
-        />
-
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="lbs"
-        />
-
-  </LinearLayout>
-
-  <Button
-      android:id="@+id/nextButton"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="Next"
-      />
 
   </LinearLayout>
 

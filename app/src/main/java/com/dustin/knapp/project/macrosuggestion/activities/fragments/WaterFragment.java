@@ -10,12 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.dustin.knapp.project.macrosuggestion.MacroSuggestionApplication;
 import com.dustin.knapp.project.macrosuggestion.R;
 import com.dustin.knapp.project.macrosuggestion.activities.DailyLogActivity;
 import com.dustin.knapp.project.macrosuggestion.models.PendingWaterData;
 import com.dustin.knapp.project.macrosuggestion.ui.QuickAddWaterDialogFragment;
+import com.dustin.knapp.project.macrosuggestion.utils.RealmUtils;
 import com.dustin.knapp.project.macrosuggestion.utils.WaterChartUtils;
 import com.github.mikephil.charting.charts.PieChart;
+import javax.inject.Inject;
+import rx.Observable;
+import rx.Observer;
 import rx.functions.Action1;
 
 /**
@@ -40,9 +45,14 @@ public class WaterFragment extends Fragment
 
   PendingWaterData currentPendingWaterData;
 
+  @Inject public Observable<PendingWaterData> pendingWaterObservable;
+  @Inject public Observer<PendingWaterData> pendingWaterObserver;
+
   @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     rootView = inflater.inflate(R.layout.water_fragment, container, false);
+
+    ((MacroSuggestionApplication) getActivity().getApplication()).getAppComponent().inject(this);
 
     currentWaterText = (TextView) rootView.findViewById(R.id.currentWater);
     remainingWaterText = (TextView) rootView.findViewById(R.id.remainingWater);
@@ -59,11 +69,11 @@ public class WaterFragment extends Fragment
     waterViewHolder = new WaterFragment.ViewHolder();
     waterViewHolder.chart = (PieChart) view.findViewById(R.id.water_chart);
 
-    activity.pendingWaterObservable.subscribe(new Action1<PendingWaterData>() {
+    pendingWaterObservable.subscribe(new Action1<PendingWaterData>() {
       @Override public void call(PendingWaterData pendingWaterData) {
         currentPendingWaterData = pendingWaterData;
-        currentWater = pendingWaterData.currentWater;
-        goalWater = pendingWaterData.goalWater;
+        currentWater = pendingWaterData.getCurrentWater();
+        goalWater = pendingWaterData.getGoalWater();
       }
     });
 
@@ -97,13 +107,14 @@ public class WaterFragment extends Fragment
   }
 
   public void updateView() {
-    updateChartView(waterViewHolder, currentPendingWaterData.currentWater, goalWater,
+    updateChartView(waterViewHolder, currentPendingWaterData.getCurrentWater(), goalWater,
         getActivity());
   }
 
   @Override public void onQuickAddSubmit(Float water) {
-    currentPendingWaterData.currentWater += water;
-    activity.pendingWaterObserver.onNext(currentPendingWaterData);
+    currentPendingWaterData.setCurrentWater(currentPendingWaterData.getCurrentWater() + water);
+    pendingWaterObserver.onNext(currentPendingWaterData);
+    RealmUtils.updateCurrentDayPendingWaterData(currentPendingWaterData);
     updateView();
   }
 

@@ -3,6 +3,7 @@ package com.dustin.knapp.project.macrosuggestion.utils;
 import com.dustin.knapp.project.macrosuggestion.models.FoodEntry;
 import com.dustin.knapp.project.macrosuggestion.models.NutritionDataGoal;
 import com.dustin.knapp.project.macrosuggestion.models.PendingNutritionData;
+import com.dustin.knapp.project.macrosuggestion.models.PendingWaterData;
 import com.dustin.knapp.project.macrosuggestion.models.UserObject;
 import io.realm.Realm;
 import io.realm.RealmQuery;
@@ -54,6 +55,23 @@ public class RealmUtils {
     }
   }
 
+  public static UserObject getCurrentUserObject(String email) {
+    Realm realm = Realm.getDefaultInstance();
+
+    RealmQuery<UserObject> query = realm.where(UserObject.class);
+
+    query.contains("email", email);
+
+    // Execute the query:
+    RealmResults<UserObject> result1 = query.findAll();
+
+    if (result1.size() == 0) {
+      return null;
+    } else {
+      return result1.get(0);
+    }
+  }
+
   public static NutritionDataGoal getNutrtionDataGoal(String enrolledEmail) {
     Realm realm = Realm.getDefaultInstance();
 
@@ -87,5 +105,32 @@ public class RealmUtils {
     }
 
     return foodEntryList;
+  }
+
+  //todo save set goal then if  == null create new daily object
+  //todo see pending nutritional data object
+  public static void updateCurrentDayPendingWaterData(
+      PendingWaterData pendingWaterData) {
+    Realm realm = Realm.getDefaultInstance();
+    realm.beginTransaction();
+    realm.copyToRealmOrUpdate(pendingWaterData);
+    realm.commitTransaction();
+  }
+
+  public static PendingWaterData getCurrentDayPendingWaterData() {
+    Realm realm = Realm.getDefaultInstance();
+
+    RealmQuery<PendingWaterData> query = realm.where(PendingWaterData.class);
+
+    query.contains("currentDate", DateUtils.getCurrentDate());
+
+    // Execute the query:
+    RealmResults<PendingWaterData> result1 = query.findAll();
+
+    if (result1.size() == 0) {
+      return null;
+    } else {
+      return result1.get(0);
+    }
   }
 }
