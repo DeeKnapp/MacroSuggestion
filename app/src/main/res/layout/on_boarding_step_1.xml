@@ -65,6 +65,33 @@
     </android.support.design.widget.TextInputLayout>
 
     <TextView
+        android:id="@+id/evEnterBirthday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="I was born on"
+        android:textColor="@color/dgm_black"
+        android:textSize="22sp"
+        />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+      <android.support.design.widget.TextInputEditText
+          android:id="@+id/etBirthday"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:hint="Date of Birth (mm/dd/yyyy)"
+          android:imeOptions="actionNext"
+          android:inputType="number"
+          android:textSize="18sp"
+          />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <TextView
         android:id="@+id/tvEnterPasswordTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -103,7 +130,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="2.1"
+        android:weightSum="3.2"
         >
 
       <RadioButton
@@ -111,13 +138,32 @@
           android:layout_width="0dp"
           android:layout_height="match_parent"
           android:layout_weight="1"
-          android:background="@drawable/green_rounded_rect_selector"
+          android:background="@drawable/blue_rounded_rect_selector"
           android:button="@null"
           android:gravity="center_horizontal|center_vertical"
           android:text="Lose Weight"
           />
 
-      <!--use this button to set the layout_height automatically-->
+      <!--use this button to set the layout_height automatically / spacer -->
+      <Button
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="0.1"
+          android:visibility="invisible"
+          />
+
+      <RadioButton
+          android:id="@+id/maintainWeight"
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:background="@drawable/blue_rounded_rect_selector"
+          android:button="@null"
+          android:gravity="center_horizontal|center_vertical"
+          android:text="Maintain / Tone"
+          />
+
+      <!--use this button to set the layout_height automatically / spacer -->
       <Button
           android:layout_width="0dp"
           android:layout_height="wrap_content"
@@ -130,7 +176,7 @@
           android:layout_width="0dp"
           android:layout_height="match_parent"
           android:layout_weight="1"
-          android:background="@drawable/green_rounded_rect_selector"
+          android:background="@drawable/blue_rounded_rect_selector"
           android:button="@null"
           android:gravity="center_horizontal|center_vertical"
           android:text="Gain Weight"
@@ -184,7 +230,7 @@
           android:layout_weight="2"
           android:hint="Enter Inches"
           android:imeOptions="actionNext"
-          android:inputType="number"
+          android:inputType="numberDecimal"
           android:textSize="18sp"
 
           />

@@ -34,6 +34,8 @@
     <activity android:name=".activities.BarcodeScanner" />
     <activity android:name=".activities.SignoutActivity" />
     <activity android:name=".activities.DailyLogActivity" />
+    <activity android:name=".activities.ProfileActivity" />
+
   </application>
 
 </manifest>

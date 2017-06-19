@@ -3,6 +3,7 @@
     android:id="@+id/food_fragment_wrapper"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/log_green_background"
     android:orientation="vertical"
     >
 
@@ -32,7 +33,7 @@
             android:layout_marginBottom="5dp"
             android:layout_weight="4"
             android:text="Breakfast"
-            android:textColor="@color/dgm_black"
+            android:textColor="@color/white"
             android:textSize="20sp"
             />
 
@@ -42,7 +43,7 @@
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
             android:text="Calories"
-            android:textColor="@color/dgm_black"
+            android:textColor="@color/white"
             android:textSize="15sp"
             />
 
@@ -93,6 +94,7 @@
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
           android:orientation="horizontal"
           android:weightSum="5"
           >
@@ -104,7 +106,7 @@
             android:layout_marginBottom="5dp"
             android:layout_weight="4"
             android:text="Lunch"
-            android:textColor="@color/dgm_black"
+            android:textColor="@color/white"
             android:textSize="20sp"
             />
 
@@ -114,7 +116,7 @@
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
             android:text="Calories"
-            android:textColor="@color/dgm_black"
+            android:textColor="@color/white"
             android:textSize="15sp"
             />
 
@@ -165,6 +167,7 @@
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
           android:orientation="horizontal"
           android:weightSum="5"
           >
@@ -176,7 +179,7 @@
             android:layout_marginBottom="5dp"
             android:layout_weight="4"
             android:text="Dinner"
-            android:textColor="@color/dgm_black"
+            android:textColor="@color/white"
             android:textSize="20sp"
             />
 
@@ -186,7 +189,7 @@
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
             android:text="Calories"
-            android:textColor="@color/dgm_black"
+            android:textColor="@color/white"
             android:textSize="15sp"
             />
 
@@ -196,6 +199,7 @@
       <View
           android:layout_width="match_parent"
           android:layout_height="2px"
+          android:layout_marginTop="5dp"
           android:background="@color/mediumGrey"
           />
 
@@ -226,6 +230,71 @@
 
         <ImageButton
             android:id="@+id/addDinnerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@mipmap/ic_add_black_24dp"
+            />
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:orientation="horizontal"
+          android:weightSum="5"
+          >
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="4"
+            android:text="Swift Adds"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:text="Calories"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            />
+
+
+      </LinearLayout>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="2px"
+          android:layout_marginTop="5dp"
+          android:background="@color/mediumGrey"
+          />
+
+      <LinearLayout
+          android:id="@+id/quickAddItemsContainer"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          />
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="10dp"
+          android:layout_marginTop="5dp"
+          android:gravity="end"
+          android:orientation="horizontal"
+          >
+
+        <ImageButton
+            android:id="@+id/addQuickAddButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"

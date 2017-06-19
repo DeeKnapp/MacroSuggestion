@@ -1,4 +1,4 @@
-package com.dustin.knapp.project.macrosuggestion.activities.fragments;
+package com.dustin.knapp.project.macrosuggestion.fragments;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -13,15 +13,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.app.Fragment;
 import android.widget.TextView;
+import com.dustin.knapp.project.macrosuggestion.Constants;
 import com.dustin.knapp.project.macrosuggestion.MacroSuggestionApplication;
 import com.dustin.knapp.project.macrosuggestion.R;
 import com.dustin.knapp.project.macrosuggestion.activities.LandingPageActivity;
 import com.dustin.knapp.project.macrosuggestion.models.BaseNutrition;
+import com.dustin.knapp.project.macrosuggestion.models.FoodEntry;
 import com.dustin.knapp.project.macrosuggestion.models.PendingNutritionData;
 import com.dustin.knapp.project.macrosuggestion.presenters.colories_fragment.CaloriesPresenter;
 import com.dustin.knapp.project.macrosuggestion.presenters.colories_fragment.CaloriesReactiveView;
 import com.dustin.knapp.project.macrosuggestion.ui.QuickAddFoodDialogFragment;
 import com.dustin.knapp.project.macrosuggestion.utils.CaloriesChartUtils;
+import com.dustin.knapp.project.macrosuggestion.utils.DateUtils;
 import com.dustin.knapp.project.macrosuggestion.utils.RealmUtils;
 import com.github.mikephil.charting.charts.PieChart;
 import javax.inject.Inject;
@@ -126,18 +129,20 @@ public class CaloriesFragment extends Fragment
   }
 
   @Override public void onServerSuccess(String quote) {
-    Snackbar snackbar =
-        Snackbar.make(getActivity().findViewById(R.id.calorie_fragment_wrapper), quote,
-            Snackbar.LENGTH_INDEFINITE).setAction("Dismiss", new View.OnClickListener() {
-          @Override public void onClick(View v) {
-            //do nothing
-          }
-        }).setActionTextColor(Color.GREEN);
-    View snackbarView = snackbar.getView();
-    TextView textView =
-        (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-    textView.setMaxLines(10);
-    snackbar.show();
+    if (!getActivity().isDestroyed()) {
+      Snackbar snackbar =
+          Snackbar.make(getActivity().findViewById(R.id.calorie_fragment_wrapper), quote,
+              Snackbar.LENGTH_INDEFINITE).setAction("Dismiss", new View.OnClickListener() {
+            @Override public void onClick(View v) {
+              //do nothing
+            }
+          }).setActionTextColor(Color.GREEN);
+      View snackbarView = snackbar.getView();
+      TextView textView =
+          (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+      textView.setMaxLines(10);
+      snackbar.show();
+    }
   }
 
   @Override public void onServerError() {
@@ -174,6 +179,18 @@ public class CaloriesFragment extends Fragment
     pendingNutritionalObserver.onNext(currentPendingNutritionalData);
 
     RealmUtils.updateCurrentDayPendingNutritionData(currentPendingNutritionalData);
+
+    FoodEntry currentFoodEntry = new FoodEntry();
+
+    currentFoodEntry.setCurrentDate(DateUtils.getCurrentDate());
+    currentFoodEntry.setCalories(baseNutrition.calories);
+    currentFoodEntry.setProtein(baseNutrition.protein);
+    currentFoodEntry.setFats(baseNutrition.fats);
+    currentFoodEntry.setCarbs(baseNutrition.carbs);
+    currentFoodEntry.setFoodName("Swift Add");
+    currentFoodEntry.setMealEntryType(Constants.MEAL_TYPE_QUICK_ADD);
+
+    RealmUtils.addFoodEntryToCurrentDay(currentFoodEntry);
 
     activity.updateFragmentViews();
   }

@@ -49,16 +49,18 @@ public class CaloriesPresenter extends Presenter<CaloriesReactiveView> {
         .subscribe(new Action1<InspirationalCall.Quote>() {
           @Override public void call(InspirationalCall.Quote quote) {
             String quoteText;
-            if (quote.getQuoteAuthor().equals("")) {
-              quoteText = "\"" + quote.getQuoteText() + "\" - Unknown";
-            } else {
-              quoteText = "\"" + quote.getQuoteText() + "\" - " + quote.getQuoteAuthor();
-            }
-            Log.d("QuoteText: ", quoteText);
-            if (!quoteText.equals("")) {
-              caloriesReactiveView.onServerSuccess(quoteText);
-            } else {
-              getInspirationQuoteForSnackbar();
+            if (quote.getQuoteText() != null) {
+              if (quote.getQuoteAuthor().equals("")) {
+                quoteText = "\"" + quote.getQuoteText() + "\" - Unknown";
+              } else {
+                quoteText = "\"" + quote.getQuoteText() + "\" - " + quote.getQuoteAuthor();
+              }
+              Log.d("QuoteText: ", quoteText);
+              if (!quoteText.equals("")) {
+                caloriesReactiveView.onServerSuccess(quoteText);
+              } else {
+                getInspirationQuoteForSnackbar();
+              }
             }
           }
         });

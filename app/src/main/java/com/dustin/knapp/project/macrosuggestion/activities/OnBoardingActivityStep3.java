@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -15,15 +13,15 @@ import com.dustin.knapp.project.macrosuggestion.Constants;
 import com.dustin.knapp.project.macrosuggestion.MacroSuggestionApplication;
 import com.dustin.knapp.project.macrosuggestion.R;
 import com.dustin.knapp.project.macrosuggestion.models.NutritionDataGoal;
-import com.dustin.knapp.project.macrosuggestion.models.PendingNutritionData;
-import com.dustin.knapp.project.macrosuggestion.models.PendingWaterData;
 import com.dustin.knapp.project.macrosuggestion.models.UserObject;
-import com.dustin.knapp.project.macrosuggestion.utils.DateUtils;
+import com.dustin.knapp.project.macrosuggestion.models.WaterDataGoal;
 import com.dustin.knapp.project.macrosuggestion.utils.RealmUtils;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import javax.inject.Inject;
 import rx.Observable;
-import rx.Observer;
 import rx.functions.Action1;
 
 /**
@@ -36,8 +34,6 @@ public class OnBoardingActivityStep3 extends BaseActivity {
   @BindView(R.id.submitButton) Button btnSubmit;
 
   @Inject public Observable<UserObject> pendingUserObjectObservable;
-  @Inject public Observer<PendingNutritionData> pendingNutritionalObserver;
-  @Inject public Observer<PendingWaterData> pendingWaterObserver;
 
   FirebaseAuth firebaseAuth;
 
@@ -60,10 +56,23 @@ public class OnBoardingActivityStep3 extends BaseActivity {
 
   @OnClick(R.id.submitButton) void submitButtonClicked(View v) {
 
-    firebaseAuth = FirebaseAuth.getInstance();
-    firebaseAuth.createUserWithEmailAndPassword(currentUserObject.getEmail(),
-        currentUserObject.getPendingPassword());
+    if (currentUserObject.isSignedInWithGoogle()) {
+      saveGoalsLocalAndRemote();
+    } else if (currentUserObject.isRegisteringWithEmail()) {
+      firebaseAuth = FirebaseAuth.getInstance();
+      Task<AuthResult> resultTask =
+          firebaseAuth.createUserWithEmailAndPassword(currentUserObject.getEmail(),
+              currentUserObject.getPendingPassword());
+      if (resultTask.isSuccessful()) {
+        currentUserObject.setPendingPassword("");
+        saveGoalsLocalAndRemote();
+      }
+    } else {
+      //todo solve for this
+    }
+  }
 
+  private void saveGoalsLocalAndRemote() {
     NutritionDataGoal nutritionDataGoal = new NutritionDataGoal();
 
     nutritionDataGoal.setGoalCalorie(2000);
@@ -75,23 +84,32 @@ public class OnBoardingActivityStep3 extends BaseActivity {
 
     RealmUtils.saveNutritionDataGoal(nutritionDataGoal);
 
-    RealmUtils.saveUserObject(currentUserObject);
+    WaterDataGoal waterDataGoal = new WaterDataGoal();
+    waterDataGoal.setEmail(currentUserObject.getEmail());
+    waterDataGoal.setGoalWater(64);
+    waterDataGoal.setCurrentWater(0);
 
-    PendingWaterData pendingWaterData = new PendingWaterData();
-    pendingWaterData.setCurrentDate(DateUtils.getCurrentDate());
-    pendingWaterData.setGoalWater(64);
-    pendingWaterData.setCurrentWater(0);
-
-    pendingWaterObserver.onNext(pendingWaterData);
-
-    RealmUtils.updateCurrentDayPendingWaterData(pendingWaterData);
+    RealmUtils.saveWaterDataGoal(waterDataGoal);
 
     sharedPreferencesUtil.storeUserIsEnrolled(true);
     sharedPreferencesUtil.storeEnrolledEmail(currentUserObject.getEmail());
+    sharedPreferencesUtil.storeEnrolledUniqueUserId(currentUserObject.getUniqueUserId());
+
+    currentUserObject.setNutritionDataGoal(nutritionDataGoal);
+    currentUserObject.setWaterDataGoal(waterDataGoal);
+
+    RealmUtils.saveUserObject(currentUserObject);
+
+    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+
+    firebaseDatabase.getReference()
+        .child(Constants.BASE_DATABASE_REFERENCE)
+        .child(Constants.USER_DATABASE_REFERENCE)
+        .push()
+        .setValue(currentUserObject);
 
     Intent intent = new Intent(this, LandingPageActivity.class);
     startActivity(intent);
     finish();
   }
 }
-

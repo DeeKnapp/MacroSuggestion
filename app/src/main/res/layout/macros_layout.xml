@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/macros_purple_background"
     android:orientation="vertical"
-    android:padding="10dp"
     >
 
-  <ScrollView
+  <com.dustin.knapp.project.macrosuggestion.adapters.CustomScrollView
+      android:id="@+id/scrollView"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       >
@@ -15,30 +16,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:padding="15dp"
         >
+
+      <TextView
+          android:id="@+id/title_view_protein"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="5dp"
+          android:gravity="center"
+          android:text="Today's Protein"
+          android:textColor="@color/white"
+          android:textSize="20sp"
+          android:textStyle="bold"
+          />
 
       <com.github.mikephil.charting.charts.PieChart
           android:id="@+id/proteinChart"
           android:layout_width="match_parent"
           android:layout_height="225dp"
-          android:layout_marginBottom="5dp"
-          />
-
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="2px"
-          android:background="@color/mediumGrey"
+          android:layout_marginBottom="10dp"
           />
 
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="5dp"
-          android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"
-          android:layout_marginTop="5dp"
+          android:background="@drawable/rounded_rectangle"
           android:orientation="horizontal"
-          android:weightSum="3"
+          android:paddingBottom="10dp"
+          android:paddingTop="10dp"
+          android:weightSum="2"
           >
 
         <LinearLayout
@@ -52,44 +59,9 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:gravity="center"
-              android:text="Goal"
-              android:textColor="#000000"
-              android:textSize="15sp"
-              />
-
-          <TextView
-              android:id="@+id/proteinGoal"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:gravity="center"
-              android:text="Goal: "
-              android:textColor="#000000"
+              android:text="Current Protein"
+              android:textColor="@color/white"
               android:textSize="12sp"
-              />
-
-        </LinearLayout>
-
-
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="@color/mediumGrey"
-            />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            >
-
-          <TextView
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:gravity="center"
-              android:text="Current"
-              android:textColor="#000000"
-              android:textSize="15sp"
               />
 
           <TextView
@@ -98,8 +70,8 @@
               android:layout_height="wrap_content"
               android:gravity="center"
               android:text="Current: "
-              android:textColor="#000000"
-              android:textSize="12sp"
+              android:textColor="@color/white"
+              android:textSize="20sp"
               />
 
         </LinearLayout>
@@ -107,7 +79,7 @@
         <View
             android:layout_width="1px"
             android:layout_height="match_parent"
-            android:background="@color/mediumGrey"
+            android:background="@color/dgm_black"
             />
 
         <LinearLayout
@@ -121,9 +93,9 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:gravity="center"
-              android:text="Remaining"
-              android:textColor="#000000"
-              android:textSize="15sp"
+              android:text="Remaining Protein"
+              android:textColor="@color/white"
+              android:textSize="12sp"
               />
 
           <TextView
@@ -132,8 +104,8 @@
               android:layout_height="wrap_content"
               android:gravity="center"
               android:text="Remaining: "
-              android:textColor="#000000"
-              android:textSize="12sp"
+              android:textColor="@color/white"
+              android:textSize="20sp"
               />
 
         </LinearLayout>
@@ -141,10 +113,17 @@
 
       </LinearLayout>
 
-      <View
+      <TextView
+          android:id="@+id/title_view_carbs"
           android:layout_width="match_parent"
-          android:layout_height="2px"
-          android:background="@color/mediumGrey"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="5dp"
+          android:layout_marginTop="25dp"
+          android:gravity="center"
+          android:text="Today's Carbs"
+          android:textColor="@color/white"
+          android:textSize="20sp"
+          android:textStyle="bold"
           />
 
       <com.github.mikephil.charting.charts.PieChart
@@ -152,24 +131,16 @@
           android:layout_width="match_parent"
           android:layout_height="225dp"
           android:layout_marginBottom="5dp"
-          android:layout_marginTop="25dp"
-          />
-
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="2px"
-          android:background="@color/mediumGrey"
           />
 
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="5dp"
-          android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"
-          android:layout_marginTop="5dp"
+          android:background="@drawable/rounded_rectangle"
           android:orientation="horizontal"
-          android:weightSum="3"
+          android:paddingBottom="10dp"
+          android:paddingTop="10dp"
+          android:weightSum="2"
           >
 
         <LinearLayout
@@ -183,44 +154,9 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:gravity="center"
-              android:text="Goal"
-              android:textColor="#000000"
-              android:textSize="15sp"
-              />
-
-          <TextView
-              android:id="@+id/carbGoal"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:gravity="center"
-              android:text="Goal: "
-              android:textColor="#000000"
+              android:text="Current Carbs"
+              android:textColor="@color/white"
               android:textSize="12sp"
-              />
-
-        </LinearLayout>
-
-
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="@color/mediumGrey"
-            />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            >
-
-          <TextView
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:gravity="center"
-              android:text="Current"
-              android:textColor="#000000"
-              android:textSize="15sp"
               />
 
           <TextView
@@ -229,8 +165,8 @@
               android:layout_height="wrap_content"
               android:gravity="center"
               android:text="Current: "
-              android:textColor="#000000"
-              android:textSize="12sp"
+              android:textColor="@color/white"
+              android:textSize="20sp"
               />
 
         </LinearLayout>
@@ -238,7 +174,7 @@
         <View
             android:layout_width="1px"
             android:layout_height="match_parent"
-            android:background="@color/mediumGrey"
+            android:background="@color/dgm_black"
             />
 
         <LinearLayout
@@ -252,9 +188,9 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:gravity="center"
-              android:text="Remaining"
-              android:textColor="#000000"
-              android:textSize="15sp"
+              android:text="Remaining Carbs"
+              android:textColor="@color/white"
+              android:textSize="12sp"
               />
 
           <TextView
@@ -263,8 +199,8 @@
               android:layout_height="wrap_content"
               android:gravity="center"
               android:text="Remaining: "
-              android:textColor="#000000"
-              android:textSize="12sp"
+              android:textColor="@color/white"
+              android:textSize="20sp"
               />
 
         </LinearLayout>
@@ -272,35 +208,36 @@
 
       </LinearLayout>
 
-      <View
+      <TextView
+          android:id="@+id/title_view_fats"
           android:layout_width="match_parent"
-          android:layout_height="2px"
-          android:background="@color/mediumGrey"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="5dp"
+          android:layout_marginTop="25dp"
+          android:gravity="center"
+          android:text="Today's Fats"
+          android:textColor="@color/white"
+          android:textSize="20sp"
+          android:textStyle="bold"
           />
 
       <com.github.mikephil.charting.charts.PieChart
           android:id="@+id/fatChart"
           android:layout_width="match_parent"
           android:layout_height="225dp"
-          android:layout_marginBottom="5dp"
-          android:layout_marginTop="25dp"
-          />
-
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="2px"
-          android:background="@color/mediumGrey"
+          android:layout_marginBottom="10dp"
           />
 
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="5dp"
           android:layout_marginLeft="10dp"
           android:layout_marginRight="10dp"
-          android:layout_marginTop="5dp"
+          android:background="@drawable/rounded_rectangle"
           android:orientation="horizontal"
-          android:weightSum="3"
+          android:paddingBottom="10dp"
+          android:paddingTop="10dp"
+          android:weightSum="2"
           >
 
         <LinearLayout
@@ -314,44 +251,9 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:gravity="center"
-              android:text="Goal"
-              android:textColor="#000000"
-              android:textSize="15sp"
-              />
-
-          <TextView
-              android:id="@+id/fatGoal"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:gravity="center"
-              android:text="Goal: "
-              android:textColor="#000000"
+              android:text="Current Fats"
+              android:textColor="@color/white"
               android:textSize="12sp"
-              />
-
-        </LinearLayout>
-
-
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="@color/mediumGrey"
-            />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            >
-
-          <TextView
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:gravity="center"
-              android:text="Current"
-              android:textColor="#000000"
-              android:textSize="15sp"
               />
 
           <TextView
@@ -360,8 +262,8 @@
               android:layout_height="wrap_content"
               android:gravity="center"
               android:text="Current: "
-              android:textColor="#000000"
-              android:textSize="12sp"
+              android:textColor="@color/white"
+              android:textSize="20sp"
               />
 
         </LinearLayout>
@@ -369,7 +271,7 @@
         <View
             android:layout_width="1px"
             android:layout_height="match_parent"
-            android:background="@color/mediumGrey"
+            android:background="@color/dgm_black"
             />
 
         <LinearLayout
@@ -383,9 +285,9 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:gravity="center"
-              android:text="Remaining"
-              android:textColor="#000000"
-              android:textSize="15sp"
+              android:text="Remaining Fats"
+              android:textColor="@color/white"
+              android:textSize="12sp"
               />
 
           <TextView
@@ -394,32 +296,33 @@
               android:layout_height="wrap_content"
               android:gravity="center"
               android:text="Remaining: "
-              android:textColor="#000000"
-              android:textSize="12sp"
+              android:textColor="@color/white"
+              android:textSize="20sp"
               />
 
         </LinearLayout>
 
-
       </LinearLayout>
 
       <View
+          android:id="@+id/fabSpace"
           android:layout_width="match_parent"
-          android:layout_height="2px"
-          android:background="@color/mediumGrey"
-          />
-
-      <Button
-          android:id="@+id/suggestionButton"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="10dp"
-          android:text="Suggest Food"
+          android:layout_height="64dp"
           />
 
     </LinearLayout>
 
-  </ScrollView>
+  </com.dustin.knapp.project.macrosuggestion.adapters.CustomScrollView>
 
+  <android.support.design.widget.FloatingActionButton
+      android:id="@+id/fab"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="bottom|end"
+      android:layout_margin="16dp"
+      android:layout_marginBottom="@dimen/activity_vertical_margin"
+      android:layout_marginEnd="@dimen/activity_horizontal_margin"
+      android:src="@mipmap/ic_plus_white"
+      />
 
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

@@ -6,18 +6,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.dustin.knapp.project.macrosuggestion.Constants;
 import com.dustin.knapp.project.macrosuggestion.MacroSuggestionApplication;
 import com.dustin.knapp.project.macrosuggestion.R;
 import android.content.Intent;
+import com.dustin.knapp.project.macrosuggestion.models.NutritionDataGoal;
 import com.dustin.knapp.project.macrosuggestion.models.PendingNutritionData;
 import com.dustin.knapp.project.macrosuggestion.models.PendingWaterData;
 import com.dustin.knapp.project.macrosuggestion.models.UserObject;
+import com.dustin.knapp.project.macrosuggestion.models.WaterDataGoal;
 import com.dustin.knapp.project.macrosuggestion.utils.DateUtils;
 import com.dustin.knapp.project.macrosuggestion.utils.RealmUtils;
 import com.google.android.gms.auth.api.Auth;
@@ -34,6 +35,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import javax.inject.Inject;
 import rx.Observer;
 
@@ -136,44 +143,11 @@ public class LoginActivity extends BaseActivity
               Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT)
                   .show();
             } else {
-              Log.w("THIS", "signInWithCredential", task.getException());
-              UserObject signedInUser =
-                  RealmUtils.getCurrentUserObject(task.getResult().getUser().getEmail());
-              if (signedInUser == null) {
-                UserObject userObject = new UserObject();
-                userObject.setEmail(acct.getEmail());
-                userObject.setName(acct.getDisplayName());
-
-                pendingUserObjectObserver.onNext(userObject);
-
-                Intent intent = new Intent(getApplicationContext(), OnBoardingActivityStep1.class);
-                startActivity(intent);
-                finish();
+              //todo authenticate user
+              //todo create new goal every login
+              if (!sharedPreferencesUtil.getUserIsEnrolled()) {
+                updateUserFromFirebaseForGoogle(task.getResult());
               } else {
-                //todo authenticate user
-                //todo create new goal every login
-                if (!sharedPreferencesUtil.getUserIsEnrolled()) {
-
-                  PendingNutritionData pendingNutritionData = new PendingNutritionData();
-
-                  pendingNutritionData.setGoalCalorie(2000);
-                  pendingNutritionData.setGoalFat(1000);
-                  pendingNutritionData.setGoalCarb(800);
-                  pendingNutritionData.setGoalProtein(750);
-                  pendingNutritionData.setCurrentCalories(0);
-                  pendingNutritionData.setCurrentCarb(0);
-                  pendingNutritionData.setCurrentFat(0);
-                  pendingNutritionData.setCurrentProtein(0);
-
-                  pendingNutritionData.setCurrentDate(DateUtils.getCurrentDate());
-
-                  pendingNutritionalObserver.onNext(pendingNutritionData);
-
-                  RealmUtils.updateCurrentDayPendingNutritionData(pendingNutritionData);
-
-                  sharedPreferencesUtil.storeUserIsEnrolled(true);
-                }
-
                 Intent intent = new Intent(getApplicationContext(), LandingPageActivity.class);
                 startActivity(intent);
                 finish();
@@ -196,6 +170,37 @@ public class LoginActivity extends BaseActivity
   @OnClick(R.id.loginButton) void loginClicked(View v) {
     //todo authenticate user
     //todo create new goal every login
+    //todo remove this chunk of code right heree
+    PendingNutritionData pendingNutritionData = new PendingNutritionData();
+
+    pendingNutritionData.setGoalCalorie(2000);
+    pendingNutritionData.setGoalFat(1500);
+    pendingNutritionData.setGoalCarb(1000);
+    pendingNutritionData.setGoalProtein(800);
+    pendingNutritionData.setCurrentCalories(0);
+    pendingNutritionData.setCurrentCarb(0);
+    pendingNutritionData.setCurrentFat(0);
+    pendingNutritionData.setCurrentProtein(0);
+
+    pendingNutritionData.setCurrentDate(DateUtils.getCurrentDate());
+
+    pendingNutritionalObserver.onNext(pendingNutritionData);
+
+    PendingWaterData pendingWaterData = new PendingWaterData();
+    pendingWaterData.setCurrentDate(DateUtils.getCurrentDate());
+    pendingWaterData.setGoalWater(64);
+    pendingWaterData.setCurrentWater(0);
+
+    pendingWaterObserver.onNext(pendingWaterData);
+
+    RealmUtils.updateCurrentDayPendingNutritionData(pendingNutritionData);
+    RealmUtils.updateCurrentDayPendingWaterData(pendingWaterData);
+
+    sharedPreferencesUtil.storeUserIsEnrolled(true);
+
+    Intent intent = new Intent(getApplicationContext(), LandingPageActivity.class);
+    startActivity(intent);
+    finish();
 
     if (etEmail.getText().toString().equals("")) {
       etEmail.requestFocus();
@@ -205,20 +210,60 @@ public class LoginActivity extends BaseActivity
       showKeyboard(etPassword);
     } else {
 
-      Task<AuthResult> login = firebaseAuth.signInWithEmailAndPassword(etEmail.getText().toString(),
-          etPassword.getText().toString());
+      firebaseAuth.signInWithEmailAndPassword(etEmail.getText().toString(),
+          etPassword.getText().toString())
+          .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override public void onComplete(@NonNull Task<AuthResult> task) {
+              Log.d("Login", "Login successful: " + task.isSuccessful());
+              if (task.isSuccessful()) {
+                //login is successful
+                //todo need to update this check right here
+                Log.d("Login", "User Is Enrolled: " + sharedPreferencesUtil.getUserIsEnrolled());
 
-      if (login.isSuccessful()) {
-        //login is successful
-        //todo need to update this check right here
-        if (!sharedPreferencesUtil.getUserIsEnrolled()) {
+                if (!sharedPreferencesUtil.getUserIsEnrolled()) {
+                  updateUserFromFirebase(task.getResult().getUser().getUid());
+                }
+              } else {
+                //todo invalid credentials error message...
+              }
+            }
+          });
+    }
+  }
+
+  private void updateUserFromFirebaseForGoogle(final AuthResult task) {
+    DatabaseReference mReference = FirebaseDatabase.getInstance().getReference();
+
+    Query mQuery = mReference.child(Constants.BASE_DATABASE_REFERENCE)
+        .child(Constants.USER_DATABASE_REFERENCE)
+        .orderByChild("uniqueUserId")
+        .equalTo(task.getUser().getUid());
+
+    Log.d("Login", "Querying Firebase for User UID: " + task.getUser().getUid());
+
+    mQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+      @Override public void onDataChange(DataSnapshot dataSnapshot) {
+        Log.d("Login", "Querying Firebase Snapshot exists: " + dataSnapshot.exists());
+        if (dataSnapshot.exists()) {
+          //todo resave goals to realm local storage
+          //todo pull in all previous records in background storage
+
+          Log.d("Firebase Test",
+              "Data snapshot contents: " + dataSnapshot.getChildren().iterator().next().getValue());
+
+          Log.d("Firebase Test", "Datasnapshot getKey(): " + dataSnapshot.getKey());
+
+          UserObject currentUser =
+              dataSnapshot.getChildren().iterator().next().getValue(UserObject.class);
+
+          Log.d("Login", "Querying Firebase Snapshot, copying data to new realm object");
 
           PendingNutritionData pendingNutritionData = new PendingNutritionData();
 
-          pendingNutritionData.setGoalCalorie(2000);
-          pendingNutritionData.setGoalFat(1000);
-          pendingNutritionData.setGoalCarb(800);
-          pendingNutritionData.setGoalProtein(750);
+          pendingNutritionData.setGoalCalorie(currentUser.getNutritionDataGoal().getGoalCalorie());
+          pendingNutritionData.setGoalFat(currentUser.getNutritionDataGoal().getGoalFat());
+          pendingNutritionData.setGoalCarb(currentUser.getNutritionDataGoal().getGoalCarb());
+          pendingNutritionData.setGoalProtein(currentUser.getNutritionDataGoal().getGoalCalorie());
           pendingNutritionData.setCurrentCalories(0);
           pendingNutritionData.setCurrentCarb(0);
           pendingNutritionData.setCurrentFat(0);
@@ -230,7 +275,82 @@ public class LoginActivity extends BaseActivity
 
           PendingWaterData pendingWaterData = new PendingWaterData();
           pendingWaterData.setCurrentDate(DateUtils.getCurrentDate());
-          pendingWaterData.setGoalWater(64);
+          pendingWaterData.setGoalWater(currentUser.getWaterDataGoal().getGoalWater());
+          pendingWaterData.setCurrentWater(0);
+
+          pendingWaterObserver.onNext(pendingWaterData);
+
+          RealmUtils.updateCurrentDayPendingNutritionData(pendingNutritionData);
+          RealmUtils.updateCurrentDayPendingWaterData(pendingWaterData);
+          RealmUtils.saveUserObject(currentUser);
+
+          sharedPreferencesUtil.storeUserIsEnrolled(true);
+          sharedPreferencesUtil.
+              storeEnrolledEmail(currentUser.getEmail());
+          sharedPreferencesUtil.storeEnrolledUniqueUserId(currentUser.getUniqueUserId());
+
+          Intent intent = new Intent(getApplicationContext(), LandingPageActivity.class);
+          startActivity(intent);
+          finish();
+        } else {
+          UserObject userObject = new UserObject();
+          userObject.setEmail(task.getUser().getEmail());
+          userObject.setName(task.getUser().getDisplayName());
+          userObject.setUniqueUserId(task.getUser().getUid());
+          userObject.setSignedInWithGoogle(true);
+
+          pendingUserObjectObserver.onNext(userObject);
+
+          Intent intent = new Intent(getApplicationContext(), OnBoardingActivityStep1.class);
+          startActivity(intent);
+          finish();
+        }
+      }
+
+      @Override public void onCancelled(DatabaseError databaseError) {
+
+      }
+    });
+  }
+
+  private void updateUserFromFirebase(String uUId) {
+    DatabaseReference mReference = FirebaseDatabase.getInstance().getReference();
+
+    Query mQuery = mReference.child(Constants.BASE_DATABASE_REFERENCE)
+        .child(Constants.USER_DATABASE_REFERENCE)
+        .orderByChild("uniqueUserId")
+        .equalTo(uUId);
+
+    Log.d("Login", "Querying Firebase for User UID: " + uUId);
+
+    mQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+      @Override public void onDataChange(DataSnapshot dataSnapshot) {
+        Log.d("Login", "Querying Firebase Snapshot exists: " + dataSnapshot.exists());
+        if (dataSnapshot.exists()) {
+          //todo resave goals to realm local storage
+          //todo pull in all previous records in background storage
+
+          UserObject currentUser =
+              dataSnapshot.getChildren().iterator().next().getValue(UserObject.class);
+
+          PendingNutritionData pendingNutritionData = new PendingNutritionData();
+
+          pendingNutritionData.setGoalCalorie(currentUser.getNutritionDataGoal().getGoalCalorie());
+          pendingNutritionData.setGoalFat(currentUser.getNutritionDataGoal().getGoalFat());
+          pendingNutritionData.setGoalCarb(currentUser.getNutritionDataGoal().getGoalCarb());
+          pendingNutritionData.setGoalProtein(currentUser.getNutritionDataGoal().getGoalCalorie());
+          pendingNutritionData.setCurrentCalories(0);
+          pendingNutritionData.setCurrentCarb(0);
+          pendingNutritionData.setCurrentFat(0);
+          pendingNutritionData.setCurrentProtein(0);
+
+          pendingNutritionData.setCurrentDate(DateUtils.getCurrentDate());
+
+          pendingNutritionalObserver.onNext(pendingNutritionData);
+
+          PendingWaterData pendingWaterData = new PendingWaterData();
+          pendingWaterData.setCurrentDate(DateUtils.getCurrentDate());
+          pendingWaterData.setGoalWater(currentUser.getWaterDataGoal().getGoalWater());
           pendingWaterData.setCurrentWater(0);
 
           pendingWaterObserver.onNext(pendingWaterData);
@@ -239,13 +359,27 @@ public class LoginActivity extends BaseActivity
           RealmUtils.updateCurrentDayPendingWaterData(pendingWaterData);
 
           sharedPreferencesUtil.storeUserIsEnrolled(true);
-        }
+          sharedPreferencesUtil.storeEnrolledEmail(currentUser.getEmail());
+          sharedPreferencesUtil.storeEnrolledUniqueUserId(currentUser.getUniqueUserId());
 
-        Intent intent = new Intent(this, LandingPageActivity.class);
-        startActivity(intent);
-        finish();
+          Intent intent = new Intent(getApplicationContext(), LandingPageActivity.class);
+          startActivity(intent);
+          finish();
+        } else {
+          //todo account create
+          //this should never happen, unless records are cleared from firebase
+          Log.d("Login", "Querying Firebase Snapshot, need user to create account...");
+
+          Intent intent = new Intent(getApplicationContext(), LandingPageActivity.class);
+          startActivity(intent);
+          finish();
+        }
       }
-    }
+
+      @Override public void onCancelled(DatabaseError databaseError) {
+
+      }
+    });
   }
 
   @Override public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {

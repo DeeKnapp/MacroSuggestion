@@ -5,26 +5,27 @@ package com.dustin.knapp.project.macrosuggestion;
  */
 public class Constants {
 
+  public static final String BASE_DATABASE_REFERENCE = "macro_suggestion";
+  public static final String USER_DATABASE_REFERENCE = "users";
+
+
   public static final int USER_GOAL_LOSE_WEIGHT = 0;
   public static final int USER_GOAL_GAIN_WEIGHT = 1;
+  public static final int USER_GOAL_MAINTAIN_WEIGHT = 2;
 
-  public static final int USER_LIGHT_ACTIVITY_LEVEL = 2;
-  public static final int USER_MODERATE_ACTIVITY_LEVEL = 3;
-  public static final int USER_INTENSE_ACTIVITY_LEVEL = 4;
+  public static final int USER_NO_ACTIVITY_LEVEL = 3;
+  public static final int USER_LIGHT_ACTIVITY_LEVEL = 4;
+  public static final int USER_MODERATE_ACTIVITY_LEVEL = 5;
+  public static final int USER_INTENSE_ACTIVITY_LEVEL = 6;
 
-
-  public static final int MACRO_GRAPH_TYPE_PROTEIN = 5;
-  public static final int MACRO_GRAPH_TYPE_CARBS = 6;
-  public static final int MACRO_GRAPH_TYPE_FATS = 7;
-  public static final int MACRO_GRAPH_TYPE_CALORIES = 8;
-
+  public static final int MACRO_GRAPH_TYPE_PROTEIN = 20;
+  public static final int MACRO_GRAPH_TYPE_CARBS = 21;
+  public static final int MACRO_GRAPH_TYPE_FATS = 22;
 
   public static final int CAMERA_PERMISSION_CODE = 99;
 
-
-  public static final int MEAL_TYPE_BREAKFAST = 10;
-  public static final int MEAL_TYPE_LUNCH = 11;
-  public static final int MEAL_TYPE_DINNER = 12;
-
-
+  public static final int MEAL_TYPE_BREAKFAST = 30;
+  public static final int MEAL_TYPE_LUNCH = 31;
+  public static final int MEAL_TYPE_DINNER = 32;
+  public static final int MEAL_TYPE_QUICK_ADD = 33;
 }

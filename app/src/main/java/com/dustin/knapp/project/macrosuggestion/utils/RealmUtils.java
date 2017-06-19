@@ -5,6 +5,7 @@ import com.dustin.knapp.project.macrosuggestion.models.NutritionDataGoal;
 import com.dustin.knapp.project.macrosuggestion.models.PendingNutritionData;
 import com.dustin.knapp.project.macrosuggestion.models.PendingWaterData;
 import com.dustin.knapp.project.macrosuggestion.models.UserObject;
+import com.dustin.knapp.project.macrosuggestion.models.WaterDataGoal;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
@@ -20,6 +21,13 @@ public class RealmUtils {
     Realm realm = Realm.getDefaultInstance();
     realm.beginTransaction();
     realm.copyToRealmOrUpdate(nutritionDataGoal);
+    realm.commitTransaction();
+  }
+
+  public static void saveWaterDataGoal(WaterDataGoal waterDataGoal) {
+    Realm realm = Realm.getDefaultInstance();
+    realm.beginTransaction();
+    realm.copyToRealmOrUpdate(waterDataGoal);
     realm.commitTransaction();
   }
 
@@ -60,7 +68,7 @@ public class RealmUtils {
 
     RealmQuery<UserObject> query = realm.where(UserObject.class);
 
-    query.contains("email", email);
+    query.contains("uniqueUserId", email);
 
     // Execute the query:
     RealmResults<UserObject> result1 = query.findAll();
@@ -72,7 +80,7 @@ public class RealmUtils {
     }
   }
 
-  public static NutritionDataGoal getNutrtionDataGoal(String enrolledEmail) {
+  public static NutritionDataGoal getNutritionDataGoal(String enrolledEmail) {
     Realm realm = Realm.getDefaultInstance();
 
     RealmQuery<NutritionDataGoal> query = realm.where(NutritionDataGoal.class);
@@ -81,6 +89,19 @@ public class RealmUtils {
 
     // Execute the query:
     RealmResults<NutritionDataGoal> result1 = query.findAll();
+
+    return result1.get(0);
+  }
+
+  public static WaterDataGoal getWaterDataGoal(String enrolledEmail) {
+    Realm realm = Realm.getDefaultInstance();
+
+    RealmQuery<WaterDataGoal> query = realm.where(WaterDataGoal.class);
+
+    query.contains("email", enrolledEmail);
+
+    // Execute the query:
+    RealmResults<WaterDataGoal> result1 = query.findAll();
 
     return result1.get(0);
   }
@@ -109,8 +130,7 @@ public class RealmUtils {
 
   //todo save set goal then if  == null create new daily object
   //todo see pending nutritional data object
-  public static void updateCurrentDayPendingWaterData(
-      PendingWaterData pendingWaterData) {
+  public static void updateCurrentDayPendingWaterData(PendingWaterData pendingWaterData) {
     Realm realm = Realm.getDefaultInstance();
     realm.beginTransaction();
     realm.copyToRealmOrUpdate(pendingWaterData);

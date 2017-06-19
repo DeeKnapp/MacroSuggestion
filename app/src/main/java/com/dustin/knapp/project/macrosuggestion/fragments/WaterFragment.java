@@ -1,4 +1,4 @@
-package com.dustin.knapp.project.macrosuggestion.activities.fragments;
+package com.dustin.knapp.project.macrosuggestion.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.dustin.knapp.project.macrosuggestion.MacroSuggestionApplication;
 import com.dustin.knapp.project.macrosuggestion.R;
-import com.dustin.knapp.project.macrosuggestion.activities.DailyLogActivity;
 import com.dustin.knapp.project.macrosuggestion.models.PendingWaterData;
 import com.dustin.knapp.project.macrosuggestion.ui.QuickAddWaterDialogFragment;
 import com.dustin.knapp.project.macrosuggestion.utils.RealmUtils;
@@ -37,8 +36,6 @@ public class WaterFragment extends Fragment
 
   float goalWater, currentWater;
 
-  DailyLogActivity activity;
-
   ViewHolder waterViewHolder;
 
   WaterFragment fragment;
@@ -57,8 +54,6 @@ public class WaterFragment extends Fragment
     currentWaterText = (TextView) rootView.findViewById(R.id.currentWater);
     remainingWaterText = (TextView) rootView.findViewById(R.id.remainingWater);
 
-    activity = (DailyLogActivity) getActivity();
-
     this.fragment = this;
     return rootView;
   }
@@ -71,7 +66,10 @@ public class WaterFragment extends Fragment
 
     pendingWaterObservable.subscribe(new Action1<PendingWaterData>() {
       @Override public void call(PendingWaterData pendingWaterData) {
-        currentPendingWaterData = pendingWaterData;
+        currentPendingWaterData = new PendingWaterData();
+        currentPendingWaterData.setCurrentDate(pendingWaterData.getCurrentDate());
+        currentPendingWaterData.setGoalWater(pendingWaterData.getGoalWater());
+        currentPendingWaterData.setCurrentWater(pendingWaterData.getCurrentWater());
         currentWater = pendingWaterData.getCurrentWater();
         goalWater = pendingWaterData.getGoalWater();
       }
@@ -83,14 +81,14 @@ public class WaterFragment extends Fragment
     fab.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
 
-        QuickAddWaterDialogFragment quickAddFoodDialogFragment =
+        QuickAddWaterDialogFragment quickAddWaterDialogFragment =
             QuickAddWaterDialogFragment.newInstance();
 
-        quickAddFoodDialogFragment.setListener(fragment);
+        quickAddWaterDialogFragment.setListener(fragment);
 
         FragmentManager fm = getActivity().getSupportFragmentManager();
 
-        quickAddFoodDialogFragment.show(fm, "Alert dialog");
+        quickAddWaterDialogFragment.show(fm, "Alert dialog");
       }
     });
   }

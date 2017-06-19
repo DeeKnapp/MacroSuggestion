@@ -3,19 +3,18 @@ package com.dustin.knapp.project.macrosuggestion.utils;
 import android.app.Activity;
 import android.graphics.Color;
 import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.widget.Toast;
 import com.dustin.knapp.project.macrosuggestion.R;
-import com.dustin.knapp.project.macrosuggestion.activities.DailyLogActivity;
 import com.dustin.knapp.project.macrosuggestion.activities.LandingPageActivity;
-import com.dustin.knapp.project.macrosuggestion.activities.fragments.CaloriesFragment;
+import com.dustin.knapp.project.macrosuggestion.fragments.CaloriesFragment;
 import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.plattysoft.leonids.ParticleSystem;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 /**
@@ -26,25 +25,32 @@ public class CaloriesChartUtils {
   public static void updateChartViews(CaloriesFragment.ViewHolder holder, float current, float goal,
       Activity activity) {
 
-    int goalTextLength = String.valueOf(goal).length();
+    float caloriePercent = (current / goal) * 100;
+
+    NumberFormat formatter = NumberFormat.getNumberInstance();
+    formatter.setMinimumFractionDigits(2);
+    formatter.setMaximumFractionDigits(2);
+    String output = formatter.format(caloriePercent);
+
+    int goalTextLength = output.length();
 
     holder.chart.getDescription().setEnabled(false);
     holder.chart.getLegend().setEnabled(false);
-    holder.chart.setHoleRadius(45f);
-    holder.chart.setTransparentCircleRadius(50f);
-    holder.chart.setCenterText(generateCenterText(goal, goalTextLength));
-    holder.chart.setCenterTextSize(9f);
+    holder.chart.setHoleRadius(90f);
+    holder.chart.setHoleColor(Color.TRANSPARENT);
+    holder.chart.setTransparentCircleRadius(55f);
+    holder.chart.setCenterText(generateCenterText(output, goalTextLength));
+    holder.chart.setCenterTextSize(18f);
+    holder.chart.setCenterTextColor(Color.WHITE);
     holder.chart.setUsePercentValues(false);
     holder.chart.setExtraOffsets(5, 10, 5, 10);
     holder.chart.setTouchEnabled(false);
-
-    float caloriePercent = (current / goal) * 100;
 
     ChartData<?> mChartData;
     if (caloriePercent <= 100.0) {
       mChartData = generateDataPie(caloriePercent);
     } else {
-      mChartData = generateDataPie(100);
+      mChartData = generateDataPieOverage(caloriePercent - 100);
     }
 
     mChartData.setValueFormatter(new PercentFormatter());
@@ -92,7 +98,7 @@ public class CaloriesChartUtils {
 
     d.setSliceSpace(1f);
     int[] color_Scheme = {
-        Color.rgb(56, 142, 60), Color.rgb(224, 224, 224)
+        Color.rgb(255, 255, 255), Color.argb(40, 0, 0, 0)
     };
 
     d.setColors(color_Scheme);
@@ -100,11 +106,35 @@ public class CaloriesChartUtils {
     return new PieData(d);
   }
 
-  private static SpannableString generateCenterText(float goalCalorie, int goalTextLength) {
+  private static PieData generateDataPieOverage(float percentToGoal) {
+
+    ArrayList<PieEntry> entries = new ArrayList<>();
+    PieDataSet d;
+
+    d = new PieDataSet(entries, "");
+    float leftOver;
+    if (percentToGoal >= 200) {
+      leftOver = 0;
+    } else {
+      leftOver = 100 - percentToGoal;
+    }
+    entries.add(new PieEntry((percentToGoal), ""));
+    entries.add(new PieEntry((leftOver), ""));
+
+    d.setSliceSpace(1f);
+    int[] color_Scheme = {
+        Color.rgb(211, 47, 47), Color.rgb(255, 255, 255)
+    };
+
+    d.setColors(color_Scheme);
+
+    return new PieData(d);
+  }
+
+  private static SpannableString generateCenterText(String goalCalorie, int goalTextLength) {
     SpannableString s;
-    s = new SpannableString("Goal\n" + goalCalorie);
-    s.setSpan(new RelativeSizeSpan(1.6f), 0, 4 + goalTextLength + 1, 0);
-    s.setSpan(new ForegroundColorSpan(Color.rgb(0, 0, 0)), 0, 1, 0);
+    s = new SpannableString(goalCalorie + "%");
+    s.setSpan(new RelativeSizeSpan(1.6f), 0, goalTextLength + 1, 0);
     return s;
   }
 }

@@ -1,4 +1,4 @@
-package com.dustin.knapp.project.macrosuggestion.activities.fragments;
+package com.dustin.knapp.project.macrosuggestion.fragments;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -25,6 +25,7 @@ import com.dustin.knapp.project.macrosuggestion.models.BaseNutrition;
 import com.dustin.knapp.project.macrosuggestion.models.FoodEntry;
 import com.dustin.knapp.project.macrosuggestion.models.PendingNutritionData;
 import com.dustin.knapp.project.macrosuggestion.ui.AddFoodDialogFragment;
+import com.dustin.knapp.project.macrosuggestion.ui.QuickAddFoodDialogFragment;
 import com.dustin.knapp.project.macrosuggestion.utils.DateUtils;
 import com.dustin.knapp.project.macrosuggestion.utils.RealmUtils;
 import java.util.List;
@@ -39,7 +40,8 @@ import static android.support.v4.content.PermissionChecker.PERMISSION_GRANTED;
 /**
  * Created by dknapp on 4/24/17
  */
-public class FoodFragment extends Fragment implements AddFoodDialogFragment.AddFoodDialogListener {
+public class FoodFragment extends Fragment implements AddFoodDialogFragment.AddFoodDialogListener,
+    QuickAddFoodDialogFragment.QuickAddDialogListener {
 
   View rootView;
 
@@ -47,9 +49,10 @@ public class FoodFragment extends Fragment implements AddFoodDialogFragment.AddF
 
   PendingNutritionData currentPendingNutritionalData;
 
-  LinearLayout breakfastItemsContainer, lunchItemsContainer, dinnerItemsContainer;
+  LinearLayout breakfastItemsContainer, lunchItemsContainer, dinnerItemsContainer,
+      quickAddItemsContainer;
 
-  ImageButton addBreakfastButton, addLunchButton, addDinnerButton;
+  ImageButton addBreakfastButton, addLunchButton, addDinnerButton, addSwiftAddButton;
 
   ImageButton addBreakfastScanButton, addLunchScanButton, addDinnerScanButton;
 
@@ -77,6 +80,9 @@ public class FoodFragment extends Fragment implements AddFoodDialogFragment.AddF
     dinnerItemsContainer = (LinearLayout) rootView.findViewById(R.id.dinnerItemsContainer);
     addDinnerButton = (ImageButton) rootView.findViewById(R.id.addDinnerButton);
     addDinnerScanButton = (ImageButton) rootView.findViewById(R.id.addDinnerScanButton);
+
+    quickAddItemsContainer = (LinearLayout) rootView.findViewById(R.id.quickAddItemsContainer);
+    addSwiftAddButton = (ImageButton) rootView.findViewById(R.id.addQuickAddButton);
 
     activity = (DailyLogActivity) getActivity();
 
@@ -122,6 +128,18 @@ public class FoodFragment extends Fragment implements AddFoodDialogFragment.AddF
       @Override public void onClick(View v) {
         AddFoodDialogFragment addFoodDialogFragment =
             AddFoodDialogFragment.newInstance(Constants.MEAL_TYPE_DINNER);
+
+        addFoodDialogFragment.setListener(fragment);
+
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+
+        addFoodDialogFragment.show(fm, "Alert dialog");
+      }
+    });
+
+    addSwiftAddButton.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        QuickAddFoodDialogFragment addFoodDialogFragment = QuickAddFoodDialogFragment.newInstance();
 
         addFoodDialogFragment.setListener(fragment);
 
@@ -199,6 +217,11 @@ public class FoodFragment extends Fragment implements AddFoodDialogFragment.AddF
               generateFoodLogItem(entry.getFoodName(), entry.getCalories()));
           break;
 
+        case Constants.MEAL_TYPE_QUICK_ADD:
+          quickAddItemsContainer.addView(
+              generateFoodLogItem(entry.getFoodName(), entry.getCalories()));
+          break;
+
         default:
           break;
       }
@@ -249,6 +272,40 @@ public class FoodFragment extends Fragment implements AddFoodDialogFragment.AddF
     } else if (callingContainer == Constants.MEAL_TYPE_DINNER) {
       dinnerItemsContainer.addView(view);
     }
+  }
+
+  @Override public void onQuickAddSubmit(BaseNutrition baseNutrition) {
+    currentPendingNutritionalData.setCurrentCalories(
+        currentPendingNutritionalData.getCurrentCalories() + baseNutrition.calories);
+
+    currentPendingNutritionalData.setCurrentProtein(
+        currentPendingNutritionalData.getCurrentProtein() + baseNutrition.protein);
+
+    currentPendingNutritionalData.setCurrentFat(
+        currentPendingNutritionalData.getCurrentFat() + baseNutrition.fats);
+
+    currentPendingNutritionalData.setCurrentCarb(
+        currentPendingNutritionalData.getCurrentCarb() + baseNutrition.carbs);
+
+    pendingNutritionalObserver.onNext(currentPendingNutritionalData);
+
+    RealmUtils.updateCurrentDayPendingNutritionData(currentPendingNutritionalData);
+
+    FoodEntry currentFoodEntry = new FoodEntry();
+
+    currentFoodEntry.setCurrentDate(DateUtils.getCurrentDate());
+    currentFoodEntry.setCalories(baseNutrition.calories);
+    currentFoodEntry.setProtein(baseNutrition.protein);
+    currentFoodEntry.setFats(baseNutrition.fats);
+    currentFoodEntry.setCarbs(baseNutrition.carbs);
+    currentFoodEntry.setFoodName("Swift Add");
+    currentFoodEntry.setMealEntryType(Constants.MEAL_TYPE_QUICK_ADD);
+
+    RealmUtils.addFoodEntryToCurrentDay(currentFoodEntry);
+
+    View view = generateFoodLogItem("Swift Add", baseNutrition.calories);
+
+    quickAddItemsContainer.addView(view);
   }
 
   public View generateFoodLogItem(String foodName, float calories) {

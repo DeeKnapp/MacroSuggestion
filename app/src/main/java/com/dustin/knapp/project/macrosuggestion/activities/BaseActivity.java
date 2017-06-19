@@ -4,8 +4,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import butterknife.Unbinder;
+import com.dustin.knapp.project.macrosuggestion.R;
 import com.dustin.knapp.project.macrosuggestion.utils.SharedPreferencesUtil;
 import javax.inject.Inject;
 import rx.subscriptions.CompositeSubscription;
@@ -31,6 +34,9 @@ public abstract class BaseActivity extends AppCompatActivity {
   @Override protected void onDestroy() {
     if (unbinder != null) {
       unbinder.unbind();
+    }
+    if (subscriptions != null) {
+      subscriptions.unsubscribe();
     }
     super.onDestroy();
   }

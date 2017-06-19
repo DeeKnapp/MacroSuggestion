@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,19 +28,22 @@ public class OnBoardingActivityStep1 extends BaseActivity {
 
   @BindView(R.id.etEnterName) EditText etName;
   @BindView(R.id.etEnterEmail) EditText etEmail;
+  @BindView(R.id.tvEnterPasswordTitle) TextView enterPasswordHeader;
   @BindView(R.id.etEnterPassword) EditText etPassword;
+  @BindView(R.id.etBirthday) EditText etBirthday;
   @BindView(R.id.etCurrentWeight) EditText etCurrentWeight;
   @BindView(R.id.etTargetWeight) EditText etTargetWeight;
   @BindView(R.id.etEnterHeightFeet) EditText etHeightFt;
   @BindView(R.id.etEnterHeightInches) EditText etHeightInches;
   @BindView(R.id.loseWeightButton) RadioButton loseWeightButton;
+  @BindView(R.id.maintainWeight) RadioButton maintaineightButton;
   @BindView(R.id.gainWeightButton) RadioButton gainWeightButton;
   @BindView(R.id.nextButton) Button nextButton;
 
   @Inject public Observer<UserObject> pendingUserObjectObserver;
   @Inject public Observable<UserObject> pendingUserObjectObservable;
 
-  private UserObject newUser;
+  private UserObject pendingNewUser;
 
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -48,19 +52,23 @@ public class OnBoardingActivityStep1 extends BaseActivity {
     ((MacroSuggestionApplication) getApplication()).getAppComponent().inject(this);
 
     unbinder = ButterKnife.bind(this);
+  }
 
-    pendingUserObjectObservable.subscribe(new Action1<UserObject>() {
+  @Override protected void onStart() {
+    super.onStart();
+    subscriptions.add(pendingUserObjectObservable.subscribe(new Action1<UserObject>() {
       @Override public void call(UserObject userObject) {
-        if (userObject.getEmail() != null && userObject.getName() != null) {
-          newUser = new UserObject();
-          newUser.setName(userObject.getName());
-          newUser.setEmail(userObject.getEmail());
-
+        if (userObject.isSignedInWithGoogle()) {
+          pendingNewUser = userObject;
           etName.setText(userObject.getName());
           etEmail.setText(userObject.getEmail());
+          etName.setFocusable(false);
+          etEmail.setFocusable(false);
+          etPassword.setVisibility(View.GONE);
+          enterPasswordHeader.setVisibility(View.GONE);
         }
       }
-    });
+    }));
   }
 
   @OnClick(R.id.nextButton) void nextButtonClicked(View v) {
@@ -70,8 +78,8 @@ public class OnBoardingActivityStep1 extends BaseActivity {
     } else if (etEmail.getText().toString().equals("")) {
       etEmail.requestFocus();
       showKeyboard(etEmail);
-    } else if (etPassword.getText().toString().equals("")) {
-      etPassword.requestFocus();
+    } else if (etBirthday.getText().toString().equals("")) {
+      etBirthday.requestFocus();
       showKeyboard(etPassword);
     } else if (etHeightFt.getText().toString().equals("")) {
       etHeightFt.requestFocus();
@@ -85,26 +93,34 @@ public class OnBoardingActivityStep1 extends BaseActivity {
     } else if (etTargetWeight.getText().toString().equals("")) {
       etTargetWeight.requestFocus();
       showKeyboard(etTargetWeight);
-    } else if (!(loseWeightButton.isChecked() || gainWeightButton.isChecked())) {
+    } else if (!(loseWeightButton.isChecked() || gainWeightButton.isChecked())
+        || maintaineightButton.isChecked()) {
       Toast.makeText(this, "Must select lose weight or gain weight", Toast.LENGTH_LONG).show();
       loseWeightButton.requestFocus();
+    } else if (!pendingNewUser.isSignedInWithGoogle() && etPassword.getText()
+        .toString()
+        .equals("")) {
+      etPassword.requestFocus();
     } else {
-      UserObject newUser = new UserObject();
-      newUser.setName(etName.getText().toString());
-      newUser.setEmail(etEmail.getText().toString());
-      newUser.setPendingPassword(etPassword.getText().toString());
-      newUser.setHeightInFeet(Integer.valueOf(etHeightFt.getText().toString()));
-      newUser.setHeightInInches(Integer.valueOf(etHeightInches.getText().toString()));
-      newUser.setCurrentWeight(Float.valueOf(etCurrentWeight.getText().toString()));
-      newUser.setTargetWeight(Float.valueOf(etTargetWeight.getText().toString()));
+      //todo save birthday in user object -- use in diet plan calculation
+      if (pendingNewUser.isSignedInWithGoogle()) {
+        pendingNewUser.setPendingPassword("");
+      }
+      pendingNewUser.setHeightInFeet(Integer.valueOf(etHeightFt.getText().toString()));
+      pendingNewUser.setHeightInInches(Integer.valueOf(etHeightInches.getText().toString()));
+      pendingNewUser.setCurrentWeight(Float.valueOf(etCurrentWeight.getText().toString()));
+      pendingNewUser.setTargetWeight(Float.valueOf(etTargetWeight.getText().toString()));
 
       if (loseWeightButton.isChecked()) {
-        newUser.setGoalType(Constants.USER_GOAL_LOSE_WEIGHT);
-      } else {
-        newUser.setGoalType(Constants.USER_GOAL_GAIN_WEIGHT);
+        pendingNewUser.setGoalType(Constants.USER_GOAL_LOSE_WEIGHT);
+      } else if (gainWeightButton.isChecked()) {
+        pendingNewUser.setGoalType(Constants.USER_GOAL_GAIN_WEIGHT);
+      } else if (maintaineightButton.isChecked()) {
+        pendingNewUser.setGoalType(Constants.USER_GOAL_GAIN_WEIGHT);
       }
 
-      pendingUserObjectObserver.onNext(newUser);
+      pendingUserObjectObserver.onNext(pendingNewUser);
+
       Intent nextStepIntent = new Intent(this, OnBoardingActivityStep2.class);
       startActivity(nextStepIntent);
       finish();

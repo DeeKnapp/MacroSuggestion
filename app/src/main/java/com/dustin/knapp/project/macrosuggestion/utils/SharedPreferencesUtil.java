@@ -10,6 +10,7 @@ public class SharedPreferencesUtil {
 
   private static final String USER_IS_ENROLLED = "User is enrolled";
   private static final String ENROLLED_EMAIL = "Enrolled Email";
+  private static final String ENROLLED_UNIQUE_USER_ID = "Enrolled Unique User Id";
   private static final String SHOULD_SHOW_CALORIE_ANIMATION = "Should show calorie animation";
   private static final String SHOULD_SHOW_WATER_ANIMATION = "Should show water animation";
 
@@ -49,6 +50,7 @@ public class SharedPreferencesUtil {
   }
 
   //todo this will need to change for the flow of the application....
+  //todo key for is data available, etc...
   public boolean getUserIsEnrolled() {
     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     return sharedPreferences.getBoolean(USER_IS_ENROLLED, false);
@@ -71,6 +73,18 @@ public class SharedPreferencesUtil {
   public String getEnrolledEmail() {
     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     return sharedPreferences.getString(ENROLLED_EMAIL, "none");
+  }
+
+  public void storeEnrolledUniqueUserId(String uniqueUserId) {
+    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    SharedPreferences.Editor editor = sharedPreferences.edit();
+    editor.putString(ENROLLED_UNIQUE_USER_ID, uniqueUserId);
+    editor.apply();
+  }
+
+  public String getEnrolledUniqueUserId() {
+    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    return sharedPreferences.getString(ENROLLED_UNIQUE_USER_ID, "none");
   }
 
   public void clearEnrolledEmail() {

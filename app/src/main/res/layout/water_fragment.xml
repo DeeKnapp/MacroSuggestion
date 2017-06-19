@@ -3,6 +3,7 @@
     android:id="@+id/water_fragment_wrapper"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/water_blue_background"
     >
 
   <View
@@ -24,7 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:gravity="center"
-        android:text="Today's Water Intake"
+        android:text="Today's Water"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         />
@@ -36,19 +38,14 @@
         android:layout_marginBottom="10dp"
         />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/mediumGrey"
-        />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
+        android:background="@drawable/rounded_rectangle"
         android:baselineAligned="false"
         android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
         android:weightSum="2"
         >
 
@@ -64,7 +61,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Current Water"
-            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
             />
 
         <TextView
@@ -73,7 +71,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="0oz"
-            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
             />
 
       </LinearLayout>
@@ -81,7 +80,7 @@
       <View
           android:layout_width="1px"
           android:layout_height="match_parent"
-          android:background="@color/mediumGrey"
+          android:background="@color/dgm_black"
           />
 
       <LinearLayout
@@ -96,7 +95,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Remaining Water"
-            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
             />
 
         <TextView
@@ -105,18 +105,13 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="64oz"
-            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
             />
 
       </LinearLayout>
 
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/mediumGrey"
-        />
 
   </LinearLayout>
 

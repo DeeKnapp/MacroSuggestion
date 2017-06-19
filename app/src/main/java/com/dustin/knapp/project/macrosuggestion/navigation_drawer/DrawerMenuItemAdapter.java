@@ -2,6 +2,7 @@ package com.dustin.knapp.project.macrosuggestion.navigation_drawer;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.drawable.Drawable;
 import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,9 @@ public class DrawerMenuItemAdapter extends BaseAdapter {
   private final Context context;
   private int selectedPosition;
 
+  int selectedBackgroundColor;
+  int selectedPositionColor;
+
   @Override public int getViewTypeCount() {
     return 2;
   }
@@ -32,6 +36,10 @@ public class DrawerMenuItemAdapter extends BaseAdapter {
   public DrawerMenuItemAdapter(final Context context, final DrawerMenuItem[] objects) {
     this.objects = Arrays.copyOf(objects, objects.length);
     this.context = context;
+
+    selectedPositionColor =
+        ResourcesCompat.getColor(context.getResources(), R.color.caloriesNavItemSelectedColor,
+            null);
   }
 
   @Override public int getCount() {
@@ -64,16 +72,58 @@ public class DrawerMenuItemAdapter extends BaseAdapter {
     textView.setText(listViewItem.getNavName());
 
     if (position == selectedPosition) {
-      convertView.setBackgroundColor(
-          ResourcesCompat.getColor(context.getResources(), R.color.dgm_green, null));
+      convertView.setBackgroundColor(selectedPositionColor);
       textView.setTextColor(ResourcesCompat.getColor(context.getResources(), R.color.white, null));
     } else {
-      convertView.setBackground(ResourcesCompat.getDrawable(context.getResources(),
-          R.drawable.background_states_nav_other, null));
+      //todo this if else for different background drawables
+      if (selectedBackgroundColor == 0) {
+        convertView.setBackground(ResourcesCompat.getDrawable(context.getResources(),
+            R.drawable.background_states_nav_calories_not_selected, null));
+      } else if (selectedBackgroundColor == 1) {
+        convertView.setBackground(ResourcesCompat.getDrawable(context.getResources(),
+            R.drawable.background_states_nav_macros_not_selected, null));
+      } else if (selectedBackgroundColor == 2) {
+        convertView.setBackground(ResourcesCompat.getDrawable(context.getResources(),
+            R.drawable.background_states_nav_water_not_selected, null));
+      } else if (selectedBackgroundColor == 3) {
+        convertView.setBackground(ResourcesCompat.getDrawable(context.getResources(),
+            R.drawable.background_states_nav_log_not_selected, null));
+      }
       textView.setTextColor(getColorStateList());
     }
 
     return convertView;
+  }
+
+  public void updateColorScheme(int colorScheme) {
+    switch (colorScheme) {
+      case 0:
+        selectedPositionColor =
+            (ResourcesCompat.getColor(context.getResources(), R.color.caloriesNavItemSelectedColor,
+                null));
+        selectedBackgroundColor = 0;
+        break;
+      case 1:
+        selectedPositionColor =
+            (ResourcesCompat.getColor(context.getResources(), R.color.macrosNavItemSelectedColor,
+                null));
+        selectedBackgroundColor = 1;
+        break;
+      case 2:
+        selectedPositionColor =
+            (ResourcesCompat.getColor(context.getResources(), R.color.waterNavItemSelectedColor,
+                null));
+        selectedBackgroundColor = 2;
+        break;
+      case 3:
+        selectedPositionColor =
+            (ResourcesCompat.getColor(context.getResources(), R.color.logNavItemSelectedColor,
+                null));
+        selectedBackgroundColor = 3;
+        break;
+      default:
+        break;
+    }
   }
 
   public void updateWithSelectedPosition(int position) {
@@ -106,4 +156,3 @@ public class DrawerMenuItemAdapter extends BaseAdapter {
     return new ColorStateList(states, colors);
   }
 }
-

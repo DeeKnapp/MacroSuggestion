@@ -4,6 +4,7 @@ import android.support.v4.util.ArrayMap;
 import com.dustin.knapp.project.macrosuggestion.activities.BarcodeScanner;
 import com.dustin.knapp.project.macrosuggestion.activities.DailyLogActivity;
 import com.dustin.knapp.project.macrosuggestion.activities.LandingPageActivity;
+import com.dustin.knapp.project.macrosuggestion.activities.ProfileActivity;
 import com.dustin.knapp.project.macrosuggestion.activities.SignoutActivity;
 import java.util.EnumSet;
 import java.util.Map;
@@ -14,7 +15,8 @@ import java.util.Map;
 public enum DrawerMenuItem {
   HOME(0, "Home", "Home", LandingPageActivity.class),
   DAILYLOG(1, "Daily Log", "Daily Log", DailyLogActivity.class),
-  SIGNOUT(1, "Sign Out", "Sign Out", SignoutActivity.class);
+  PROFILE(2, "Profile", "Profile", ProfileActivity.class),
+  SIGNOUT(3, "Sign Out", "Sign Out", SignoutActivity.class);
 
   private final int position;
   private final String navName;

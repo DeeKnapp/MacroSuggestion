@@ -4,6 +4,7 @@ import android.util.SparseArray;
 import com.dustin.knapp.project.macrosuggestion.activities.BarcodeScanner;
 import com.dustin.knapp.project.macrosuggestion.activities.DailyLogActivity;
 import com.dustin.knapp.project.macrosuggestion.activities.LandingPageActivity;
+import com.dustin.knapp.project.macrosuggestion.activities.ProfileActivity;
 import com.dustin.knapp.project.macrosuggestion.activities.SignoutActivity;
 
 /**
@@ -17,13 +18,15 @@ public final class DrawerMenuHelper {
   }
 
   @SuppressWarnings("checkstyle:magicnumber") public static DrawerMenuItem[] getMenuItems() {
-    final DrawerMenuItem[] items = new DrawerMenuItem[3];
+    final DrawerMenuItem[] items = new DrawerMenuItem[4];
     items[0] = DrawerMenuItem.HOME;
     sparseArray.put(0, LandingPageActivity.class);
     items[1] = DrawerMenuItem.DAILYLOG;
     sparseArray.put(1, DailyLogActivity.class);
-    items[2] = DrawerMenuItem.SIGNOUT;
-    sparseArray.put(2, SignoutActivity.class);
+    items[2] = DrawerMenuItem.PROFILE;
+    sparseArray.put(2, ProfileActivity.class);
+    items[3] = DrawerMenuItem.SIGNOUT;
+    sparseArray.put(3, SignoutActivity.class);
     return items;
   }
 

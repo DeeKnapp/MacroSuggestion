@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/calorie_fragment_wrapper"
+    android:id="@+id/protein_fragment_wrapper"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/calories_orange_background"
+    android:background="@color/dgm_orange"
     >
 
   <LinearLayout
@@ -19,27 +19,31 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:gravity="center"
-        android:text="Today's Calories"
-        android:textColor="@color/white"
+        android:text="Today's Protein"
         android:textSize="20sp"
         android:textStyle="bold"
         />
 
     <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/calorie_chart"
+        android:id="@+id/protein_chart"
         android:layout_width="match_parent"
         android:layout_height="225dp"
         android:layout_marginBottom="10dp"
         />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/mediumGrey"
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_rectangle"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         android:baselineAligned="false"
         android:orientation="horizontal"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
         android:weightSum="2"
         >
 
@@ -54,19 +58,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Current Calories"
-            android:textColor="@color/white"
-            android:textSize="12sp"
+            android:text="Current Protein"
+            android:textSize="15sp"
             />
 
         <TextView
-            android:id="@+id/currentCalories"
+            android:id="@+id/currentProtein"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="1000g"
-            android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="12sp"
             />
 
       </LinearLayout>
@@ -74,7 +76,7 @@
       <View
           android:layout_width="1px"
           android:layout_height="match_parent"
-          android:background="@color/dgm_black"
+          android:background="@color/mediumGrey"
           />
 
       <LinearLayout
@@ -88,36 +90,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Remaining Calories"
-            android:textColor="@color/white"
-            android:textSize="12sp"
+            android:text="Remaining Protein"
+            android:textSize="15sp"
             />
 
         <TextView
-            android:id="@+id/remainingCalories"
+            android:id="@+id/remainingProtein"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="500g"
-            android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="12sp"
             />
 
       </LinearLayout>
 
     </LinearLayout>
 
-  </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/mediumGrey"
+        />
 
-  <android.support.design.widget.FloatingActionButton
-      android:id="@+id/fab"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="bottom|end"
-      android:layout_margin="16dp"
-      android:layout_marginBottom="@dimen/activity_vertical_margin"
-      android:layout_marginEnd="@dimen/activity_horizontal_margin"
-      android:src="@mipmap/ic_plus_white"
-      />
+  </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

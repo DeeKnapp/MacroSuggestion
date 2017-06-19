@@ -9,8 +9,9 @@ import android.view.View;
 import com.dustin.knapp.project.macrosuggestion.MacroSuggestionApplication;
 import com.dustin.knapp.project.macrosuggestion.R;
 import com.dustin.knapp.project.macrosuggestion.adapters.LandingPageFragmentPagerAdapter;
-import com.dustin.knapp.project.macrosuggestion.models.NutritionDataGoal;
 import com.dustin.knapp.project.macrosuggestion.models.PendingNutritionData;
+import com.dustin.knapp.project.macrosuggestion.models.PendingWaterData;
+import com.dustin.knapp.project.macrosuggestion.models.UserObject;
 import com.dustin.knapp.project.macrosuggestion.navigation_drawer.DrawerMenuHelper;
 import com.dustin.knapp.project.macrosuggestion.navigation_drawer.DrawerMenuItem;
 import com.dustin.knapp.project.macrosuggestion.utils.DateUtils;
@@ -19,13 +20,16 @@ import javax.inject.Inject;
 import rx.Observable;
 import rx.Observer;
 
-public class LandingPageActivity extends BaseNavDrawerActivity {
+public class LandingPageActivity extends BaseNavDrawerActivity
+    implements ViewPager.OnPageChangeListener {
 
-  ViewPager mViewPager;
+  public ViewPager mViewPager;
+  public TabLayout mTabLayout;
 
   private View view;
 
   @Inject public Observer<PendingNutritionData> pendingNutritionalObserver;
+  @Inject public Observer<PendingWaterData> pendingWaterObserver;
   @Inject public Observable<PendingNutritionData> pendingNutritionalObservable;
   //todo if nutritional data doesn't exist, add goals/current to default from dietary plan
 
@@ -45,20 +49,23 @@ public class LandingPageActivity extends BaseNavDrawerActivity {
     this.content.addView(view);
 
     toolbarTitle.setText(DrawerMenuItem.getTitle(LandingPageActivity.class));
-    toolbar.setBackgroundColor(
-        ResourcesCompat.getColor(getResources(), R.color.dgm_dark_green, null));
+    toolbar.setBackground(
+        ResourcesCompat.getDrawable(getResources(), R.drawable.calories_toolbar, null));
+    mTabLayout.setBackground(getDrawable(R.drawable.tab_layout_orange));
 
     PendingNutritionData pendingNutritionData = new PendingNutritionData();
     PendingNutritionData realmPendingData = RealmUtils.getCurrentDayNutritionObject();
 
+    UserObject currentUserObject =
+        RealmUtils.getCurrentUserObject(sharedPreferencesUtil.getEnrolledUniqueUserId());
     if (realmPendingData == null) {
-      NutritionDataGoal nutritionDataGoal =
-          RealmUtils.getNutrtionDataGoal(sharedPreferencesUtil.getEnrolledEmail());
       pendingNutritionData = new PendingNutritionData();
-      pendingNutritionData.setGoalCalorie(nutritionDataGoal.getGoalCalorie());
-      pendingNutritionData.setGoalProtein(nutritionDataGoal.getGoalProtein());
-      pendingNutritionData.setGoalFat(nutritionDataGoal.getGoalFat());
-      pendingNutritionData.setGoalCarb(nutritionDataGoal.getGoalCarb());
+      pendingNutritionData.setGoalCalorie(
+          currentUserObject.getNutritionDataGoal().getGoalCalorie());
+      pendingNutritionData.setGoalProtein(
+          currentUserObject.getNutritionDataGoal().getGoalProtein());
+      pendingNutritionData.setGoalFat(currentUserObject.getNutritionDataGoal().getGoalFat());
+      pendingNutritionData.setGoalCarb(currentUserObject.getNutritionDataGoal().getGoalCarb());
       pendingNutritionData.setCurrentCalories(0);
       pendingNutritionData.setCurrentProtein(0);
       pendingNutritionData.setCurrentFat(0);
@@ -80,15 +87,32 @@ public class LandingPageActivity extends BaseNavDrawerActivity {
     }
 
     pendingNutritionalObserver.onNext(pendingNutritionData);
+
+    PendingWaterData pendingWaterData = RealmUtils.getCurrentDayPendingWaterData();
+
+    if (pendingWaterData == null) {
+      pendingWaterData = new PendingWaterData();
+      pendingWaterData.setGoalWater(currentUserObject.getWaterDataGoal().getGoalWater());
+      pendingWaterData.setCurrentWater(currentUserObject.getWaterDataGoal().getCurrentWater());
+      pendingWaterData.setCurrentDate(DateUtils.getCurrentDate());
+    }
+
+    RealmUtils.updateCurrentDayPendingWaterData(pendingWaterData);
+    pendingWaterObserver.onNext(pendingWaterData);
+  }
+
+  @Override public void updateColorScheme(int colorScheme) {
+    super.updateColorScheme(colorScheme);
   }
 
   private void setupViewPager() {
     mViewPager = (ViewPager) view.findViewById(R.id.pager);
     landingPageFragmentPagerAdapter =
         new LandingPageFragmentPagerAdapter(getSupportFragmentManager());
-    TabLayout tabLayout = (TabLayout) view.findViewById(R.id.sliding_tabs);
+    mTabLayout = (TabLayout) view.findViewById(R.id.sliding_tabs);
     mViewPager.setAdapter(landingPageFragmentPagerAdapter);
-    tabLayout.setupWithViewPager(mViewPager);
+    mTabLayout.setupWithViewPager(mViewPager);
+    mViewPager.addOnPageChangeListener(this);
   }
 
   @Override protected void onStart() {
@@ -101,5 +125,27 @@ public class LandingPageActivity extends BaseNavDrawerActivity {
   public void updateFragmentViews() {
     landingPageFragmentPagerAdapter.caloriesFragment.updateView();
     landingPageFragmentPagerAdapter.macrosFragment.updateViews();
+  }
+
+  @Override
+  public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+  }
+
+  @Override public void onPageSelected(int position) {
+    if (position == 0) {
+      mTabLayout.setBackground(getDrawable(R.drawable.tab_layout_orange));
+      updateColorScheme(0);
+    } else if (position == 1) {
+      mTabLayout.setBackground(getDrawable(R.drawable.tab_layout_purple));
+      updateColorScheme(1);
+    } else if (position == 2) {
+      mTabLayout.setBackground(getDrawable(R.drawable.tab_layout_blue));
+      updateColorScheme(2);
+    }
+  }
+
+  @Override public void onPageScrollStateChanged(int state) {
+
   }
 }

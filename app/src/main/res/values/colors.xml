@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#388e3c</color>
+  <color name="colorPrimary">#FF00A1A1</color>
   <color name="colorPrimaryDark">#000000</color>
   <color name="colorAccent">#01579b</color>
 
@@ -8,6 +8,8 @@
   <color name="mediumGrey">#AAAAAA</color>
 
   <color name="white">#FFFFFF</color>
+
+  <color name="darker_white">#fafafa</color>
 
 
   <!--digital guide mobile -->
@@ -20,8 +22,33 @@
   <color name="dgm_medium_grey">#9e9e9e</color>
   <color name="dgm_dark_grey">#757575</color>
 
+  <color name="dgm_dark_blue">#1a237e</color>
+
+  <color name="dgm_orange">#FFA726</color>
+  <color name="dgm_dark_yellow">#FDD835</color>
+  <color name="dgm_purple">#673AB7</color>
+
+
   <color name="water_chart_blue">#1976d2</color>
 
   <color name="water_chart_grey">#e0e0e0</color>
+
+  <color name="red">#d32f2f</color>
+
+  <color name="tab_not_selected_text_color">#3c000000</color>
+
+
+  <color name="waterNavDrawerBackground">#FF00A1A1</color>
+  <color name="waterNavItemSelectedColor">#FF69C8E1</color>
+
+  <color name="macrosNavDrawerBackground">#FF7D66D8</color>
+  <color name="macrosNavItemSelectedColor">#ffc965ec</color>
+
+  <color name="caloriesNavDrawerBackground">#FFBA4950</color>
+  <color name="caloriesNavItemSelectedColor">#FFD86639</color>
+
+  <color name="logNavDrawerBackground">#ff2e7d32</color>
+  <color name="logNavItemSelectedColor">#ff66bb6a</color>
+
 
 </resources>

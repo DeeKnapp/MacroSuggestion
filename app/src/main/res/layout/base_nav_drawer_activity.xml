@@ -11,6 +11,7 @@
       android:layout_height="match_parent"
       android:orientation="vertical"
       >
+
     <include
         layout="@layout/toolbar"
         android:id="@+id/toolbar"
@@ -29,7 +30,7 @@
       android:layout_width="wrap_content"
       android:layout_height="match_parent"
       android:layout_gravity="start"
-      android:background="@color/dgm_dark_green"
+      android:background="@color/caloriesNavDrawerBackground"
       >
     <LinearLayout
         android:layout_width="wrap_content"
@@ -48,14 +49,15 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:background="@color/dgm_medium_grey"
-          android:divider="@color/dgm_light_green"
-          android:dividerHeight="1dp"
+          android:divider="@color/caloriesNavItemSelectedColor"
+          android:dividerHeight="1px"
           />
 
       <View
+          android:id="@+id/last_divider"
           android:layout_width="match_parent"
-          android:layout_height="1dp"
-          android:background="@color/dgm_light_green"
+          android:layout_height="1px"
+          android:background="@color/caloriesNavItemSelectedColor"
           />
 
     </LinearLayout>

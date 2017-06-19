@@ -3,26 +3,26 @@ package com.dustin.knapp.project.macrosuggestion.adapters;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import com.dustin.knapp.project.macrosuggestion.activities.fragments.CaloriesFragment;
-import com.dustin.knapp.project.macrosuggestion.activities.fragments.MacrosFragment;
-import com.dustin.knapp.project.macrosuggestion.activities.fragments.MacrosFragment2;
+import com.dustin.knapp.project.macrosuggestion.fragments.CaloriesFragment;
+import com.dustin.knapp.project.macrosuggestion.fragments.MacrosFragment;
+import com.dustin.knapp.project.macrosuggestion.fragments.WaterFragment;
 
 /**
  * Created by dknapp on 5/16/16.
  */
 public class LandingPageFragmentPagerAdapter extends FragmentPagerAdapter {
   private static final int PAGE_COUNT = 3;
-  private String[] tabTitles = new String[] {"Calories", "Macros", "Macros 2"};
+  private String[] tabTitles = new String[] {"Calories", "Macros", "Water"};
 
   public CaloriesFragment caloriesFragment;
   public MacrosFragment macrosFragment;
-  public MacrosFragment2 macrosFragment2;
+  public WaterFragment waterFragment;
 
   public LandingPageFragmentPagerAdapter(FragmentManager fm) {
     super(fm);
     caloriesFragment = new CaloriesFragment();
     macrosFragment = new MacrosFragment();
-    macrosFragment2 = new MacrosFragment2();
+    waterFragment = new WaterFragment();
   }
 
   @Override public int getCount() {
@@ -35,7 +35,7 @@ public class LandingPageFragmentPagerAdapter extends FragmentPagerAdapter {
     } else if (position == 1) {
       return macrosFragment;
     } else if (position == 2) {
-      return macrosFragment2;
+      return waterFragment;
     } else {
       return null;
     }

@@ -2,10 +2,11 @@ package com.dustin.knapp.project.macrosuggestion.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Configuration;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -41,9 +42,11 @@ public class BaseNavDrawerActivity extends BaseActivity {
   @BindView(R.id.status_bar_mask) View statusBarSpaceView;
 
   @BindView(R.id.list_view_inside_nav) ListView drawerMenuList;
+  @BindView(R.id.navigation_view) NavigationView navigationView;
+  @BindView(R.id.last_divider) View lastDivider;
 
-  Toolbar toolbar;
-  TextView toolbarTitle;
+  public Toolbar toolbar;
+  public TextView toolbarTitle;
 
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -111,6 +114,7 @@ public class BaseNavDrawerActivity extends BaseActivity {
           if (SignoutActivity.class == nextActivityClass) {
             Intent i = new Intent(BaseNavDrawerActivity.this, LoginActivity.class);
             // make sure login clears everything else behind this activity
+            //todo clear all local stored data
             sharedPreferencesUtil.storeUserIsEnrolled(false);
             startActivity(
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
@@ -123,6 +127,64 @@ public class BaseNavDrawerActivity extends BaseActivity {
         }
       }
     });
+  }
+
+  public void updateColorScheme(int colorScheme) {
+    switch (colorScheme) {
+      case 0:
+        Log.d("Color Update", "Updating color scheme for int:" + colorScheme);
+        toolbar.setBackground(getDrawable(R.drawable.calories_toolbar));
+        navigationView.setBackgroundColor(
+            getResources().getColor(R.color.caloriesNavDrawerBackground));
+        drawerMenuAdaper.updateColorScheme(colorScheme);
+        drawerMenuList.setDivider(new ColorDrawable(0xFFD86639));
+        drawerMenuList.setDividerHeight(1);
+        drawerMenuList.setBackgroundColor(
+            getResources().getColor(R.color.caloriesNavDrawerBackground));
+        lastDivider.setBackgroundColor(
+            getResources().getColor(R.color.caloriesNavItemSelectedColor));
+        drawerMenuAdaper.notifyDataSetChanged();
+        break;
+      case 1:
+        Log.d("Color Update", "Updating color scheme for int:" + colorScheme);
+        toolbar.setBackground(getDrawable(R.drawable.macros_toolbar));
+        navigationView.setBackgroundColor(
+            getResources().getColor(R.color.macrosNavDrawerBackground));
+        drawerMenuAdaper.updateColorScheme(colorScheme);
+        drawerMenuList.setDivider(new ColorDrawable(0xffc965ec));
+        drawerMenuList.setDividerHeight(1);
+        drawerMenuList.setBackgroundColor(
+            getResources().getColor(R.color.macrosNavDrawerBackground));
+        lastDivider.setBackgroundColor(getResources().getColor(R.color.macrosNavItemSelectedColor));
+        drawerMenuAdaper.notifyDataSetChanged();
+        break;
+      case 2:
+        Log.d("Color Update", "Updating color scheme for int:" + colorScheme);
+        toolbar.setBackground(getDrawable(R.drawable.water_toolbar));
+        navigationView.setBackgroundColor(
+            getResources().getColor(R.color.waterNavDrawerBackground));
+        drawerMenuAdaper.updateColorScheme(colorScheme);
+        drawerMenuList.setDivider(new ColorDrawable(0xFF69C8E1));
+        drawerMenuList.setDividerHeight(1);
+        drawerMenuList.setBackgroundColor(
+            getResources().getColor(R.color.waterNavDrawerBackground));
+        lastDivider.setBackgroundColor(getResources().getColor(R.color.waterNavItemSelectedColor));
+        drawerMenuAdaper.notifyDataSetChanged();
+        break;
+      case 3:
+        Log.d("Color Update", "Updating color scheme for int:" + colorScheme);
+        toolbar.setBackground(getDrawable(R.drawable.log_toolbar));
+        navigationView.setBackgroundColor(getResources().getColor(R.color.logNavDrawerBackground));
+        drawerMenuAdaper.updateColorScheme(colorScheme);
+        drawerMenuList.setDivider(new ColorDrawable(0xff66bb6a));
+        drawerMenuList.setDividerHeight(1);
+        drawerMenuList.setBackgroundColor(getResources().getColor(R.color.logNavDrawerBackground));
+        lastDivider.setBackgroundColor(getResources().getColor(R.color.logNavItemSelectedColor));
+        drawerMenuAdaper.notifyDataSetChanged();
+        break;
+      default:
+        break;
+    }
   }
 
   @Override public void onBackPressed() {
