@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+    >
+
+  <TextView
+      android:id="@+id/tvHeightTitle"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="My Current Height is"
+      android:textColor="@color/dgm_black"
+      android:textSize="22sp"
+      />
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:weightSum="6"
+      >
+
+    <EditText
+        android:id="@+id/etEnterHeightFeet"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:hint="Enter Feet"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:textSize="18sp"
+        />
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:text="ft."
+        />
+
+    <EditText
+        android:id="@+id/etEnterHeightInches"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_weight="2"
+        android:hint="Enter Inches"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:textSize="18sp"
+
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:text="in."
+        />
+
+
+  </LinearLayout>
+
+
+  <TextView
+      android:id="@+id/tvEnterCurrentWeightTitle"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="and I currently weigh"
+      android:textColor="@color/dgm_black"
+      android:textSize="22sp"
+      />
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:weightSum="4"
+      >
+
+    <EditText
+        android:id="@+id/etCurrentWeight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:hint="Current Weight"
+        android:imeOptions="actionNext"
+        android:inputType="numberDecimal"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="lbs"
+        />
+
+  </LinearLayout>
+
+
+  <TextView
+      android:id="@+id/tvEnterTargetWeightTitle"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="but, I want to weigh"
+      android:textColor="@color/dgm_black"
+      android:textSize="22sp"
+      />
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:weightSum="4"
+      >
+
+    <EditText
+        android:id="@+id/etTargetWeight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:hint="Target Weight"
+        android:imeOptions="actionDone"
+        android:inputType="numberDecimal"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="lbs"
+        />
+
+  </LinearLayout>
+
+  <Button
+      android:id="@+id/nextButton"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Next"
+      />
+
+</LinearLayout>

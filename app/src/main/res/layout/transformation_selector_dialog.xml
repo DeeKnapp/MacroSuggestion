@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:minWidth="300dp"
+    android:orientation="vertical"
+    android:padding="20dp"
+    >
+
+  <RadioGroup
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      >
+
+
+    <RadioButton
+        android:id="@+id/accordionTransformerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Accordion Transformer"
+        />
+
+    <RadioButton
+        android:id="@+id/cubeInTransformer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cube In Transformer"
+        />
+
+    <RadioButton
+        android:id="@+id/cubeOutTransformer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cube Out Transformer"
+        />
+
+    <RadioButton
+        android:id="@+id/stackTransformer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stack Transformer"
+        />
+
+    <RadioButton
+        android:id="@+id/zoomOutTransformer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Zoom Out Transformer"
+        />
+
+  </RadioGroup>
+
+
+  <Button
+      android:id="@+id/btnSubmit"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="15dp"
+      android:text="Submit"
+      />
+
+</LinearLayout>
