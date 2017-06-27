@@ -66,6 +66,8 @@ public class OnBoardingActivityStep1 extends BaseActivity {
           etEmail.setFocusable(false);
           etPassword.setVisibility(View.GONE);
           enterPasswordHeader.setVisibility(View.GONE);
+        } else {
+          pendingNewUser = new UserObject();
         }
       }
     }));

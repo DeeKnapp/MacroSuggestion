@@ -118,6 +118,7 @@
       android:layout_marginBottom="@dimen/activity_vertical_margin"
       android:layout_marginEnd="@dimen/activity_horizontal_margin"
       android:src="@mipmap/ic_plus_white"
+      android:background="@color/white"
       />
 
 </android.support.design.widget.CoordinatorLayout>

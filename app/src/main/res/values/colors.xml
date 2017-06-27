@@ -35,8 +35,7 @@
 
   <color name="red">#d32f2f</color>
 
-  <color name="tab_not_selected_text_color">#3c000000</color>
-
+  <color name="tab_not_selected_text_color">#50000000</color>
 
   <color name="waterNavDrawerBackground">#FF00A1A1</color>
   <color name="waterNavItemSelectedColor">#FF69C8E1</color>
@@ -49,6 +48,5 @@
 
   <color name="logNavDrawerBackground">#ff2e7d32</color>
   <color name="logNavItemSelectedColor">#ff66bb6a</color>
-
 
 </resources>
