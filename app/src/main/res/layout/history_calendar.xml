@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+  <com.prolificinteractive.materialcalendarview.MaterialCalendarView xmlns:app="http://schemas.android.com/apk/res-auto"
+      android:id="@+id/calendarView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:padding="15dp"
+      app:mcv_showOtherDates="all"
+      />
+
+  <RadioGroup
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:padding="15dp"
+      android:weightSum="3.2"
+      >
+
+    <RadioButton
+        android:id="@+id/loseWeightButton"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/blue_rounded_rect_selector"
+        android:button="@null"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Calories"
+        />
+
+    <!--use this button to set the layout_height automatically / spacer -->
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+        android:visibility="invisible"
+        />
+
+    <RadioButton
+        android:id="@+id/maintainWeight"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/blue_rounded_rect_selector"
+        android:button="@null"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Macros"
+        />
+
+    <!--use this button to set the layout_height automatically / spacer -->
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+        android:visibility="invisible"
+        />
+
+    <RadioButton
+        android:id="@+id/gainWeightButton"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/blue_rounded_rect_selector"
+        android:button="@null"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Water"
+        />
+
+
+  </RadioGroup>
+
+
+</LinearLayout>

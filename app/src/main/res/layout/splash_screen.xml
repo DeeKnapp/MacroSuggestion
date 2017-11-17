@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/water_chart_grey">
+
+
+    <ImageView
+        android:id="@+id/loader_bad_foods"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/loader_good_foods"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="20sp"
+        android:layout_marginBottom="15dp"
+        android:gravity="center"
+        android:text="LOADING..."
+        android:textColor="@color/dgm_black"
+        android:textSize="30sp" />
+
+
+</FrameLayout>

@@ -8,73 +8,82 @@ import io.realm.annotations.PrimaryKey;
  */
 public class FoodEntry extends RealmObject {
 
-  private String currentDate;
-  private float calories;
-  private float fats;
-  private float carbs;
-  private float protein;
-  private String foodName;
-  private int mealEntryType;
+    private String currentDate;
+    private String timeStamp;
+    private float calories;
+    private float fats;
+    private float carbs;
+    private float protein;
+    private String foodName;
+    private int mealEntryType;
 
-  public int getMealEntryType() {
-    return mealEntryType;
-  }
+    public int getMealEntryType() {
+        return mealEntryType;
+    }
 
-  public void setMealEntryType(int mealEntryType) {
-    this.mealEntryType = mealEntryType;
-  }
+    public void setMealEntryType(int mealEntryType) {
+        this.mealEntryType = mealEntryType;
+    }
 
-  public String getFoodName() {
+    public String getTimeStamp() {
+        return timeStamp;
+    }
 
-    return foodName;
-  }
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
+    }
 
-  public void setFoodName(String foodName) {
-    this.foodName = foodName;
-  }
+    public String getFoodName() {
 
-  public float getProtein() {
+        return foodName;
+    }
 
-    return protein;
-  }
+    public void setFoodName(String foodName) {
+        this.foodName = foodName;
+    }
 
-  public void setProtein(float protein) {
-    this.protein = protein;
-  }
+    public float getProtein() {
 
-  public float getCarbs() {
+        return protein;
+    }
 
-    return carbs;
-  }
+    public void setProtein(float protein) {
+        this.protein = protein;
+    }
 
-  public void setCarbs(float carbs) {
-    this.carbs = carbs;
-  }
+    public float getCarbs() {
 
-  public float getFats() {
+        return carbs;
+    }
 
-    return fats;
-  }
+    public void setCarbs(float carbs) {
+        this.carbs = carbs;
+    }
 
-  public void setFats(float fats) {
-    this.fats = fats;
-  }
+    public float getFats() {
 
-  public float getCalories() {
+        return fats;
+    }
 
-    return calories;
-  }
+    public void setFats(float fats) {
+        this.fats = fats;
+    }
 
-  public void setCalories(float calories) {
-    this.calories = calories;
-  }
+    public float getCalories() {
 
-  public String getCurrentDate() {
+        return calories;
+    }
 
-    return currentDate;
-  }
+    public void setCalories(float calories) {
+        this.calories = calories;
+    }
 
-  public void setCurrentDate(String currentDate) {
-    this.currentDate = currentDate;
-  }
+    public String getCurrentDate() {
+
+        return currentDate;
+    }
+
+    public void setCurrentDate(String currentDate) {
+        this.currentDate = currentDate;
+    }
 }

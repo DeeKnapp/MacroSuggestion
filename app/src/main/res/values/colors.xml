@@ -1,52 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#FF00A1A1</color>
-  <color name="colorPrimaryDark">#000000</color>
-  <color name="colorAccent">#01579b</color>
+    <color name="colorPrimary">#FF00A1A1</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#01579b</color>
 
 
-  <color name="mediumGrey">#AAAAAA</color>
+    <color name="mediumGrey">#AAAAAA</color>
 
-  <color name="white">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
 
-  <color name="darker_white">#fafafa</color>
+    <color name="darker_white">#fafafa</color>
+
+    <color name="calories_fab_color">#ffCD5936</color>
+    <color name="macros_fab_color">#ffC361F3</color>
+    <color name="water_fab_color">#ff0094CE</color>
+    <color name="daily_log_fab_color">#ff66bb6a</color>
+
+    <!--digital guide mobile -->
+    <color name="dgm_blue">#01579b</color>
+    <color name="dgm_cyan_blue">#4dd0e1</color>
+    <color name="dgm_dark_green">#1b5e20</color>
+    <color name="dgm_green">#388e3c</color>
+    <color name="dgm_light_green">#66bb6a</color>
+    <color name="dgm_black">#000000</color>
+    <color name="dgm_medium_grey">#9e9e9e</color>
+    <color name="dgm_dark_grey">#757575</color>
+
+    <color name="dgm_dark_blue">#1a237e</color>
+
+    <color name="dgm_orange">#FFA726</color>
+    <color name="dgm_dark_yellow">#FDD835</color>
+    <color name="dgm_purple">#673AB7</color>
 
 
-  <!--digital guide mobile -->
-  <color name="dgm_blue">#01579b</color>
-  <color name="dgm_cyan_blue">#4dd0e1</color>
-  <color name="dgm_dark_green">#1b5e20</color>
-  <color name="dgm_green">#388e3c</color>
-  <color name="dgm_light_green">#66bb6a</color>
-  <color name="dgm_black">#000000</color>
-  <color name="dgm_medium_grey">#9e9e9e</color>
-  <color name="dgm_dark_grey">#757575</color>
+    <color name="water_chart_blue">#1976d2</color>
 
-  <color name="dgm_dark_blue">#1a237e</color>
+    <color name="water_chart_grey">#e0e0e0</color>
 
-  <color name="dgm_orange">#FFA726</color>
-  <color name="dgm_dark_yellow">#FDD835</color>
-  <color name="dgm_purple">#673AB7</color>
+    <color name="red">#d32f2f</color>
 
+    <color name="tab_not_selected_text_color">#50000000</color>
 
-  <color name="water_chart_blue">#1976d2</color>
+    <color name="waterNavDrawerBackground">#FF00A1A1</color>
+    <color name="waterNavItemSelectedColor">#FF69C8E1</color>
 
-  <color name="water_chart_grey">#e0e0e0</color>
+    <color name="macrosNavDrawerBackground">#FF7D66D8</color>
+    <color name="macrosNavItemSelectedColor">#ffc965ec</color>
 
-  <color name="red">#d32f2f</color>
+    <color name="caloriesNavDrawerBackground">#FFBA4950</color>
+    <color name="caloriesNavItemSelectedColor">#FFD86639</color>
 
-  <color name="tab_not_selected_text_color">#50000000</color>
-
-  <color name="waterNavDrawerBackground">#FF00A1A1</color>
-  <color name="waterNavItemSelectedColor">#FF69C8E1</color>
-
-  <color name="macrosNavDrawerBackground">#FF7D66D8</color>
-  <color name="macrosNavItemSelectedColor">#ffc965ec</color>
-
-  <color name="caloriesNavDrawerBackground">#FFBA4950</color>
-  <color name="caloriesNavItemSelectedColor">#FFD86639</color>
-
-  <color name="logNavDrawerBackground">#ff2e7d32</color>
-  <color name="logNavItemSelectedColor">#ff66bb6a</color>
+    <color name="logNavDrawerBackground">#ff2e7d32</color>
+    <color name="logNavItemSelectedColor">#ff66bb6a</color>
 
 </resources>

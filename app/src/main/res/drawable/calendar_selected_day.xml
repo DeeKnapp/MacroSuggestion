@@ -1,0 +1,26 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+
+            <solid
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:color="#aaaaaa" />
+        </shape>
+    </item>
+
+    <item
+        android:layout_width="1px"
+        android:layout_height="1px"
+        android:layout_margin="20dp"
+        android:drawable="@drawable/failed_goal_cross"
+        android:gravity="bottom|start" />
+
+    <item
+        android:layout_width="1px"
+        android:layout_height="1px"
+        android:layout_margin="20dp"
+        android:drawable="@drawable/completed_goal_check_mark"
+        android:gravity="bottom|end" />
+
+</layer-list>

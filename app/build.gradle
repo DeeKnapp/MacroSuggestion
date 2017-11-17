@@ -1,9 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
+apply from: "../quality.gradle"
 
 android {
   compileSdkVersion 25
-  buildToolsVersion "25.0.2"
+  buildToolsVersion "25.0.3"
   defaultConfig {
     applicationId "com.dustin.knapp.project.macrosuggestion"
     minSdkVersion 21
@@ -26,6 +27,9 @@ dependencies {
   androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
     exclude group: 'com.android.support', module: 'support-annotations'
   })
+
+  debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+  releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
   compile 'com.google.android.gms:play-services-vision:10.2.4'
   compile 'com.android.support:appcompat-v7:25.3.1'
@@ -88,6 +92,14 @@ dependencies {
   compile 'com.google.firebase:firebase-database:10.2.4'
   compile 'com.google.firebase:firebase-auth:10.2.4'
   compile 'com.google.firebase:firebase-messaging:10.2.4'
+
+  //Material Calendar
+  compile 'com.prolificinteractive:material-calendarview:1.4.3'
+
+  compile 'com.roomorama:caldroid:3.0.1'
+
+
+  compile 'com.airbnb.android:lottie:2.1.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

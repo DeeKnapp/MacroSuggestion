@@ -95,18 +95,19 @@ public class OnBoardingActivityStep1 extends BaseActivity {
     } else if (etTargetWeight.getText().toString().equals("")) {
       etTargetWeight.requestFocus();
       showKeyboard(etTargetWeight);
-    } else if (!(loseWeightButton.isChecked() || gainWeightButton.isChecked())
-        || maintaineightButton.isChecked()) {
+    } else if (!(loseWeightButton.isChecked() || gainWeightButton.isChecked()) || maintaineightButton.isChecked()) {
       Toast.makeText(this, "Must select lose weight or gain weight", Toast.LENGTH_LONG).show();
       loseWeightButton.requestFocus();
-    } else if (!pendingNewUser.isSignedInWithGoogle() && etPassword.getText()
-        .toString()
-        .equals("")) {
+    } else if (!pendingNewUser.isSignedInWithGoogle() && etPassword.getText().toString().equals("")) {
       etPassword.requestFocus();
     } else {
       //todo save birthday in user object -- use in diet plan calculation
       if (pendingNewUser.isSignedInWithGoogle()) {
         pendingNewUser.setPendingPassword("");
+      } else {
+        pendingNewUser.setRegisteringWithEmail(true);
+        pendingNewUser.setEmail(etEmail.getText().toString());
+        pendingNewUser.setPendingPassword(etPassword.getText().toString());
       }
       pendingNewUser.setHeightInFeet(Integer.valueOf(etHeightFt.getText().toString()));
       pendingNewUser.setHeightInInches(Integer.valueOf(etHeightInches.getText().toString()));

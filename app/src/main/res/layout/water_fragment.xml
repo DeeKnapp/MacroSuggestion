@@ -1,129 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/water_fragment_wrapper"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/water_blue_background"
-    >
+    android:background="@drawable/water_blue_background">
 
-  <View
-      android:id="@+id/emiter"
-      android:layout_width="match_parent"
-      android:layout_height="0dp"
-      />
-
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:orientation="vertical"
-      android:padding="15dp"
-      >
-
-    <TextView
-        android:id="@+id/title_view"
+    <View
+        android:id="@+id/emiter"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:gravity="center"
-        android:text="Today's Water"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        />
-
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/water_chart"
-        android:layout_width="match_parent"
-        android:layout_height="225dp"
-        android:layout_marginBottom="10dp"
-        />
+        android:layout_height="0dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_rectangle"
-        android:baselineAligned="false"
-        android:orientation="horizontal"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:weightSum="2"
-        >
-
-      <LinearLayout
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:orientation="vertical"
-          >
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp">
 
         <TextView
+            android:id="@+id/title_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:gravity="center"
-            android:text="Current Water"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            />
-
-        <TextView
-            android:id="@+id/currentWater"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="0oz"
+            android:text="Today's Water"
             android:textColor="@color/white"
             android:textSize="20sp"
-            />
+            android:textStyle="bold" />
 
-      </LinearLayout>
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/water_chart"
+            android:layout_width="match_parent"
+            android:layout_height="225dp"
+            android:layout_marginBottom="10dp" />
 
-      <View
-          android:layout_width="1px"
-          android:layout_height="match_parent"
-          android:background="@color/dgm_black"
-          />
-
-      <LinearLayout
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:orientation="vertical"
-          >
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Remaining Water"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            />
+            android:background="@drawable/rounded_rectangle"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:weightSum="2">
 
-        <TextView
-            android:id="@+id/remainingWater"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="64oz"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-      </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Current Water"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/currentWater"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="0oz"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/dgm_black" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Remaining Water"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/remainingWater"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="64oz"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-  </LinearLayout>
-
-  <android.support.design.widget.FloatingActionButton
-      android:id="@+id/waterFab"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="bottom|right"
-      android:layout_margin="16dp"
-      android:layout_marginBottom="@dimen/activity_vertical_margin"
-      android:layout_marginRight="@dimen/activity_horizontal_margin"
-      android:src="@android:drawable/ic_input_add"
-      />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/waterFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:src="@mipmap/ic_plus_white"
+        android:tint="@color/water_fab_color"
+        app:backgroundTint="@color/white" />
 
 </android.support.design.widget.CoordinatorLayout>

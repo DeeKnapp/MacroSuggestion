@@ -9,6 +9,7 @@ import android.view.View;
 import com.dustin.knapp.project.macrosuggestion.MacroSuggestionApplication;
 import com.dustin.knapp.project.macrosuggestion.R;
 import com.dustin.knapp.project.macrosuggestion.adapters.LandingPageFragmentPagerAdapter;
+import com.dustin.knapp.project.macrosuggestion.models.NutritionDataGoal;
 import com.dustin.knapp.project.macrosuggestion.models.PendingNutritionData;
 import com.dustin.knapp.project.macrosuggestion.models.PendingWaterData;
 import com.dustin.knapp.project.macrosuggestion.models.UserObject;
@@ -20,8 +21,7 @@ import javax.inject.Inject;
 import rx.Observable;
 import rx.Observer;
 
-public class LandingPageActivity extends BaseNavDrawerActivity
-    implements ViewPager.OnPageChangeListener {
+public class LandingPageActivity extends BaseNavDrawerActivity implements ViewPager.OnPageChangeListener {
 
   public ViewPager mViewPager;
   public TabLayout mTabLayout;
@@ -49,33 +49,37 @@ public class LandingPageActivity extends BaseNavDrawerActivity
     this.content.addView(view);
 
     toolbarTitle.setText(DrawerMenuItem.getTitle(LandingPageActivity.class));
-    toolbar.setBackground(
-        ResourcesCompat.getDrawable(getResources(), R.drawable.calories_toolbar, null));
+    toolbar.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.calories_toolbar, null));
     mTabLayout.setBackground(getDrawable(R.drawable.tab_layout_orange));
 
     PendingNutritionData pendingNutritionData = new PendingNutritionData();
     PendingNutritionData realmPendingData = RealmUtils.getCurrentDayNutritionObject();
 
-    UserObject currentUserObject =
-        RealmUtils.getCurrentUserObject(sharedPreferencesUtil.getEnrolledUniqueUserId());
+    UserObject currentUserObject = RealmUtils.getCurrentUserObject(sharedPreferencesUtil.getEnrolledUniqueUserId());
     if (realmPendingData == null) {
+      if (currentUserObject.getNutritionDataGoal() == null) {
+        NutritionDataGoal newGoal = new NutritionDataGoal();
+        newGoal.setGoalCalorie(2000);
+        newGoal.setGoalProtein(200);
+        newGoal.setGoalCarb(200);
+        newGoal.setGoalFat(200);
+        currentUserObject.setNutritionDataGoal(new NutritionDataGoal());
+      }
       pendingNutritionData = new PendingNutritionData();
-      pendingNutritionData.setGoalCalorie(
-          currentUserObject.getNutritionDataGoal().getGoalCalorie());
-      pendingNutritionData.setGoalProtein(
-          currentUserObject.getNutritionDataGoal().getGoalProtein());
+      pendingNutritionData.setGoalCalorie(currentUserObject.getNutritionDataGoal().getGoalCalorie());
+      pendingNutritionData.setGoalProtein(currentUserObject.getNutritionDataGoal().getGoalProtein());
       pendingNutritionData.setGoalFat(currentUserObject.getNutritionDataGoal().getGoalFat());
       pendingNutritionData.setGoalCarb(currentUserObject.getNutritionDataGoal().getGoalCarb());
       pendingNutritionData.setCurrentCalories(0);
       pendingNutritionData.setCurrentProtein(0);
       pendingNutritionData.setCurrentFat(0);
       pendingNutritionData.setCurrentCarb(0);
-      pendingNutritionData.setCurrentDate(DateUtils.getCurrentDate());
+      pendingNutritionData.setCurrentDate(DateUtils.getCurrentDateString());
 
       sharedPreferencesUtil.storeShouldShowCalorieAnimation(true);
       sharedPreferencesUtil.storeShouldShowWaterAnimation(true);
     } else {
-      pendingNutritionData.setCurrentDate(DateUtils.getCurrentDate());
+      pendingNutritionData.setCurrentDate(DateUtils.getCurrentDateString());
       pendingNutritionData.setGoalCalorie(realmPendingData.getGoalCalorie());
       pendingNutritionData.setGoalProtein(realmPendingData.getGoalProtein());
       pendingNutritionData.setGoalFat(realmPendingData.getGoalFat());
@@ -94,7 +98,7 @@ public class LandingPageActivity extends BaseNavDrawerActivity
       pendingWaterData = new PendingWaterData();
       pendingWaterData.setGoalWater(currentUserObject.getWaterDataGoal().getGoalWater());
       pendingWaterData.setCurrentWater(currentUserObject.getWaterDataGoal().getCurrentWater());
-      pendingWaterData.setCurrentDate(DateUtils.getCurrentDate());
+      pendingWaterData.setCurrentDate(DateUtils.getCurrentDateString());
     }
 
     RealmUtils.updateCurrentDayPendingWaterData(pendingWaterData);
@@ -107,8 +111,7 @@ public class LandingPageActivity extends BaseNavDrawerActivity
 
   private void setupViewPager() {
     mViewPager = (ViewPager) view.findViewById(R.id.pager);
-    landingPageFragmentPagerAdapter =
-        new LandingPageFragmentPagerAdapter(getSupportFragmentManager());
+    landingPageFragmentPagerAdapter = new LandingPageFragmentPagerAdapter(getSupportFragmentManager());
     mTabLayout = (TabLayout) view.findViewById(R.id.sliding_tabs);
     mViewPager.setAdapter(landingPageFragmentPagerAdapter);
     mTabLayout.setupWithViewPager(mViewPager);
@@ -120,6 +123,7 @@ public class LandingPageActivity extends BaseNavDrawerActivity
     int position = DrawerMenuHelper.getNavDrawerIndex(LandingPageActivity.class);
     drawerMenuAdaper.updateWithSelectedPosition(position);
     drawerMenuList.smoothScrollToPosition(position);
+    onPageSelected(mViewPager.getCurrentItem());
   }
 
   public void updateFragmentViews() {
@@ -127,8 +131,7 @@ public class LandingPageActivity extends BaseNavDrawerActivity
     landingPageFragmentPagerAdapter.macrosFragment.updateViews();
   }
 
-  @Override
-  public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+  @Override public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
   }
 

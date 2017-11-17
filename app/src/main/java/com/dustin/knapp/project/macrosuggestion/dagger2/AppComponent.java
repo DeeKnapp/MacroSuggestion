@@ -15,7 +15,6 @@ import com.dustin.knapp.project.macrosuggestion.activities.SignoutActivity;
 import com.dustin.knapp.project.macrosuggestion.fragments.CaloriesFragment;
 import com.dustin.knapp.project.macrosuggestion.fragments.CarbFragment;
 import com.dustin.knapp.project.macrosuggestion.fragments.FatFragment;
-import com.dustin.knapp.project.macrosuggestion.fragments.FoodFragment;
 import com.dustin.knapp.project.macrosuggestion.fragments.MacrosFragment;
 import com.dustin.knapp.project.macrosuggestion.fragments.MacrosFragment2;
 import com.dustin.knapp.project.macrosuggestion.fragments.MacrosFragment3;
@@ -55,8 +54,6 @@ import javax.inject.Singleton;
   void inject(MacrosFragment2 macrosFragment);
 
   void inject(MacrosFragment3 macrosFragment);
-
-  void inject(FoodFragment foodFragment);
 
   void inject(WaterFragment waterFragment);
 

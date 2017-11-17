@@ -51,7 +51,7 @@ public class RealmUtils {
 
     RealmQuery<PendingNutritionData> query = realm.where(PendingNutritionData.class);
 
-    query.contains("currentDate", DateUtils.getCurrentDate());
+    query.contains("currentDate", DateUtils.getCurrentDateString());
 
     // Execute the query:
     RealmResults<PendingNutritionData> result1 = query.findAll();
@@ -120,7 +120,7 @@ public class RealmUtils {
     RealmQuery<FoodEntry> query = realm.where(FoodEntry.class);
 
     for (FoodEntry entry : query.findAll()) {
-      if (entry.getCurrentDate().equals(DateUtils.getCurrentDate())) {
+      if (entry.getCurrentDate().equals(DateUtils.getCurrentDateString())) {
         foodEntryList.add(entry);
       }
     }
@@ -142,7 +142,7 @@ public class RealmUtils {
 
     RealmQuery<PendingWaterData> query = realm.where(PendingWaterData.class);
 
-    query.contains("currentDate", DateUtils.getCurrentDate());
+    query.contains("currentDate", DateUtils.getCurrentDateString());
 
     // Execute the query:
     RealmResults<PendingWaterData> result1 = query.findAll();

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.app.Fragment;
 import android.widget.TextView;
+
 import com.dustin.knapp.project.macrosuggestion.Constants;
 import com.dustin.knapp.project.macrosuggestion.MacroSuggestionApplication;
 import com.dustin.knapp.project.macrosuggestion.R;
@@ -27,7 +28,9 @@ import com.dustin.knapp.project.macrosuggestion.utils.CaloriesChartUtils;
 import com.dustin.knapp.project.macrosuggestion.utils.DateUtils;
 import com.dustin.knapp.project.macrosuggestion.utils.RealmUtils;
 import com.github.mikephil.charting.charts.PieChart;
+
 import javax.inject.Inject;
+
 import rx.Observable;
 import rx.Observer;
 import rx.functions.Action1;
@@ -35,8 +38,7 @@ import rx.functions.Action1;
 /**
  * Created by dknapp on 4/24/17
  */
-public class CaloriesFragment extends Fragment
-    implements CaloriesReactiveView, QuickAddFoodDialogFragment.QuickAddDialogListener {
+public class CaloriesFragment extends Fragment implements CaloriesReactiveView, QuickAddFoodDialogFragment.QuickAddDialogListener {
 
   View rootView;
 
@@ -58,8 +60,7 @@ public class CaloriesFragment extends Fragment
   @Inject public Observable<PendingNutritionData> pendingNutritionalObservable;
   @Inject public Observer<PendingNutritionData> pendingNutritionalObserver;
 
-  @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState) {
+  @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
     ((MacroSuggestionApplication) getActivity().getApplication()).getAppComponent().inject(this);
 
@@ -88,8 +89,7 @@ public class CaloriesFragment extends Fragment
     //todo launch quick add dialog overlay
     fab.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
-        QuickAddFoodDialogFragment quickAddFoodDialogFragment =
-            QuickAddFoodDialogFragment.newInstance();
+        QuickAddFoodDialogFragment quickAddFoodDialogFragment = QuickAddFoodDialogFragment.newInstance();
 
         quickAddFoodDialogFragment.setListener(fragment);
 
@@ -121,8 +121,7 @@ public class CaloriesFragment extends Fragment
     caloriesPresenter.getInspirationQuoteForSnackbar();
   }
 
-  private void updateChartView(CaloriesFragment.ViewHolder holder, float current, float goal,
-      Activity activity) {
+  private void updateChartView(CaloriesFragment.ViewHolder holder, float current, float goal, Activity activity) {
     currentCalorieText.setText(String.valueOf(current));
     remainingCalorieText.setText(String.valueOf(goal - current));
     CaloriesChartUtils.updateChartViews(holder, current, goal, activity);
@@ -130,16 +129,15 @@ public class CaloriesFragment extends Fragment
 
   @Override public void onServerSuccess(String quote) {
     if (!getActivity().isDestroyed()) {
-      Snackbar snackbar =
-          Snackbar.make(getActivity().findViewById(R.id.calorie_fragment_wrapper), quote,
-              Snackbar.LENGTH_INDEFINITE).setAction("Dismiss", new View.OnClickListener() {
+      Snackbar snackbar = Snackbar.make(getActivity().findViewById(R.id.calorie_fragment_wrapper), quote, Snackbar.LENGTH_INDEFINITE)
+          .setAction("Dismiss", new View.OnClickListener() {
             @Override public void onClick(View v) {
               //do nothing
             }
-          }).setActionTextColor(Color.GREEN);
+          })
+          .setActionTextColor(Color.GREEN);
       View snackbarView = snackbar.getView();
-      TextView textView =
-          (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+      TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
       textView.setMaxLines(10);
       snackbar.show();
     }
@@ -158,23 +156,18 @@ public class CaloriesFragment extends Fragment
   }
 
   public void updateView() {
-    updateChartView(caloriesViewHolder, currentPendingNutritionalData.getCurrentCalories(),
-        goalCalorie, getActivity());
+    updateChartView(caloriesViewHolder, currentPendingNutritionalData.getCurrentCalories(), goalCalorie, getActivity());
   }
 
   @Override public void onQuickAddSubmit(final BaseNutrition baseNutrition) {
 
-    currentPendingNutritionalData.setCurrentCalories(
-        currentPendingNutritionalData.getCurrentCalories() + baseNutrition.calories);
+    currentPendingNutritionalData.setCurrentCalories(currentPendingNutritionalData.getCurrentCalories() + baseNutrition.calories);
 
-    currentPendingNutritionalData.setCurrentProtein(
-        currentPendingNutritionalData.getCurrentProtein() + baseNutrition.protein);
+    currentPendingNutritionalData.setCurrentProtein(currentPendingNutritionalData.getCurrentProtein() + baseNutrition.protein);
 
-    currentPendingNutritionalData.setCurrentFat(
-        currentPendingNutritionalData.getCurrentFat() + baseNutrition.fats);
+    currentPendingNutritionalData.setCurrentFat(currentPendingNutritionalData.getCurrentFat() + baseNutrition.fats);
 
-    currentPendingNutritionalData.setCurrentCarb(
-        currentPendingNutritionalData.getCurrentCarb() + baseNutrition.carbs);
+    currentPendingNutritionalData.setCurrentCarb(currentPendingNutritionalData.getCurrentCarb() + baseNutrition.carbs);
 
     pendingNutritionalObserver.onNext(currentPendingNutritionalData);
 
@@ -182,12 +175,13 @@ public class CaloriesFragment extends Fragment
 
     FoodEntry currentFoodEntry = new FoodEntry();
 
-    currentFoodEntry.setCurrentDate(DateUtils.getCurrentDate());
+    currentFoodEntry.setCurrentDate(DateUtils.getCurrentDateString());
     currentFoodEntry.setCalories(baseNutrition.calories);
     currentFoodEntry.setProtein(baseNutrition.protein);
     currentFoodEntry.setFats(baseNutrition.fats);
     currentFoodEntry.setCarbs(baseNutrition.carbs);
     currentFoodEntry.setFoodName("Swift Add");
+    currentFoodEntry.setTimeStamp(DateUtils.getCurrentTime());
     currentFoodEntry.setMealEntryType(Constants.MEAL_TYPE_QUICK_ADD);
 
     RealmUtils.addFoodEntryToCurrentDay(currentFoodEntry);

@@ -3,7 +3,6 @@ package com.dustin.knapp.project.macrosuggestion.activities;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.res.ResourcesCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,8 +18,6 @@ import com.dustin.knapp.project.macrosuggestion.models.ScannerNutritionalData;
 import com.dustin.knapp.project.macrosuggestion.models.barcode_objects.UpcLookupResponse;
 import com.dustin.knapp.project.macrosuggestion.navigation_drawer.DrawerMenuHelper;
 import com.dustin.knapp.project.macrosuggestion.navigation_drawer.DrawerMenuItem;
-import com.dustin.knapp.project.macrosuggestion.networking.retrofit.NutritionixApiServicesUtil;
-import com.dustin.knapp.project.macrosuggestion.networking.services.UpcLookupService;
 import com.dustin.knapp.project.macrosuggestion.utils.DateUtils;
 import com.dustin.knapp.project.macrosuggestion.utils.RealmUtils;
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScanner;
@@ -31,9 +28,7 @@ import java.util.List;
 import javax.inject.Inject;
 import rx.Observable;
 import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by dknapp on 4/14/17
@@ -125,7 +120,7 @@ public class BarcodeScanner extends BaseNavDrawerActivity
         RealmUtils.updateCurrentDayPendingNutritionData(currentPendingNutritionalData);
 
         FoodEntry currentFoodEntry = new FoodEntry();
-        currentFoodEntry.setCurrentDate(DateUtils.getCurrentDate());
+        currentFoodEntry.setCurrentDate(DateUtils.getCurrentDateString());
         currentFoodEntry.setCalories(calories);
         currentFoodEntry.setProtein(protein);
         currentFoodEntry.setFats(fats);
