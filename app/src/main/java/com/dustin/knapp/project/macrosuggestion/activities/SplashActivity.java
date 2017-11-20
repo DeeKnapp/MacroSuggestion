@@ -45,6 +45,7 @@ public class SplashActivity extends BaseActivity {
     rotateCounterClockwise.setFillAfter(true);
     rotateClockwise.setFillAfter(true);
 
+    //testing git to jenkins pipeline
     new Timer().schedule(new TimerTask() {
       @Override public void run() {
         rotateClockwise.setRepeatCount(0);
