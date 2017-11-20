@@ -12,7 +12,7 @@
       android:gravity="left|center_vertical"
       android:text="Some Fancy Title"
       android:transitionName="transitionTextView"
-      style="@style/AppTheme.Toolbar.Title"
+      style="@style/MacroSuggestionTheme.Toolbar.Title"
       />
 
 </android.support.v7.widget.Toolbar>

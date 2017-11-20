@@ -1,6 +1,7 @@
 package com.dustin.knapp.project.macrosuggestion.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import com.dustin.knapp.project.macrosuggestion.Constants;
 import com.dustin.knapp.project.macrosuggestion.MacroSuggestionApplication;
 import com.dustin.knapp.project.macrosuggestion.R;
+import com.dustin.knapp.project.macrosuggestion.activities.BarcodeScanner;
 import com.dustin.knapp.project.macrosuggestion.activities.LandingPageActivity;
 import com.dustin.knapp.project.macrosuggestion.models.BaseNutrition;
 import com.dustin.knapp.project.macrosuggestion.models.FoodEntry;

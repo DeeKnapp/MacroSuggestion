@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MacroSuggestion.iml" filepath="$PROJECT_DIR$/MacroSuggestion.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/materialbarcodescanner/materialbarcodescanner.iml" filepath="$PROJECT_DIR$/materialbarcodescanner/materialbarcodescanner.iml" />
     </modules>
   </component>
 </project>

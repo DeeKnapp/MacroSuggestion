@@ -20,6 +20,7 @@ import com.dustin.knapp.project.macrosuggestion.navigation_drawer.DrawerMenuHelp
 import com.dustin.knapp.project.macrosuggestion.navigation_drawer.DrawerMenuItem;
 import com.dustin.knapp.project.macrosuggestion.utils.DateUtils;
 import com.dustin.knapp.project.macrosuggestion.utils.RealmUtils;
+
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScanner;
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder;
 import com.google.android.gms.vision.barcode.Barcode;
