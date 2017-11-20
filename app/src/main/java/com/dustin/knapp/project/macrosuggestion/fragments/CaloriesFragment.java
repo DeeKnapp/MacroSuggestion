@@ -101,9 +101,7 @@ public class CaloriesFragment extends Fragment implements CaloriesReactiveView, 
       }
     });
   }
-
-  //runnnign
-
+  
   @Override public void onResume() {
     super.onResume();
     pendingNutritionalObservable.subscribe(new Action1<PendingNutritionData>() {
