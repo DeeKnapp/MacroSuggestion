@@ -31,7 +31,7 @@ public class CarbFragment extends Fragment {
   MacrosFragment.ViewHolder proteinViewHolder;
 
   @Inject public Observable<PendingNutritionData> pendingNutritionalObservable;
-
+//test
   @Nullable @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     ((MacroSuggestionApplication) getActivity().getApplication()).getAppComponent().inject(this);
