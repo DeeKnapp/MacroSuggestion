@@ -32,6 +32,7 @@ public class CarbFragment extends Fragment {
 
   @Inject public Observable<PendingNutritionData> pendingNutritionalObservable;
 
+  //test localhost webhook with ultrahook
   @Nullable @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     ((MacroSuggestionApplication) getActivity().getApplication()).getAppComponent().inject(this);
