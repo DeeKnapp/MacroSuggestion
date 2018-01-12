@@ -8,8 +8,6 @@ import io.realm.annotations.PrimaryKey;
  */
 public class WaterDataGoal extends RealmObject {
 
-  @PrimaryKey private String email;
-
   private float currentWater;
 
   private float goalWater;
@@ -31,11 +29,4 @@ public class WaterDataGoal extends RealmObject {
     this.currentWater = currentWater;
   }
 
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
 }

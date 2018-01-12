@@ -19,7 +19,7 @@ import com.dustin.knapp.project.macrosuggestion.models.barcode_objects.UpcLookup
 import com.dustin.knapp.project.macrosuggestion.navigation_drawer.DrawerMenuHelper;
 import com.dustin.knapp.project.macrosuggestion.navigation_drawer.DrawerMenuItem;
 import com.dustin.knapp.project.macrosuggestion.utils.DateUtils;
-import com.dustin.knapp.project.macrosuggestion.utils.RealmUtils;
+import com.dustin.knapp.project.macrosuggestion.utils.storage.RealmUtils;
 
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScanner;
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder;
@@ -127,9 +127,8 @@ public class BarcodeScanner extends BaseNavDrawerActivity
         currentFoodEntry.setFats(fats);
         currentFoodEntry.setCarbs(carbs);
         currentFoodEntry.setFoodName(etFoodName.getText().toString());
-        currentFoodEntry.setMealEntryType(pendingMealType);
 
-        RealmUtils.addFoodEntryToCurrentDay(currentFoodEntry);
+        RealmUtils.saveFoodEntry(currentFoodEntry);
 
         finish();
       }

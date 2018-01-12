@@ -3,6 +3,7 @@ package com.dustin.knapp.project.macrosuggestion.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,10 +16,11 @@ import com.dustin.knapp.project.macrosuggestion.R;
 import com.dustin.knapp.project.macrosuggestion.models.NutritionDataGoal;
 import com.dustin.knapp.project.macrosuggestion.models.UserObject;
 import com.dustin.knapp.project.macrosuggestion.models.WaterDataGoal;
-import com.dustin.knapp.project.macrosuggestion.utils.RealmUtils;
+import com.dustin.knapp.project.macrosuggestion.utils.storage.RealmUtils;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import javax.inject.Inject;
 import rx.Observable;
@@ -58,17 +60,40 @@ public class OnBoardingActivityStep3 extends BaseActivity {
 
     if (currentUserObject.isSignedInWithGoogle()) {
       saveGoalsLocalAndRemote();
-    } else if (currentUserObject.isRegisteringWithEmail()) {
-      firebaseAuth = FirebaseAuth.getInstance();
-      Task<AuthResult> resultTask =
-          firebaseAuth.createUserWithEmailAndPassword(currentUserObject.getEmail(),
-              currentUserObject.getPendingPassword());
-      if (resultTask.isSuccessful()) {
-        currentUserObject.setPendingPassword("");
-        saveGoalsLocalAndRemote();
-      }
     } else {
-      //todo solve for this
+      if (currentUserObject.isRegisteringWithEmail()) {
+        firebaseAuth = FirebaseAuth.getInstance();
+        Task<AuthResult> resultTask =
+            firebaseAuth.createUserWithEmailAndPassword(currentUserObject.getEmail(), currentUserObject.getPendingPassword());
+        if (resultTask.isSuccessful()) {
+          currentUserObject.setPendingPassword("");
+          currentUserObject.setUniqueUserId(resultTask.getResult().getUser().getUid());
+          NutritionDataGoal goal = new NutritionDataGoal();
+          goal.setGoalCalorie(2000);
+          goal.setGoalProtein(1000);
+          goal.setGoalCarb(1000);
+          goal.setGoalFat(800);
+          currentUserObject.setNutritionDataGoal(goal);
+
+          WaterDataGoal waterDataGoal = new WaterDataGoal();
+          waterDataGoal.setGoalWater(64);
+          waterDataGoal.setCurrentWater(0);
+
+          currentUserObject.setWaterDataGoal(waterDataGoal);
+          saveGoalsLocalAndRemote();
+        } else {
+          try {
+            //Exception exception = resultTask.getException();
+            //Log.d("TAG", "Task result : " + exception);
+            ////Log.d("TAG", "Task result : " + resultTask.getException().)
+            //throw exception;
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
+        }
+      } else {
+        //todo solve for this
+      }
     }
   }
 
@@ -80,16 +105,9 @@ public class OnBoardingActivityStep3 extends BaseActivity {
     nutritionDataGoal.setGoalCarb(800);
     nutritionDataGoal.setGoalProtein(750);
 
-    nutritionDataGoal.setEmail(currentUserObject.getEmail());
-
-    RealmUtils.saveNutritionDataGoal(nutritionDataGoal);
-
     WaterDataGoal waterDataGoal = new WaterDataGoal();
-    waterDataGoal.setEmail(currentUserObject.getEmail());
     waterDataGoal.setGoalWater(64);
     waterDataGoal.setCurrentWater(0);
-
-    RealmUtils.saveWaterDataGoal(waterDataGoal);
 
     sharedPreferencesUtil.storeUserIsEnrolled(true);
     sharedPreferencesUtil.storeEnrolledEmail(currentUserObject.getEmail());
@@ -98,15 +116,17 @@ public class OnBoardingActivityStep3 extends BaseActivity {
     currentUserObject.setNutritionDataGoal(nutritionDataGoal);
     currentUserObject.setWaterDataGoal(waterDataGoal);
 
-    RealmUtils.saveUserObject(currentUserObject);
+    currentUserObject.setPendingPassword(getString(R.string.app_name));
 
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
 
-    firebaseDatabase.getReference()
-        .child(Constants.BASE_DATABASE_REFERENCE)
-        .child(Constants.USER_DATABASE_REFERENCE)
-        .push()
-        .setValue(currentUserObject);
+    DatabaseReference databaseReference =
+        firebaseDatabase.getReference().child(Constants.BASE_DATABASE_REFERENCE).child(Constants.USER_DATABASE_REFERENCE);
+
+    databaseReference.child(currentUserObject.getUniqueUserId()).setValue(currentUserObject);
+
+    RealmUtils.saveUserObject(currentUserObject);
+
 
     Intent intent = new Intent(this, LandingPageActivity.class);
     startActivity(intent);

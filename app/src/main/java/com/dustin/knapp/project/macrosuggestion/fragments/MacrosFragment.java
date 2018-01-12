@@ -19,20 +19,16 @@ import com.dustin.knapp.project.macrosuggestion.MacroSuggestionApplication;
 import com.dustin.knapp.project.macrosuggestion.R;
 import com.dustin.knapp.project.macrosuggestion.activities.LandingPageActivity;
 import com.dustin.knapp.project.macrosuggestion.activities.MacroSuggestionResults;
-import com.dustin.knapp.project.macrosuggestion.adapters.CustomScrollView;
+import com.dustin.knapp.project.macrosuggestion.ui.CustomScrollView;
 import com.dustin.knapp.project.macrosuggestion.models.BaseNutrition;
 import com.dustin.knapp.project.macrosuggestion.models.ExcessMacros;
 import com.dustin.knapp.project.macrosuggestion.models.FoodEntry;
-import com.dustin.knapp.project.macrosuggestion.models.PendingNutritionData;
 import com.dustin.knapp.project.macrosuggestion.ui.QuickAddFoodDialogFragment;
 import com.dustin.knapp.project.macrosuggestion.utils.DateUtils;
-import com.dustin.knapp.project.macrosuggestion.utils.MacrosChartUtils;
-import com.dustin.knapp.project.macrosuggestion.utils.RealmUtils;
+import com.dustin.knapp.project.macrosuggestion.utils.charts.MacrosChartUtils;
+import com.dustin.knapp.project.macrosuggestion.utils.storage.FirebaseUtils;
+import com.dustin.knapp.project.macrosuggestion.utils.storage.RealmUtils;
 import com.github.mikephil.charting.charts.PieChart;
-import javax.inject.Inject;
-import rx.Observable;
-import rx.Observer;
-import rx.functions.Action1;
 
 /**
  * Created by dknapp on 4/25/17
@@ -40,9 +36,6 @@ import rx.functions.Action1;
 public class MacrosFragment extends Fragment implements CustomScrollView.OnBottomReachedListener, QuickAddFoodDialogFragment.QuickAddDialogListener {
 
   View rootView;
-
-  @Inject public Observable<PendingNutritionData> pendingNutritionalObservable;
-  @Inject public Observer<PendingNutritionData> pendingNutritionalObserver;
 
   LandingPageActivity activity;
 
@@ -53,12 +46,6 @@ public class MacrosFragment extends Fragment implements CustomScrollView.OnBotto
   float currentCarb;
   float currentProtein;
   float currentFat;
-
-  float proteinRemaining = goalProtein - currentProtein;
-  float carbRemaining = goalCarb - currentCarb;
-  float fatRemaining = goalFat - currentFat;
-
-  PendingNutritionData currentPendingNutritionalData;
 
   CustomScrollView scrollView;
 
@@ -108,6 +95,7 @@ public class MacrosFragment extends Fragment implements CustomScrollView.OnBotto
     fab.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         QuickAddFoodDialogFragment quickAddFoodDialogFragment = QuickAddFoodDialogFragment.newInstance();
+        quickAddFoodDialogFragment.setLayout(R.layout.macros_add_food_dialog);
 
         quickAddFoodDialogFragment.setListener(fragment);
 
@@ -122,17 +110,13 @@ public class MacrosFragment extends Fragment implements CustomScrollView.OnBotto
 
   @Override public void onResume() {
     super.onResume();
-    pendingNutritionalObservable.subscribe(new Action1<PendingNutritionData>() {
-      @Override public void call(PendingNutritionData pendingNutritionData) {
-        goalCarb = pendingNutritionData.getGoalCarb();
-        goalProtein = pendingNutritionData.getGoalProtein();
-        goalFat = pendingNutritionData.getGoalFat();
+    goalCarb = activity.currentPendingNutritionalData.getGoalCarb();
+    goalProtein = activity.currentPendingNutritionalData.getGoalProtein();
+    goalFat = activity.currentPendingNutritionalData.getGoalFat();
 
-        currentCarb = pendingNutritionData.getCurrentCarb();
-        currentProtein = pendingNutritionData.getCurrentProtein();
-        currentFat = pendingNutritionData.getCurrentFat();
-      }
-    });
+    currentCarb = activity.currentPendingNutritionalData.getCurrentCarb();
+    currentProtein = activity.currentPendingNutritionalData.getCurrentProtein();
+    currentFat = activity.currentPendingNutritionalData.getCurrentFat();
 
     MacrosChartUtils.updateChartViews(proteinViewHolder, Constants.MACRO_GRAPH_TYPE_PROTEIN, currentProtein, goalProtein);
 
@@ -146,17 +130,7 @@ public class MacrosFragment extends Fragment implements CustomScrollView.OnBotto
   }
 
   @Override public void onQuickAddSubmit(BaseNutrition baseNutrition) {
-    currentPendingNutritionalData.setCurrentCalories(currentPendingNutritionalData.getCurrentCalories() + baseNutrition.calories);
-
-    currentPendingNutritionalData.setCurrentProtein(currentPendingNutritionalData.getCurrentProtein() + baseNutrition.protein);
-
-    currentPendingNutritionalData.setCurrentFat(currentPendingNutritionalData.getCurrentFat() + baseNutrition.fats);
-
-    currentPendingNutritionalData.setCurrentCarb(currentPendingNutritionalData.getCurrentCarb() + baseNutrition.carbs);
-
-    pendingNutritionalObserver.onNext(currentPendingNutritionalData);
-
-    RealmUtils.updateCurrentDayPendingNutritionData(currentPendingNutritionalData);
+    activity.updateObservers(baseNutrition);
 
     FoodEntry currentFoodEntry = new FoodEntry();
 
@@ -165,11 +139,11 @@ public class MacrosFragment extends Fragment implements CustomScrollView.OnBotto
     currentFoodEntry.setProtein(baseNutrition.protein);
     currentFoodEntry.setFats(baseNutrition.fats);
     currentFoodEntry.setCarbs(baseNutrition.carbs);
-    currentFoodEntry.setFoodName("Swift Add");
+    currentFoodEntry.setFoodName(baseNutrition.name);
     currentFoodEntry.setTimeStamp(DateUtils.getCurrentTime());
-    currentFoodEntry.setMealEntryType(Constants.MEAL_TYPE_QUICK_ADD);
 
-    RealmUtils.addFoodEntryToCurrentDay(currentFoodEntry);
+    RealmUtils.saveFoodEntry(currentFoodEntry);
+    FirebaseUtils.saveFoodEntryToFirebase(currentFoodEntry, ((LandingPageActivity) getActivity()).sharedPreferencesUtil.getEnrolledUniqueUserId());
 
     activity.updateFragmentViews();
   }
@@ -180,11 +154,14 @@ public class MacrosFragment extends Fragment implements CustomScrollView.OnBotto
   }
 
   public void updateViews() {
-    MacrosChartUtils.updateChartViews(proteinViewHolder, Constants.MACRO_GRAPH_TYPE_PROTEIN, currentProtein, goalProtein);
+    MacrosChartUtils.updateChartViews(proteinViewHolder, Constants.MACRO_GRAPH_TYPE_PROTEIN,
+        activity.currentPendingNutritionalData.getCurrentProtein(), goalProtein);
 
-    MacrosChartUtils.updateChartViews(carbViewHolder, Constants.MACRO_GRAPH_TYPE_CARBS, currentCarb, goalCarb);
+    MacrosChartUtils.updateChartViews(carbViewHolder, Constants.MACRO_GRAPH_TYPE_CARBS, activity.currentPendingNutritionalData.getCurrentCarb(),
+        goalCarb);
 
-    MacrosChartUtils.updateChartViews(fatViewHolder, Constants.MACRO_GRAPH_TYPE_FATS, currentFat, goalFat);
+    MacrosChartUtils.updateChartViews(fatViewHolder, Constants.MACRO_GRAPH_TYPE_FATS, activity.currentPendingNutritionalData.getCurrentFat(),
+        goalFat);
   }
 
   private void showSnackbar() {
@@ -193,11 +170,11 @@ public class MacrosFragment extends Fragment implements CustomScrollView.OnBotto
       @Override public void onClick(View v) {
         ExcessMacros excessMacros = new ExcessMacros();
 
-        excessMacros.maxCarbs = (int) carbRemaining;
-        excessMacros.maxFat = (int) fatRemaining;
-        excessMacros.maxProtein = (int) proteinRemaining;
+        excessMacros.maxCarbs = Math.round(goalCarb - currentCarb);
+        excessMacros.maxFat = Math.round(goalFat - currentFat);
+        excessMacros.maxProtein = Math.round(goalProtein - currentProtein);
 
-        excessMacros.maxCalories = (int) (carbRemaining * 4 + proteinRemaining * 4 + fatRemaining * 9);
+        excessMacros.maxCalories = excessMacros.maxCarbs * 4 + excessMacros.maxProtein * 4 + excessMacros.maxFat * 9;
 
         Intent i = new Intent(getActivity(), MacroSuggestionResults.class);
         i.putExtra("macros_remaining", excessMacros);

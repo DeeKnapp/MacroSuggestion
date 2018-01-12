@@ -14,8 +14,8 @@ import com.dustin.knapp.project.macrosuggestion.MacroSuggestionApplication;
 import com.dustin.knapp.project.macrosuggestion.R;
 import com.dustin.knapp.project.macrosuggestion.models.PendingWaterData;
 import com.dustin.knapp.project.macrosuggestion.ui.QuickAddWaterDialogFragment;
-import com.dustin.knapp.project.macrosuggestion.utils.RealmUtils;
-import com.dustin.knapp.project.macrosuggestion.utils.WaterChartUtils;
+import com.dustin.knapp.project.macrosuggestion.utils.storage.RealmUtils;
+import com.dustin.knapp.project.macrosuggestion.utils.charts.WaterChartUtils;
 import com.github.mikephil.charting.charts.PieChart;
 import javax.inject.Inject;
 import rx.Observable;
@@ -25,8 +25,7 @@ import rx.functions.Action1;
 /**
  * Created by dknapp on 4/24/17
  */
-public class WaterFragment extends Fragment
-    implements QuickAddWaterDialogFragment.QuickAddDialogListener {
+public class WaterFragment extends Fragment implements QuickAddWaterDialogFragment.QuickAddDialogListener {
 
   View rootView;
 
@@ -45,8 +44,7 @@ public class WaterFragment extends Fragment
   @Inject public Observable<PendingWaterData> pendingWaterObservable;
   @Inject public Observer<PendingWaterData> pendingWaterObserver;
 
-  @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState) {
+  @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     rootView = inflater.inflate(R.layout.water_fragment, container, false);
 
     ((MacroSuggestionApplication) getActivity().getApplication()).getAppComponent().inject(this);
@@ -81,8 +79,7 @@ public class WaterFragment extends Fragment
     fab.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
 
-        QuickAddWaterDialogFragment quickAddWaterDialogFragment =
-            QuickAddWaterDialogFragment.newInstance();
+        QuickAddWaterDialogFragment quickAddWaterDialogFragment = QuickAddWaterDialogFragment.newInstance();
 
         quickAddWaterDialogFragment.setListener(fragment);
 
@@ -97,16 +94,14 @@ public class WaterFragment extends Fragment
     super.onResume();
   }
 
-  private void updateChartView(WaterFragment.ViewHolder holder, float current, float goal,
-      Activity activity) {
+  private void updateChartView(WaterFragment.ViewHolder holder, float current, float goal, Activity activity) {
     currentWaterText.setText(current + " oz");
     remainingWaterText.setText((goal - current) + " oz");
     WaterChartUtils.updateChartViews(holder, current, goal, activity);
   }
 
   public void updateView() {
-    updateChartView(waterViewHolder, currentPendingWaterData.getCurrentWater(), goalWater,
-        getActivity());
+    updateChartView(waterViewHolder, currentPendingWaterData.getCurrentWater(), goalWater, getActivity());
   }
 
   @Override public void onQuickAddSubmit(Float water) {

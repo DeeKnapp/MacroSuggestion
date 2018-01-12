@@ -47,7 +47,7 @@ public class BaseNavDrawerActivity extends BaseActivity {
 
   public Toolbar toolbar;
   public TextView toolbarTitle;
-
+  protected ActionBarDrawerToggle mDrawerToggle;
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.base_nav_drawer_activity);
@@ -69,7 +69,7 @@ public class BaseNavDrawerActivity extends BaseActivity {
 
     toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
 
-    ActionBarDrawerToggle mDrawerToggle =
+    mDrawerToggle =
         new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer_open,
             R.string.drawer_close) {
 
@@ -90,8 +90,6 @@ public class BaseNavDrawerActivity extends BaseActivity {
             super.onDrawerOpened(drawerView);
           }
         };
-
-    getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(false);
 
     // Set the drawer toggle as the DrawerListener
     mDrawerLayout.addDrawerListener(mDrawerToggle);
@@ -180,6 +178,17 @@ public class BaseNavDrawerActivity extends BaseActivity {
         drawerMenuList.setDividerHeight(1);
         drawerMenuList.setBackgroundColor(getResources().getColor(R.color.logNavDrawerBackground));
         lastDivider.setBackgroundColor(getResources().getColor(R.color.logNavItemSelectedColor));
+        drawerMenuAdaper.notifyDataSetChanged();
+        break;
+      case 4:
+        Log.d("Color Update", "Updating color scheme for int:" + colorScheme);
+        toolbar.setBackground(getDrawable(R.drawable.profile_toolbar));
+        navigationView.setBackgroundColor(getResources().getColor(R.color.profileNavDrawerBackground));
+        drawerMenuAdaper.updateColorScheme(colorScheme);
+        drawerMenuList.setDivider(new ColorDrawable(0xffdacb54));
+        drawerMenuList.setDividerHeight(1);
+        drawerMenuList.setBackgroundColor(getResources().getColor(R.color.profileNavDrawerBackground));
+        lastDivider.setBackgroundColor(getResources().getColor(R.color.profileNavItemSelectedColor));
         drawerMenuAdaper.notifyDataSetChanged();
         break;
       default:

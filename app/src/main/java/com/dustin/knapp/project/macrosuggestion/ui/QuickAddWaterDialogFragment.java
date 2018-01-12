@@ -1,6 +1,7 @@
 package com.dustin.knapp.project.macrosuggestion.ui;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.Gravity;
@@ -11,6 +12,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import com.dustin.knapp.project.macrosuggestion.R;
 
 /**
@@ -23,6 +26,10 @@ public class QuickAddWaterDialogFragment extends DialogFragment {
   private Button btnSubmit;
 
   private QuickAddDialogListener listener;
+
+  ImageView addSuccessCheckImage;
+
+  TextView dialogTitle;
 
   public QuickAddWaterDialogFragment() {
     // Empty constructor is required for DialogFragment
@@ -51,6 +58,8 @@ public class QuickAddWaterDialogFragment extends DialogFragment {
 
     etWater = (EditText) view.findViewById(R.id.etWater);
     btnSubmit = (Button) view.findViewById(R.id.btnSubmit);
+    addSuccessCheckImage = (ImageView) view.findViewById(R.id.successIcon);
+    dialogTitle = (TextView) view.findViewById(R.id.dialogTitle);
 
     btnSubmit.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
@@ -59,7 +68,17 @@ public class QuickAddWaterDialogFragment extends DialogFragment {
         } else {
           Float water = Float.valueOf(etWater.getText().toString());
           listener.onQuickAddSubmit(water);
-          dismiss();
+
+          btnSubmit.setEnabled(false);
+          dialogTitle.setVisibility(View.GONE);
+          addSuccessCheckImage.setVisibility(View.VISIBLE);
+
+          final Handler handler = new Handler();
+          handler.postDelayed(new Runnable() {
+            @Override public void run() {
+              dismiss();
+            }
+          }, 2000);
         }
       }
     });

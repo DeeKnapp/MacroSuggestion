@@ -7,7 +7,8 @@ public class Constants {
 
   public static final String BASE_DATABASE_REFERENCE = "macro_suggestion";
   public static final String USER_DATABASE_REFERENCE = "users";
-
+  public static final String USER_RECORDS_DATABASE_REFERENCE = "backup_data";
+  public static final String SELECTED_DAY_EXTRA = "Selected Day";
 
   public static final int USER_GOAL_LOSE_WEIGHT = 0;
   public static final int USER_GOAL_GAIN_WEIGHT = 1;
@@ -23,9 +24,4 @@ public class Constants {
   public static final int MACRO_GRAPH_TYPE_FATS = 22;
 
   public static final int CAMERA_PERMISSION_CODE = 99;
-
-  public static final int MEAL_TYPE_BREAKFAST = 30;
-  public static final int MEAL_TYPE_LUNCH = 31;
-  public static final int MEAL_TYPE_DINNER = 32;
-  public static final int MEAL_TYPE_QUICK_ADD = 33;
 }

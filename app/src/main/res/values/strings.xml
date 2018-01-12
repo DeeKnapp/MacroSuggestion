@@ -1,5 +1,7 @@
 <resources>
-  <string name="app_name">MacroSuggestion</string>
+  <string name="app_name">Macro Suggestion</string>
   <string name="drawer_open">Open Drawer</string>
   <string name="drawer_close">Close Drawer</string>
+  <string name="no_items_text">No entries found.</string>
+  <string name="activity_image_trans">string animation</string>
 </resources>

@@ -11,6 +11,7 @@
       android:layout_height="wrap_content"
       android:layout_gravity="center"
       android:padding="15dp"
+      app:mcv_selectionColor="@color/dgm_light_grey"
       app:mcv_showOtherDates="all"
       />
 
@@ -23,11 +24,11 @@
       >
 
     <RadioButton
-        android:id="@+id/loseWeightButton"
+        android:id="@+id/caloriesButton"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@drawable/blue_rounded_rect_selector"
+        android:background="@drawable/calories_button_selector"
         android:button="@null"
         android:gravity="center_horizontal|center_vertical"
         android:text="Calories"
@@ -42,11 +43,11 @@
         />
 
     <RadioButton
-        android:id="@+id/maintainWeight"
+        android:id="@+id/macrosButton"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@drawable/blue_rounded_rect_selector"
+        android:background="@drawable/macros_button_selector"
         android:button="@null"
         android:gravity="center_horizontal|center_vertical"
         android:text="Macros"
@@ -61,11 +62,11 @@
         />
 
     <RadioButton
-        android:id="@+id/gainWeightButton"
+        android:id="@+id/waterButton"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@drawable/blue_rounded_rect_selector"
+        android:background="@drawable/water_button_selector"
         android:button="@null"
         android:gravity="center_horizontal|center_vertical"
         android:text="Water"

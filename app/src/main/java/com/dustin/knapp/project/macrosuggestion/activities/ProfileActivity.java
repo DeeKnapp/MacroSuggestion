@@ -1,7 +1,6 @@
 package com.dustin.knapp.project.macrosuggestion.activities;
 
 import android.os.Bundle;
-import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -11,7 +10,7 @@ import com.dustin.knapp.project.macrosuggestion.R;
 import com.dustin.knapp.project.macrosuggestion.models.UserObject;
 import com.dustin.knapp.project.macrosuggestion.navigation_drawer.DrawerMenuHelper;
 import com.dustin.knapp.project.macrosuggestion.navigation_drawer.DrawerMenuItem;
-import com.dustin.knapp.project.macrosuggestion.utils.RealmUtils;
+import com.dustin.knapp.project.macrosuggestion.utils.storage.RealmUtils;
 
 /**
  * Created by dknapp on 5/28/17
@@ -35,14 +34,12 @@ public class ProfileActivity extends BaseNavDrawerActivity {
     currentUserEmail = ButterKnife.findById(view, R.id.tvUserEmail);
 
     toolbarTitle.setText(DrawerMenuItem.getTitle(ProfileActivity.class));
-    toolbar.setBackgroundColor(
-        ResourcesCompat.getColor(getResources(), R.color.dgm_dark_green, null));
+    toolbar.setBackground(getDrawable(R.drawable.profile_toolbar));
 
     if (sharedPreferencesUtil.getEnrolledUniqueUserId().equals("none")) {
       //todo oh shit
     } else {
-      UserObject currentUser =
-          RealmUtils.getCurrentUserObject(sharedPreferencesUtil.getEnrolledUniqueUserId());
+      UserObject currentUser = RealmUtils.getCurrentUserObject(sharedPreferencesUtil.getEnrolledUniqueUserId());
 
       if (currentUser.getName() != null) {
         currentUserName.setText(currentUser.getName());
@@ -56,5 +53,6 @@ public class ProfileActivity extends BaseNavDrawerActivity {
     int position = DrawerMenuHelper.getNavDrawerIndex(ProfileActivity.class);
     drawerMenuAdaper.updateWithSelectedPosition(position);
     drawerMenuList.smoothScrollToPosition(position);
+    updateColorScheme(4);
   }
 }

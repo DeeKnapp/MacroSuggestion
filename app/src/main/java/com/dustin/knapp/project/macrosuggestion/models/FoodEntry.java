@@ -1,89 +1,91 @@
 package com.dustin.knapp.project.macrosuggestion.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import java.io.Serializable;
 
 /**
  * Created by dknapp on 5/8/17
  */
-public class FoodEntry extends RealmObject {
+@JsonIgnoreProperties(ignoreUnknown = true) public class FoodEntry extends RealmObject {
 
-    private String currentDate;
-    private String timeStamp;
-    private float calories;
-    private float fats;
-    private float carbs;
-    private float protein;
-    private String foodName;
-    private int mealEntryType;
+  private String currentDate;
+  private String timeStamp;
+  private float calories;
+  private float fats;
+  private float carbs;
+  private float protein;
+  private String foodName;
+  private String uid;
 
-    public int getMealEntryType() {
-        return mealEntryType;
-    }
+  public String getUid() {
+    return uid;
+  }
 
-    public void setMealEntryType(int mealEntryType) {
-        this.mealEntryType = mealEntryType;
-    }
+  public void setUid(String uid) {
+    this.uid = uid;
+  }
 
-    public String getTimeStamp() {
-        return timeStamp;
-    }
+  public String getTimeStamp() {
+    return timeStamp;
+  }
 
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
-    }
+  public void setTimeStamp(String timeStamp) {
+    this.timeStamp = timeStamp;
+  }
 
-    public String getFoodName() {
+  public String getFoodName() {
 
-        return foodName;
-    }
+    return foodName;
+  }
 
-    public void setFoodName(String foodName) {
-        this.foodName = foodName;
-    }
+  public void setFoodName(String foodName) {
+    this.foodName = foodName;
+  }
 
-    public float getProtein() {
+  public float getProtein() {
 
-        return protein;
-    }
+    return protein;
+  }
 
-    public void setProtein(float protein) {
-        this.protein = protein;
-    }
+  public void setProtein(float protein) {
+    this.protein = protein;
+  }
 
-    public float getCarbs() {
+  public float getCarbs() {
 
-        return carbs;
-    }
+    return carbs;
+  }
 
-    public void setCarbs(float carbs) {
-        this.carbs = carbs;
-    }
+  public void setCarbs(float carbs) {
+    this.carbs = carbs;
+  }
 
-    public float getFats() {
+  public float getFats() {
 
-        return fats;
-    }
+    return fats;
+  }
 
-    public void setFats(float fats) {
-        this.fats = fats;
-    }
+  public void setFats(float fats) {
+    this.fats = fats;
+  }
 
-    public float getCalories() {
+  public float getCalories() {
 
-        return calories;
-    }
+    return calories;
+  }
 
-    public void setCalories(float calories) {
-        this.calories = calories;
-    }
+  public void setCalories(float calories) {
+    this.calories = calories;
+  }
 
-    public String getCurrentDate() {
+  public String getCurrentDate() {
 
-        return currentDate;
-    }
+    return currentDate;
+  }
 
-    public void setCurrentDate(String currentDate) {
-        this.currentDate = currentDate;
-    }
+  public void setCurrentDate(String currentDate) {
+    this.currentDate = currentDate;
+  }
 }

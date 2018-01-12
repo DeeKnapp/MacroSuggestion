@@ -8,7 +8,7 @@ import com.dustin.knapp.project.macrosuggestion.models.PendingNutritionData;
 import com.dustin.knapp.project.macrosuggestion.models.PendingWaterData;
 import com.dustin.knapp.project.macrosuggestion.models.UserObject;
 import com.dustin.knapp.project.macrosuggestion.rx.NeverFinishObserver;
-import com.dustin.knapp.project.macrosuggestion.utils.SharedPreferencesUtil;
+import com.dustin.knapp.project.macrosuggestion.utils.storage.SharedPreferencesUtil;
 import dagger.Module;
 import dagger.Provides;
 import javax.inject.Named;

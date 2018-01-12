@@ -7,16 +7,34 @@
     android:orientation="vertical"
     >
 
-  <TextView
+  <FrameLayout
       android:layout_width="match_parent"
-      android:layout_height="50dp"
-      android:background="@color/dgm_blue"
-      android:gravity="center"
-      android:text="Add Food"
-      android:textColor="@color/darker_white"
-      android:textSize="20sp"
-      android:textStyle="bold"
-      />
+      android:layout_height="wrap_content"
+      >
+
+    <TextView
+        android:id="@+id/dialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/dgm_blue"
+        android:gravity="center"
+        android:text="Add Food"
+        android:textColor="@color/darker_white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+
+    <ImageView
+        android:id="@+id/successIcon"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/dgm_blue"
+        android:contentDescription="Add Entry Success"
+        android:src="@drawable/ic_done_white"
+        android:visibility="gone"
+        />
+
+  </FrameLayout>
 
   <android.support.design.widget.TextInputLayout
       android:layout_width="match_parent"

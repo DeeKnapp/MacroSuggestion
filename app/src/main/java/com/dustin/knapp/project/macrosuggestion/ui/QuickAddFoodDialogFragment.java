@@ -1,6 +1,7 @@
 package com.dustin.knapp.project.macrosuggestion.ui;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.Gravity;
@@ -11,6 +12,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import com.dustin.knapp.project.macrosuggestion.R;
 import com.dustin.knapp.project.macrosuggestion.models.BaseNutrition;
 
@@ -19,9 +22,15 @@ import com.dustin.knapp.project.macrosuggestion.models.BaseNutrition;
  */
 public class QuickAddFoodDialogFragment extends DialogFragment {
 
-  private EditText etCalories, etProtein, etFats, etCarbs;
+  private EditText etName, etCalories, etProtein, etFats, etCarbs;
 
-  private Button btnSubmit;
+  Button btnSubmit;
+
+  ImageView addSuccessCheckImage;
+
+  TextView dialogTitle;
+
+  private int layout = -1;
 
   private QuickAddDialogListener listener;
 
@@ -35,9 +44,16 @@ public class QuickAddFoodDialogFragment extends DialogFragment {
     return new QuickAddFoodDialogFragment();
   }
 
-  @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState) {
-    return inflater.inflate(R.layout.quick_add_food_dialog, container);
+  public void setLayout(int layout) {
+    this.layout = layout;
+  }
+
+  @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    if (layout != -1) {
+      return inflater.inflate(layout, container);
+    } else {
+      return inflater.inflate(R.layout.calories_add_food_dialog, container);
+    }
   }
 
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -50,15 +66,20 @@ public class QuickAddFoodDialogFragment extends DialogFragment {
     wlp.flags &= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
     window.setAttributes(wlp);
 
+    etName = (EditText) view.findViewById(R.id.etFoodName);
     etCalories = (EditText) view.findViewById(R.id.etCalories);
     etProtein = (EditText) view.findViewById(R.id.etProtein);
     etFats = (EditText) view.findViewById(R.id.etFats);
     etCarbs = (EditText) view.findViewById(R.id.etCarbs);
     btnSubmit = (Button) view.findViewById(R.id.btnSubmit);
+    addSuccessCheckImage = (ImageView) view.findViewById(R.id.successIcon);
+    dialogTitle = (TextView) view.findViewById(R.id.dialogTitle);
 
     btnSubmit.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
-        if (etCalories.getText().toString().equals("")) {
+        if (etName.getText().toString().equals("")) {
+          etName.requestFocus();
+        } else if (etCalories.getText().toString().equals("")) {
           etCalories.requestFocus();
         } else if (etProtein.getText().toString().equals("")) {
           etProtein.requestFocus();
@@ -67,14 +88,26 @@ public class QuickAddFoodDialogFragment extends DialogFragment {
         } else if (etFats.getText().toString().equals("")) {
           etFats.requestFocus();
         } else {
+          String name = etName.getText().toString();
           Float calories = Float.valueOf(etCalories.getText().toString());
           Float protein = Float.valueOf(etProtein.getText().toString());
           Float carbs = Float.valueOf(etCarbs.getText().toString());
           Float fats = Float.valueOf(etFats.getText().toString());
 
-          BaseNutrition baseNutrition = new BaseNutrition(calories, protein, carbs, fats);
+          BaseNutrition baseNutrition = new BaseNutrition(name, calories, protein, carbs, fats);
           listener.onQuickAddSubmit(baseNutrition);
-          dismiss();
+
+          btnSubmit.setEnabled(false);
+          dialogTitle.setVisibility(View.GONE);
+          addSuccessCheckImage.setVisibility(View.VISIBLE);
+
+          //todo allow lost state dialog transaction
+          final Handler handler = new Handler();
+          handler.postDelayed(new Runnable() {
+            @Override public void run() {
+              dismiss();
+            }
+          }, 2000);
         }
       }
     });
@@ -83,7 +116,7 @@ public class QuickAddFoodDialogFragment extends DialogFragment {
     String title = "Add Food";
     getDialog().setTitle(title);
     // Show soft keyboard automatically and request focus to field
-    etCalories.requestFocus();
+    etName.requestFocus();
     getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
   }
 

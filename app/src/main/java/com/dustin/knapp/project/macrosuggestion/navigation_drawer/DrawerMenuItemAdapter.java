@@ -37,9 +37,7 @@ public class DrawerMenuItemAdapter extends BaseAdapter {
     this.objects = Arrays.copyOf(objects, objects.length);
     this.context = context;
 
-    selectedPositionColor =
-        ResourcesCompat.getColor(context.getResources(), R.color.caloriesNavItemSelectedColor,
-            null);
+    selectedPositionColor = ResourcesCompat.getColor(context.getResources(), R.color.caloriesNavItemSelectedColor, null);
   }
 
   @Override public int getCount() {
@@ -77,17 +75,15 @@ public class DrawerMenuItemAdapter extends BaseAdapter {
     } else {
       //todo this if else for different background drawables
       if (selectedBackgroundColor == 0) {
-        convertView.setBackground(ResourcesCompat.getDrawable(context.getResources(),
-            R.drawable.background_states_nav_calories_not_selected, null));
+        convertView.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.drawable.background_states_nav_calories_not_selected, null));
       } else if (selectedBackgroundColor == 1) {
-        convertView.setBackground(ResourcesCompat.getDrawable(context.getResources(),
-            R.drawable.background_states_nav_macros_not_selected, null));
+        convertView.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.drawable.background_states_nav_macros_not_selected, null));
       } else if (selectedBackgroundColor == 2) {
-        convertView.setBackground(ResourcesCompat.getDrawable(context.getResources(),
-            R.drawable.background_states_nav_water_not_selected, null));
+        convertView.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.drawable.background_states_nav_water_not_selected, null));
       } else if (selectedBackgroundColor == 3) {
-        convertView.setBackground(ResourcesCompat.getDrawable(context.getResources(),
-            R.drawable.background_states_nav_log_not_selected, null));
+        convertView.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.drawable.background_states_nav_log_not_selected, null));
+      } else if (selectedBackgroundColor == 4) {
+        convertView.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.drawable.background_states_nav_profile_not_selected, null));
       }
       textView.setTextColor(getColorStateList());
     }
@@ -98,29 +94,24 @@ public class DrawerMenuItemAdapter extends BaseAdapter {
   public void updateColorScheme(int colorScheme) {
     switch (colorScheme) {
       case 0:
-        selectedPositionColor =
-            (ResourcesCompat.getColor(context.getResources(), R.color.caloriesNavItemSelectedColor,
-                null));
+        selectedPositionColor = (ResourcesCompat.getColor(context.getResources(), R.color.caloriesNavItemSelectedColor, null));
         selectedBackgroundColor = 0;
         break;
       case 1:
-        selectedPositionColor =
-            (ResourcesCompat.getColor(context.getResources(), R.color.macrosNavItemSelectedColor,
-                null));
+        selectedPositionColor = (ResourcesCompat.getColor(context.getResources(), R.color.macrosNavItemSelectedColor, null));
         selectedBackgroundColor = 1;
         break;
       case 2:
-        selectedPositionColor =
-            (ResourcesCompat.getColor(context.getResources(), R.color.waterNavItemSelectedColor,
-                null));
+        selectedPositionColor = (ResourcesCompat.getColor(context.getResources(), R.color.waterNavItemSelectedColor, null));
         selectedBackgroundColor = 2;
         break;
       case 3:
-        selectedPositionColor =
-            (ResourcesCompat.getColor(context.getResources(), R.color.logNavItemSelectedColor,
-                null));
+        selectedPositionColor = (ResourcesCompat.getColor(context.getResources(), R.color.logNavItemSelectedColor, null));
         selectedBackgroundColor = 3;
         break;
+      case 4:
+        selectedPositionColor = (ResourcesCompat.getColor(context.getResources(), R.color.profileNavItemSelectedColor, null));
+        selectedBackgroundColor = 4;
       default:
         break;
     }
@@ -147,10 +138,8 @@ public class DrawerMenuItemAdapter extends BaseAdapter {
     };
 
     int[] colors = new int[] {
-        ResourcesCompat.getColor(context.getResources(), R.color.white, null),
-        ResourcesCompat.getColor(context.getResources(), R.color.white, null),
-        ResourcesCompat.getColor(context.getResources(), R.color.white, null),
-        ResourcesCompat.getColor(context.getResources(), R.color.white, null)
+        ResourcesCompat.getColor(context.getResources(), R.color.white, null), ResourcesCompat.getColor(context.getResources(), R.color.white, null),
+        ResourcesCompat.getColor(context.getResources(), R.color.white, null), ResourcesCompat.getColor(context.getResources(), R.color.white, null)
     };
 
     return new ColorStateList(states, colors);

@@ -7,21 +7,12 @@ import io.realm.annotations.PrimaryKey;
  * Created by dknapp on 4/26/17
  */
 public class NutritionDataGoal extends RealmObject {
-  @PrimaryKey private String email;
   private float goalCalorie;
   private float goalFat;
   private float goalProtein;
   private float goalCarb;
 
   public NutritionDataGoal() {
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
   }
 
   public float getGoalCalorie() {

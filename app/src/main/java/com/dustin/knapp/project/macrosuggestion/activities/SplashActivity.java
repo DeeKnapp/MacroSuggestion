@@ -26,6 +26,8 @@ public class SplashActivity extends BaseActivity {
 
   @BindView(R.id.loader_good_foods) ImageView goodFoodsImage;
 
+  private static int SPLASH_DELAY = 0;
+
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.splash_screen);
@@ -62,7 +64,7 @@ public class SplashActivity extends BaseActivity {
           }
         });
       }
-    }, 10000);
+    }, SPLASH_DELAY);
 
     //todo load data here
     //if data is not saved in cloud sync at this time
