@@ -1,14 +1,11 @@
 package com.dustin.knapp.project.macrosuggestion.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-import java.io.Serializable;
 
 /**
  * Created by dknapp on 5/8/17
  */
-@JsonIgnoreProperties(ignoreUnknown = true) public class FoodEntry extends RealmObject {
+@JsonIgnoreProperties(ignoreUnknown = true) public class FoodEntry {
 
   private String currentDate;
   private String timeStamp;

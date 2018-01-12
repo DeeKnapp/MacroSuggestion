@@ -9,20 +9,15 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.dustin.knapp.project.macrosuggestion.Constants;
 import com.dustin.knapp.project.macrosuggestion.MacroSuggestionApplication;
 import com.dustin.knapp.project.macrosuggestion.R;
 import com.dustin.knapp.project.macrosuggestion.models.FoodEntry;
 import com.dustin.knapp.project.macrosuggestion.models.PendingNutritionData;
-import com.dustin.knapp.project.macrosuggestion.models.UserObject;
 import com.dustin.knapp.project.macrosuggestion.navigation_drawer.DrawerMenuHelper;
 import com.dustin.knapp.project.macrosuggestion.navigation_drawer.DrawerMenuItem;
 import com.dustin.knapp.project.macrosuggestion.utils.DateUtils;
-import com.dustin.knapp.project.macrosuggestion.utils.storage.FirebaseUtils;
-import com.dustin.knapp.project.macrosuggestion.utils.storage.RealmUtils;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -82,12 +77,14 @@ public class DailyLogActivity extends BaseNavDrawerActivity {
   private void setUpDailyMeals(String day) {
     foodEntryContainer.removeAllViews();
 
-    List<FoodEntry> foodEntryList;
-    if (day == null) {
-      foodEntryList = RealmUtils.getCurrentDayFoodEntries();
-    } else {
-      foodEntryList = RealmUtils.getPastDayFoodEntries(day);
-    }
+    List<FoodEntry> foodEntryList = new ArrayList<>();
+
+    //todo this will use FirebaseUtils instead
+    //if (day == null) {
+    //  foodEntryList = RealmUtils.getCurrentDayFoodEntries();
+    //} else {
+    //  foodEntryList = RealmUtils.getPastDayFoodEntries(day);
+    //}
 
     if (foodEntryList.size() > 0) {
       for (FoodEntry entry : foodEntryList) {

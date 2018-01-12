@@ -23,7 +23,6 @@ import com.dustin.knapp.project.macrosuggestion.models.PendingNutritionData;
 import com.dustin.knapp.project.macrosuggestion.models.PendingWaterData;
 import com.dustin.knapp.project.macrosuggestion.models.UserObject;
 import com.dustin.knapp.project.macrosuggestion.utils.DateUtils;
-import com.dustin.knapp.project.macrosuggestion.utils.storage.RealmUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -424,10 +423,6 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
 
             pendingWaterObserver.onNext(pendingWaterData);
 
-            RealmUtils.updateCurrentDayPendingNutritionData(pendingNutritionData);
-            RealmUtils.updateCurrentDayPendingWaterData(pendingWaterData);
-            RealmUtils.saveUserObject(currentUser);
-
             sharedPreferencesUtil.storeUserIsEnrolled(true);
             sharedPreferencesUtil.
                 storeEnrolledEmail(currentUser.getEmail());
@@ -498,10 +493,6 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
 
             pendingWaterObserver.onNext(pendingWaterData);
 
-            RealmUtils.updateCurrentDayPendingNutritionData(pendingNutritionData);
-            RealmUtils.updateCurrentDayPendingWaterData(pendingWaterData);
-            RealmUtils.saveUserObject(currentUser);
-
             sharedPreferencesUtil.storeUserIsEnrolled(true);
             sharedPreferencesUtil.storeEnrolledEmail(currentUser.getEmail());
             sharedPreferencesUtil.storeEnrolledUniqueUserId(currentUser.getUniqueUserId());
@@ -532,9 +523,9 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
     mQuery.addValueEventListener(new ValueEventListener() {
       @Override public void onDataChange(DataSnapshot recordsDataSnapshot) {
         ObjectMapper mapper = new ObjectMapper();
-        for (DataSnapshot recordDataSnapShot : recordsDataSnapshot.getChildren()) {
-          RealmUtils.saveFoodEntry(mapper.convertValue(recordDataSnapShot.getValue(), FoodEntry.class));
-        }
+        //for (DataSnapshot recordDataSnapShot : recordsDataSnapshot.getChildren()) {
+        //  RealmUtils.saveFoodEntry(mapper.convertValue(recordDataSnapShot.getValue(), FoodEntry.class));
+        //}
 
         Intent intent = new Intent(getApplicationContext(), LandingPageActivity.class);
         startActivity(intent);

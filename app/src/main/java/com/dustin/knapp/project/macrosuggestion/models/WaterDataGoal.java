@@ -1,12 +1,9 @@
 package com.dustin.knapp.project.macrosuggestion.models;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-
 /**
  * Created by dknapp on 5/1/17
  */
-public class WaterDataGoal extends RealmObject {
+public class WaterDataGoal {
 
   private float currentWater;
 

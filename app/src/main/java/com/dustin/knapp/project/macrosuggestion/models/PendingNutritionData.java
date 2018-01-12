@@ -1,13 +1,10 @@
 package com.dustin.knapp.project.macrosuggestion.models;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-
 /**
  * Created by dknapp on 4/26/17
  */
-public class PendingNutritionData extends RealmObject {
-  @PrimaryKey private String currentDate;
+public class PendingNutritionData {
+  private String currentDate;
   private float currentCalories;
   private float currentFat;
   private float currentProtein;

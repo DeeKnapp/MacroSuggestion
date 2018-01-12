@@ -1,14 +1,11 @@
 package com.dustin.knapp.project.macrosuggestion.models;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-
 /**
  * Created by dknapp on 5/1/17
  */
-public class PendingWaterData extends RealmObject {
+public class PendingWaterData {
 
-  @PrimaryKey private String currentDate;
+  private String currentDate;
 
   private float currentWater;
 

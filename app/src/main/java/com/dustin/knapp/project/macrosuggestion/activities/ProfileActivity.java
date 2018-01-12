@@ -10,7 +10,6 @@ import com.dustin.knapp.project.macrosuggestion.R;
 import com.dustin.knapp.project.macrosuggestion.models.UserObject;
 import com.dustin.knapp.project.macrosuggestion.navigation_drawer.DrawerMenuHelper;
 import com.dustin.knapp.project.macrosuggestion.navigation_drawer.DrawerMenuItem;
-import com.dustin.knapp.project.macrosuggestion.utils.storage.RealmUtils;
 
 /**
  * Created by dknapp on 5/28/17
@@ -39,12 +38,13 @@ public class ProfileActivity extends BaseNavDrawerActivity {
     if (sharedPreferencesUtil.getEnrolledUniqueUserId().equals("none")) {
       //todo oh shit
     } else {
-      UserObject currentUser = RealmUtils.getCurrentUserObject(sharedPreferencesUtil.getEnrolledUniqueUserId());
-
-      if (currentUser.getName() != null) {
-        currentUserName.setText(currentUser.getName());
-        currentUserEmail.setText(currentUser.getEmail());
-      }
+      //todo use user object provider here
+      //UserObject currentUser = RealmUtils.getCurrentUserObject(sharedPreferencesUtil.getEnrolledUniqueUserId());
+      //
+      //if (currentUser.getName() != null) {
+      //  currentUserName.setText(currentUser.getName());
+      //  currentUserEmail.setText(currentUser.getEmail());
+      //}
     }
   }
 

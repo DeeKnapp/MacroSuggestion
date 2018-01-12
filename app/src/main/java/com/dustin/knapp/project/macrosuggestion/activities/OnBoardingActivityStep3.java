@@ -16,7 +16,6 @@ import com.dustin.knapp.project.macrosuggestion.R;
 import com.dustin.knapp.project.macrosuggestion.models.NutritionDataGoal;
 import com.dustin.knapp.project.macrosuggestion.models.UserObject;
 import com.dustin.knapp.project.macrosuggestion.models.WaterDataGoal;
-import com.dustin.knapp.project.macrosuggestion.utils.storage.RealmUtils;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -124,9 +123,6 @@ public class OnBoardingActivityStep3 extends BaseActivity {
         firebaseDatabase.getReference().child(Constants.BASE_DATABASE_REFERENCE).child(Constants.USER_DATABASE_REFERENCE);
 
     databaseReference.child(currentUserObject.getUniqueUserId()).setValue(currentUserObject);
-
-    RealmUtils.saveUserObject(currentUserObject);
-
 
     Intent intent = new Intent(this, LandingPageActivity.class);
     startActivity(intent);

@@ -28,7 +28,6 @@ import com.dustin.knapp.project.macrosuggestion.navigation_drawer.DrawerMenuItem
 import com.dustin.knapp.project.macrosuggestion.presenters.colories_fragment.InspirationQuotePresenter;
 import com.dustin.knapp.project.macrosuggestion.presenters.colories_fragment.InspirtationQuoteReactiveView;
 import com.dustin.knapp.project.macrosuggestion.utils.DateUtils;
-import com.dustin.knapp.project.macrosuggestion.utils.storage.RealmUtils;
 import com.dustin.knapp.project.macrosuggestion.utils.storage.SharedPreferencesUtil;
 import javax.inject.Inject;
 import rx.Observable;
@@ -74,48 +73,35 @@ public class LandingPageActivity extends BaseNavDrawerActivity implements ViewPa
     inspirationQuotePresenter.setView(this);
 
     PendingNutritionData pendingNutritionData = new PendingNutritionData();
-    PendingNutritionData realmPendingData = RealmUtils.getCurrentDayNutritionObject();
 
-    UserObject currentUserObject = RealmUtils.getCurrentUserObject(sharedPreferencesUtil.getEnrolledUniqueUserId());
-    if (realmPendingData == null) {
-      //todo will goal ever be null here?
-      if (currentUserObject.getNutritionDataGoal() == null) {
-        NutritionDataGoal newGoal = new NutritionDataGoal();
-        newGoal.setGoalCalorie(2000);
-        newGoal.setGoalProtein(200);
-        newGoal.setGoalCarb(200);
-        newGoal.setGoalFat(200);
-        currentUserObject.setNutritionDataGoal(new NutritionDataGoal());
-      }
-      pendingNutritionData = new PendingNutritionData();
-      pendingNutritionData.setGoalCalorie(currentUserObject.getNutritionDataGoal().getGoalCalorie());
-      pendingNutritionData.setGoalProtein(currentUserObject.getNutritionDataGoal().getGoalProtein());
-      pendingNutritionData.setGoalFat(currentUserObject.getNutritionDataGoal().getGoalFat());
-      pendingNutritionData.setGoalCarb(currentUserObject.getNutritionDataGoal().getGoalCarb());
-      pendingNutritionData.setCurrentCalories(0);
-      pendingNutritionData.setCurrentProtein(0);
-      pendingNutritionData.setCurrentFat(0);
-      pendingNutritionData.setCurrentCarb(0);
-      pendingNutritionData.setCurrentDate(DateUtils.getCurrentDateString());
-
-      sharedPreferencesUtil.storeShouldShowCalorieAnimation(true);
-      sharedPreferencesUtil.storeShouldShowWaterAnimation(true);
-    } else {
-      pendingNutritionData.setCurrentDate(DateUtils.getCurrentDateString());
-      pendingNutritionData.setGoalCalorie(realmPendingData.getGoalCalorie());
-      pendingNutritionData.setGoalProtein(realmPendingData.getGoalProtein());
-      pendingNutritionData.setGoalFat(realmPendingData.getGoalFat());
-      pendingNutritionData.setGoalCarb(realmPendingData.getGoalCarb());
-      pendingNutritionData.setCurrentCalories(realmPendingData.getCurrentCalories());
-      pendingNutritionData.setCurrentProtein(realmPendingData.getCurrentProtein());
-      pendingNutritionData.setCurrentFat(realmPendingData.getCurrentFat());
-      pendingNutritionData.setCurrentCarb(realmPendingData.getCurrentCarb());
+    //todo provide user object here
+    UserObject currentUserObject = new UserObject();
+    if (currentUserObject.getNutritionDataGoal() == null) {
+      NutritionDataGoal newGoal = new NutritionDataGoal();
+      newGoal.setGoalCalorie(2000);
+      newGoal.setGoalProtein(200);
+      newGoal.setGoalCarb(200);
+      newGoal.setGoalFat(200);
+      currentUserObject.setNutritionDataGoal(new NutritionDataGoal());
     }
+    pendingNutritionData = new PendingNutritionData();
+    pendingNutritionData.setGoalCalorie(currentUserObject.getNutritionDataGoal().getGoalCalorie());
+    pendingNutritionData.setGoalProtein(currentUserObject.getNutritionDataGoal().getGoalProtein());
+    pendingNutritionData.setGoalFat(currentUserObject.getNutritionDataGoal().getGoalFat());
+    pendingNutritionData.setGoalCarb(currentUserObject.getNutritionDataGoal().getGoalCarb());
+    pendingNutritionData.setCurrentCalories(0);
+    pendingNutritionData.setCurrentProtein(0);
+    pendingNutritionData.setCurrentFat(0);
+    pendingNutritionData.setCurrentCarb(0);
+    pendingNutritionData.setCurrentDate(DateUtils.getCurrentDateString());
+
+    sharedPreferencesUtil.storeShouldShowCalorieAnimation(true);
+    sharedPreferencesUtil.storeShouldShowWaterAnimation(true);
 
     pendingNutritionalObserver.onNext(pendingNutritionData);
 
-    PendingWaterData pendingWaterData = RealmUtils.getCurrentDayPendingWaterData();
-
+    //PendingWaterData pendingWaterData = RealmUtils.getCurrentDayPendingWaterData();
+    PendingWaterData pendingWaterData = new PendingWaterData();
     if (pendingWaterData == null) {
       pendingWaterData = new PendingWaterData();
       //todo will goal ever be null here?
@@ -124,7 +110,7 @@ public class LandingPageActivity extends BaseNavDrawerActivity implements ViewPa
       pendingWaterData.setCurrentDate(DateUtils.getCurrentDateString());
     }
 
-    RealmUtils.updateCurrentDayPendingWaterData(pendingWaterData);
+    //todo save water updates in firebase
     pendingWaterObserver.onNext(pendingWaterData);
 
     pendingNutritionalObservable.subscribe(new Action1<PendingNutritionData>() {
@@ -172,8 +158,6 @@ public class LandingPageActivity extends BaseNavDrawerActivity implements ViewPa
     currentPendingNutritionalData.setCurrentCarb(currentPendingNutritionalData.getCurrentCarb() + baseNutrition.carbs);
 
     pendingNutritionalObserver.onNext(currentPendingNutritionalData);
-
-    RealmUtils.updateCurrentDayPendingNutritionData(currentPendingNutritionalData);
   }
 
   @Override public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

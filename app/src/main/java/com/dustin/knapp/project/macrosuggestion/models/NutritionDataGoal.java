@@ -1,12 +1,9 @@
 package com.dustin.knapp.project.macrosuggestion.models;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-
 /**
  * Created by dknapp on 4/26/17
  */
-public class NutritionDataGoal extends RealmObject {
+public class NutritionDataGoal {
   private float goalCalorie;
   private float goalFat;
   private float goalProtein;

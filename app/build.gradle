@@ -23,7 +23,7 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
     debug {
-      minifyEnabled true
+      minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
   }
@@ -78,9 +78,6 @@ dependencies {
 
   //Android Charts
   compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
-
-  // Realm
-  compile 'io.realm:realm-android:0.82.1'
 
   // Google
   compile 'com.google.android.gms:play-services-auth:10.2.4'

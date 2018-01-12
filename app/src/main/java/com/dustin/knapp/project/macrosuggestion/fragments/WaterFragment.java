@@ -14,7 +14,6 @@ import com.dustin.knapp.project.macrosuggestion.MacroSuggestionApplication;
 import com.dustin.knapp.project.macrosuggestion.R;
 import com.dustin.knapp.project.macrosuggestion.models.PendingWaterData;
 import com.dustin.knapp.project.macrosuggestion.ui.QuickAddWaterDialogFragment;
-import com.dustin.knapp.project.macrosuggestion.utils.storage.RealmUtils;
 import com.dustin.knapp.project.macrosuggestion.utils.charts.WaterChartUtils;
 import com.github.mikephil.charting.charts.PieChart;
 import javax.inject.Inject;
@@ -107,7 +106,6 @@ public class WaterFragment extends Fragment implements QuickAddWaterDialogFragme
   @Override public void onQuickAddSubmit(Float water) {
     currentPendingWaterData.setCurrentWater(currentPendingWaterData.getCurrentWater() + water);
     pendingWaterObserver.onNext(currentPendingWaterData);
-    RealmUtils.updateCurrentDayPendingWaterData(currentPendingWaterData);
     updateView();
   }
 

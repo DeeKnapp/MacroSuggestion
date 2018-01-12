@@ -20,7 +20,6 @@ import com.dustin.knapp.project.macrosuggestion.ui.QuickAddFoodDialogFragment;
 import com.dustin.knapp.project.macrosuggestion.utils.charts.CaloriesChartUtils;
 import com.dustin.knapp.project.macrosuggestion.utils.DateUtils;
 import com.dustin.knapp.project.macrosuggestion.utils.storage.FirebaseUtils;
-import com.dustin.knapp.project.macrosuggestion.utils.storage.RealmUtils;
 import com.github.mikephil.charting.charts.PieChart;
 
 /**
@@ -117,8 +116,6 @@ public class CaloriesFragment extends Fragment implements QuickAddFoodDialogFrag
     currentFoodEntry.setTimeStamp(DateUtils.getCurrentTime());
 
     FirebaseUtils.saveFoodEntryToFirebase(currentFoodEntry, ((LandingPageActivity) getActivity()).sharedPreferencesUtil.getEnrolledUniqueUserId());
-
-    RealmUtils.saveFoodEntry(currentFoodEntry);
 
     activity.updateFragmentViews();
   }

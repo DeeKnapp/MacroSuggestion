@@ -1,12 +1,9 @@
 package com.dustin.knapp.project.macrosuggestion.models;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-
 /**
  * Created by dknapp on 5/11/17
  */
-public class UserObject extends RealmObject {
+public class UserObject {
 
   public UserObject() {
     //default constructor
@@ -20,7 +17,7 @@ public class UserObject extends RealmObject {
     this.uniqueUserId = uniqueUserId;
   }
 
-  @PrimaryKey private String uniqueUserId;
+  private String uniqueUserId;
 
   private String email;
   private NutritionDataGoal nutritionDataGoal;

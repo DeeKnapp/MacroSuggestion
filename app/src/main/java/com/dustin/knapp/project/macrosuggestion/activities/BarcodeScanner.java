@@ -19,7 +19,7 @@ import com.dustin.knapp.project.macrosuggestion.models.barcode_objects.UpcLookup
 import com.dustin.knapp.project.macrosuggestion.navigation_drawer.DrawerMenuHelper;
 import com.dustin.knapp.project.macrosuggestion.navigation_drawer.DrawerMenuItem;
 import com.dustin.knapp.project.macrosuggestion.utils.DateUtils;
-import com.dustin.knapp.project.macrosuggestion.utils.storage.RealmUtils;
+import com.dustin.knapp.project.macrosuggestion.utils.storage.FirebaseUtils;
 
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScanner;
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder;
@@ -118,8 +118,6 @@ public class BarcodeScanner extends BaseNavDrawerActivity
 
         pendingNutritionalObserver.onNext(currentPendingNutritionalData);
 
-        RealmUtils.updateCurrentDayPendingNutritionData(currentPendingNutritionalData);
-
         FoodEntry currentFoodEntry = new FoodEntry();
         currentFoodEntry.setCurrentDate(DateUtils.getCurrentDateString());
         currentFoodEntry.setCalories(calories);
@@ -128,7 +126,7 @@ public class BarcodeScanner extends BaseNavDrawerActivity
         currentFoodEntry.setCarbs(carbs);
         currentFoodEntry.setFoodName(etFoodName.getText().toString());
 
-        RealmUtils.saveFoodEntry(currentFoodEntry);
+       // FirebaseUtils.saveFoodEntryToFirebase(currentFoodEntry, userObject.getUUID());
 
         finish();
       }

@@ -27,7 +27,6 @@ import com.dustin.knapp.project.macrosuggestion.ui.QuickAddFoodDialogFragment;
 import com.dustin.knapp.project.macrosuggestion.utils.DateUtils;
 import com.dustin.knapp.project.macrosuggestion.utils.charts.MacrosChartUtils;
 import com.dustin.knapp.project.macrosuggestion.utils.storage.FirebaseUtils;
-import com.dustin.knapp.project.macrosuggestion.utils.storage.RealmUtils;
 import com.github.mikephil.charting.charts.PieChart;
 
 /**
@@ -142,7 +141,6 @@ public class MacrosFragment extends Fragment implements CustomScrollView.OnBotto
     currentFoodEntry.setFoodName(baseNutrition.name);
     currentFoodEntry.setTimeStamp(DateUtils.getCurrentTime());
 
-    RealmUtils.saveFoodEntry(currentFoodEntry);
     FirebaseUtils.saveFoodEntryToFirebase(currentFoodEntry, ((LandingPageActivity) getActivity()).sharedPreferencesUtil.getEnrolledUniqueUserId());
 
     activity.updateFragmentViews();
