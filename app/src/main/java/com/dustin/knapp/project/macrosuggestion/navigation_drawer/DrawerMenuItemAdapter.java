@@ -3,12 +3,14 @@ package com.dustin.knapp.project.macrosuggestion.navigation_drawer;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import androidx.core.content.res.ResourcesCompat;
+
 import com.dustin.knapp.project.macrosuggestion.R;
 import java.util.Arrays;
 

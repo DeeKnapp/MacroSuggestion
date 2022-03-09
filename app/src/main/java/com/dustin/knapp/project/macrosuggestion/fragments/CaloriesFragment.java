@@ -2,14 +2,14 @@ package com.dustin.knapp.project.macrosuggestion.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentManager;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.app.Fragment;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.dustin.knapp.project.macrosuggestion.MacroSuggestionApplication;
 import com.dustin.knapp.project.macrosuggestion.R;
@@ -17,10 +17,11 @@ import com.dustin.knapp.project.macrosuggestion.activities.LandingPageActivity;
 import com.dustin.knapp.project.macrosuggestion.models.BaseNutrition;
 import com.dustin.knapp.project.macrosuggestion.models.FoodEntry;
 import com.dustin.knapp.project.macrosuggestion.ui.QuickAddFoodDialogFragment;
-import com.dustin.knapp.project.macrosuggestion.utils.charts.CaloriesChartUtils;
 import com.dustin.knapp.project.macrosuggestion.utils.DateUtils;
+import com.dustin.knapp.project.macrosuggestion.utils.charts.CaloriesChartUtils;
 import com.dustin.knapp.project.macrosuggestion.utils.storage.FirebaseUtils;
 import com.github.mikephil.charting.charts.PieChart;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
  * Created by dknapp on 4/24/17

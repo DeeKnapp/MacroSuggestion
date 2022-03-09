@@ -2,12 +2,16 @@ package com.dustin.knapp.project.macrosuggestion.activities;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import butterknife.Unbinder;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.dustin.knapp.project.macrosuggestion.utils.storage.SharedPreferencesUtil;
+
 import javax.inject.Inject;
+
+import butterknife.Unbinder;
 import rx.subscriptions.CompositeSubscription;
 
 /**

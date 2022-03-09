@@ -3,8 +3,6 @@ package com.dustin.knapp.project.macrosuggestion.activities;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
@@ -12,6 +10,9 @@ import android.text.style.StyleSpan;
 import android.view.Display;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.dustin.knapp.project.macrosuggestion.R;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;

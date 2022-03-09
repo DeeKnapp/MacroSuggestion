@@ -1,8 +1,6 @@
 package com.dustin.knapp.project.macrosuggestion.ui;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +9,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RadioButton;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+
 import com.dustin.knapp.project.macrosuggestion.R;
 
 /**

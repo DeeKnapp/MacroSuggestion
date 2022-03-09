@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MacroSuggestion.iml" filepath="$PROJECT_DIR$/MacroSuggestion.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/materialbarcodescanner/materialbarcodescanner.iml" filepath="$PROJECT_DIR$/materialbarcodescanner/materialbarcodescanner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MacroSuggestion.iml" filepath="$PROJECT_DIR$/.idea/modules/MacroSuggestion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MacroSuggestion.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MacroSuggestion.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/materialbarcodescanner/MacroSuggestion.materialbarcodescanner.iml" filepath="$PROJECT_DIR$/.idea/modules/materialbarcodescanner/MacroSuggestion.materialbarcodescanner.iml" />
     </modules>
   </component>
 </project>

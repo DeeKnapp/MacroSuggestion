@@ -3,8 +3,9 @@ package com.edwardvanraak.materialbarcodescanner;
 import android.app.Activity;
 import android.graphics.Color;
 import android.hardware.Camera;
-import android.support.annotation.NonNull;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
 
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;

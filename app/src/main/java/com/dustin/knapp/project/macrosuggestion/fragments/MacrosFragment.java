@@ -1,33 +1,35 @@
 package com.dustin.knapp.project.macrosuggestion.fragments;
 
-import android.graphics.Color;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import butterknife.ButterKnife;
+
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.dustin.knapp.project.macrosuggestion.Constants;
 import com.dustin.knapp.project.macrosuggestion.MacroSuggestionApplication;
 import com.dustin.knapp.project.macrosuggestion.R;
 import com.dustin.knapp.project.macrosuggestion.activities.LandingPageActivity;
 import com.dustin.knapp.project.macrosuggestion.activities.MacroSuggestionResults;
-import com.dustin.knapp.project.macrosuggestion.ui.CustomScrollView;
 import com.dustin.knapp.project.macrosuggestion.models.BaseNutrition;
 import com.dustin.knapp.project.macrosuggestion.models.ExcessMacros;
 import com.dustin.knapp.project.macrosuggestion.models.FoodEntry;
+import com.dustin.knapp.project.macrosuggestion.ui.CustomScrollView;
 import com.dustin.knapp.project.macrosuggestion.ui.QuickAddFoodDialogFragment;
 import com.dustin.knapp.project.macrosuggestion.utils.DateUtils;
 import com.dustin.knapp.project.macrosuggestion.utils.charts.MacrosChartUtils;
 import com.dustin.knapp.project.macrosuggestion.utils.storage.FirebaseUtils;
 import com.github.mikephil.charting.charts.PieChart;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by dknapp on 4/25/17
@@ -69,7 +71,7 @@ public class MacrosFragment extends Fragment implements CustomScrollView.OnBotto
     return rootView;
   }
 
-  @RequiresApi(api = Build.VERSION_CODES.M) @Override public void onViewCreated(View view, Bundle savedInstanceState) {
+  @Override public void onViewCreated(View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
     proteinViewHolder = new MacrosFragment.ViewHolder();
@@ -180,7 +182,7 @@ public class MacrosFragment extends Fragment implements CustomScrollView.OnBotto
       }
     }).setActionTextColor(Color.GREEN);
     View snackbarView = snackbar.getView();
-    TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+    TextView textView = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
     textView.setMaxLines(10);
     snackbar.show();
   }

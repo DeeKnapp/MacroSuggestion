@@ -2,20 +2,23 @@ package com.dustin.knapp.project.macrosuggestion.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.dustin.knapp.project.macrosuggestion.MacroSuggestionApplication;
 import com.dustin.knapp.project.macrosuggestion.R;
 import com.dustin.knapp.project.macrosuggestion.models.PendingWaterData;
 import com.dustin.knapp.project.macrosuggestion.ui.QuickAddWaterDialogFragment;
 import com.dustin.knapp.project.macrosuggestion.utils.charts.WaterChartUtils;
 import com.github.mikephil.charting.charts.PieChart;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import javax.inject.Inject;
 import rx.Observable;
 import rx.Observer;

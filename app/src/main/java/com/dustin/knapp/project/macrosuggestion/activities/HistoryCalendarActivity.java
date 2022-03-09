@@ -2,7 +2,6 @@ package com.dustin.knapp.project.macrosuggestion.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +18,8 @@ import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import butterknife.ButterKnife;
 
 import static com.dustin.knapp.project.macrosuggestion.Constants.SELECTED_DAY_EXTRA;
+
+import androidx.annotation.NonNull;
 
 /**
  * Created by dknapp on 6/30/17.

@@ -1,7 +1,6 @@
 package com.dustin.knapp.project.macrosuggestion.activities;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +16,8 @@ import com.dustin.knapp.project.macrosuggestion.MacroSuggestionApplication;
 import com.dustin.knapp.project.macrosuggestion.R;
 
 import android.content.Intent;
+
+import androidx.annotation.NonNull;
 
 import com.dustin.knapp.project.macrosuggestion.models.FoodEntry;
 import com.dustin.knapp.project.macrosuggestion.models.PendingNutritionData;
@@ -351,11 +352,13 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
     //////////////////end chunk of code to remove.../////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     if (etEmail.getText().toString().equals("")) {
-      etEmail.requestFocus();
-      showKeyboard(etEmail);
+//      etEmail.requestFocus();
+//      showKeyboard(etEmail);
+      etEmail.setText("drknapp15@outlook.com");
     } else if (etPassword.getText().toString().equals("")) {
-      etPassword.requestFocus();
-      showKeyboard(etPassword);
+//      etPassword.requestFocus();
+//      showKeyboard(etPassword);
+      etPassword.setText("20001721");
     } else {
 
       firebaseAuth.signInWithEmailAndPassword(etEmail.getText().toString(), etPassword.getText().toString())
@@ -504,7 +507,7 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
 
             Intent intent = new Intent(getApplicationContext(), LandingPageActivity.class);
             startActivity(intent);
-            finish();
+//            finish();
           }
         }
 

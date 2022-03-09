@@ -1,11 +1,12 @@
 package com.dustin.knapp.project.macrosuggestion.navigation_drawer;
 
-import android.support.v4.util.ArrayMap;
-import com.dustin.knapp.project.macrosuggestion.activities.BarcodeScanner;
+import androidx.collection.ArrayMap;
+
 import com.dustin.knapp.project.macrosuggestion.activities.DailyLogActivity;
 import com.dustin.knapp.project.macrosuggestion.activities.LandingPageActivity;
 import com.dustin.knapp.project.macrosuggestion.activities.ProfileActivity;
 import com.dustin.knapp.project.macrosuggestion.activities.SignoutActivity;
+
 import java.util.EnumSet;
 import java.util.Map;
 

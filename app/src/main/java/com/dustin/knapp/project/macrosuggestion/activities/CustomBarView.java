@@ -3,11 +3,11 @@ package com.dustin.knapp.project.macrosuggestion.activities;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.support.annotation.Nullable;
-import android.support.v4.widget.TextViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 /**
  * Created by dknapp on 7/13/17.

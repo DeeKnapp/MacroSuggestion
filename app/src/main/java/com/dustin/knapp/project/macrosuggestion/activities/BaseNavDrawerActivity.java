@@ -6,11 +6,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -20,12 +15,20 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.dustin.knapp.project.macrosuggestion.R;
 import com.dustin.knapp.project.macrosuggestion.navigation_drawer.DrawerMenuHelper;
 import com.dustin.knapp.project.macrosuggestion.navigation_drawer.DrawerMenuItem;
 import com.dustin.knapp.project.macrosuggestion.navigation_drawer.DrawerMenuItemAdapter;
+import com.google.android.material.navigation.NavigationView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by dknapp on 4/26/17
@@ -37,12 +40,14 @@ public class BaseNavDrawerActivity extends BaseActivity {
   protected Activity activity;
   protected DrawerMenuItemAdapter drawerMenuAdaper;
 
-  @BindView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
+  @BindView(R.id.drawer_layout)
+  DrawerLayout mDrawerLayout;
   public @BindView(R.id.content) FrameLayout content;
   @BindView(R.id.status_bar_mask) View statusBarSpaceView;
 
   @BindView(R.id.list_view_inside_nav) ListView drawerMenuList;
-  @BindView(R.id.navigation_view) NavigationView navigationView;
+  @BindView(R.id.navigation_view)
+  NavigationView navigationView;
   @BindView(R.id.last_divider) View lastDivider;
 
   public Toolbar toolbar;
@@ -79,15 +84,21 @@ public class BaseNavDrawerActivity extends BaseActivity {
             super.onDrawerClosed(drawerView);
           }
 
-          /** Called when a drawer has settled in a completely open state. */
+          /**
+           * Called when a drawer has settled in a completely open state.
+           */
           public void onDrawerOpened(View drawerView) {
             //close keyboard if any
-            InputMethodManager inputMethodManager =
-                (InputMethodManager) BaseNavDrawerActivity.this.getSystemService(
-                    INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(
-                BaseNavDrawerActivity.this.getCurrentFocus().getWindowToken(), 0);
-            super.onDrawerOpened(drawerView);
+            try {
+              InputMethodManager inputMethodManager =
+                      (InputMethodManager) BaseNavDrawerActivity.this.getSystemService(
+                              INPUT_METHOD_SERVICE);
+              inputMethodManager.hideSoftInputFromWindow(
+                      BaseNavDrawerActivity.this.getCurrentFocus().getWindowToken(), 0);
+              super.onDrawerOpened(drawerView);
+            } catch (Exception e) {
+              Log.d("Debug", "Exception BaseNavDrawer: " + e.getLocalizedMessage());
+            }
           }
         };
 
@@ -95,6 +106,7 @@ public class BaseNavDrawerActivity extends BaseActivity {
     mDrawerLayout.addDrawerListener(mDrawerToggle);
     mDrawerToggle.syncState();
   }
+
 
   @Override protected void onStart() {
     super.onStart();

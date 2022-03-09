@@ -3,13 +3,14 @@ package com.edwardvanraak.materialbarcodescanner;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+
 import com.google.android.gms.vision.barcode.Barcode;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -42,7 +43,6 @@ public class MaterialBarcodeScanner {
         this.onResultListener = onResultListener;
     }
 
-    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onBarcodeScannerResult(Barcode barcode){
         onResultListener.onResult(barcode);
         EventBus.getDefault().removeStickyEvent(barcode);

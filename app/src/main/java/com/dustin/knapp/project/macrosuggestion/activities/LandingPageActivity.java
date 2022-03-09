@@ -4,13 +4,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -29,12 +22,21 @@ import com.dustin.knapp.project.macrosuggestion.presenters.colories_fragment.Ins
 import com.dustin.knapp.project.macrosuggestion.presenters.colories_fragment.InspirtationQuoteReactiveView;
 import com.dustin.knapp.project.macrosuggestion.utils.DateUtils;
 import com.dustin.knapp.project.macrosuggestion.utils.storage.SharedPreferencesUtil;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
+
 import javax.inject.Inject;
 import rx.Observable;
 import rx.Observer;
 import rx.functions.Action1;
 
-import static android.support.v4.content.PermissionChecker.PERMISSION_GRANTED;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.PermissionChecker;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.viewpager.widget.ViewPager;
 
 public class LandingPageActivity extends BaseNavDrawerActivity implements ViewPager.OnPageChangeListener, InspirtationQuoteReactiveView {
 
@@ -129,7 +131,7 @@ public class LandingPageActivity extends BaseNavDrawerActivity implements ViewPa
   private void setupViewPager() {
     mViewPager = (ViewPager) view.findViewById(R.id.pager);
     landingPageFragmentPagerAdapter = new LandingPageFragmentPagerAdapter(getSupportFragmentManager());
-    mTabLayout = (TabLayout) view.findViewById(R.id.sliding_tabs);
+    mTabLayout = view.findViewById(R.id.sliding_tabs);
     mViewPager.setAdapter(landingPageFragmentPagerAdapter);
     mTabLayout.setupWithViewPager(mViewPager);
     mViewPager.addOnPageChangeListener(this);
@@ -183,7 +185,7 @@ public class LandingPageActivity extends BaseNavDrawerActivity implements ViewPa
 
   @Override public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    if (requestCode == Constants.CAMERA_PERMISSION_CODE && grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
+    if (requestCode == Constants.CAMERA_PERMISSION_CODE && grantResults.length > 0 && grantResults[0] == PermissionChecker.PERMISSION_GRANTED) {
       startBarcodeScannerActivity();
     }
   }
@@ -198,7 +200,7 @@ public class LandingPageActivity extends BaseNavDrawerActivity implements ViewPa
   }
 
   private boolean needUsersCameraPermission() {
-    return ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) != PERMISSION_GRANTED;
+    return ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) != PermissionChecker.PERMISSION_GRANTED;
   }
 
   public void requestCameraPermission() {
@@ -222,7 +224,7 @@ public class LandingPageActivity extends BaseNavDrawerActivity implements ViewPa
             }
           }).setActionTextColor(Color.GREEN);
       View snackbarView = snackbar.getView();
-      TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+      TextView textView = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
       textView.setMaxLines(10);
       snackbar.show();
     }

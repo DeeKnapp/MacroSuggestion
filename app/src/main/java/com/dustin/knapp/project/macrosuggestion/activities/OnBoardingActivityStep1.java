@@ -1,7 +1,6 @@
 package com.dustin.knapp.project.macrosuggestion.activities;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +14,9 @@ import com.dustin.knapp.project.macrosuggestion.Constants;
 import com.dustin.knapp.project.macrosuggestion.MacroSuggestionApplication;
 import com.dustin.knapp.project.macrosuggestion.R;
 import android.content.Intent;
+
+import androidx.annotation.Nullable;
+
 import com.dustin.knapp.project.macrosuggestion.models.UserObject;
 import javax.inject.Inject;
 import rx.Observable;

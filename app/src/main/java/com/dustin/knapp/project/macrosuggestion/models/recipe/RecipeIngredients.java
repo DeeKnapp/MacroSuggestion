@@ -67,7 +67,7 @@ public class RecipeIngredients {
 
   private transient String gaps;
 
-  private transient String weightWatcherSmartPoints;
+  @Expose private transient String weightWatcherSmartPoints;
 
   private transient String vegan;
 

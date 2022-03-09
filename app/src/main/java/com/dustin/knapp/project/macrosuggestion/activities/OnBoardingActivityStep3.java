@@ -2,11 +2,13 @@ package com.dustin.knapp.project.macrosuggestion.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -82,10 +84,10 @@ public class OnBoardingActivityStep3 extends BaseActivity {
           saveGoalsLocalAndRemote();
         } else {
           try {
-            //Exception exception = resultTask.getException();
-            //Log.d("TAG", "Task result : " + exception);
-            ////Log.d("TAG", "Task result : " + resultTask.getException().)
-            //throw exception;
+            Exception exception = resultTask.getException();
+            Log.d("TAG", "Task result : " + exception);
+            //Log.d("TAG", "Task result : " + resultTask.getException().)
+            throw exception;
           } catch (Exception e) {
             e.printStackTrace();
           }

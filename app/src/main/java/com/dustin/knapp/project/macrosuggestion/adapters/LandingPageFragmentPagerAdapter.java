@@ -1,8 +1,9 @@
 package com.dustin.knapp.project.macrosuggestion.adapters;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+
 import com.dustin.knapp.project.macrosuggestion.fragments.CaloriesFragment;
 import com.dustin.knapp.project.macrosuggestion.fragments.MacrosFragment;
 import com.dustin.knapp.project.macrosuggestion.fragments.WaterFragment;

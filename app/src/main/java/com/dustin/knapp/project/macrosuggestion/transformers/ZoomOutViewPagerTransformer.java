@@ -1,7 +1,8 @@
 package com.dustin.knapp.project.macrosuggestion.transformers;
 
-import android.support.v4.view.ViewPager;
 import android.view.View;
+
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * Created by dknapp on 6/1/17

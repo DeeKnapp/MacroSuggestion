@@ -4,10 +4,11 @@ package com.dustin.knapp.project.macrosuggestion.transformers;
  * Created by dknapp on 6/1/17
  */
 
-import android.support.v4.view.ViewPager.PageTransformer;
 import android.view.View;
 
-public abstract class ABaseTransformer implements PageTransformer {
+import androidx.viewpager.widget.ViewPager;
+
+public abstract class ABaseTransformer implements ViewPager.PageTransformer {
 
   /**
    * Called each {@link #transformPage(android.view.View, float)}.

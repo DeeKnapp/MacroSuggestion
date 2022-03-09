@@ -7,11 +7,13 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.AppCompatTextView;
+
 /**
  * Created by dknapp on 8/2/17.
  */
 
-public class CustomTextView extends android.support.v7.widget.AppCompatTextView
+public class CustomTextView extends AppCompatTextView
 {
     private float strokeWidth;
     int strokeColor,solidColor;
